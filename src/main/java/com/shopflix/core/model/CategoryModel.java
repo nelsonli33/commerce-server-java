@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
-public class CategoryModel {
+public class CategoryModel extends ItemModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +18,7 @@ public class CategoryModel {
     private String metaTitle;
     private String metaDescription;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "parent_id")
     private CategoryModel parent;
 

@@ -83,4 +83,19 @@ public class CategoryData {
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
+
+    @Override
+    public String toString() {
+        return "CategoryData{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", sortOrder=" + sortOrder +
+                ", status=" + status +
+                ", metaTitle='" + metaTitle + '\'' +
+                ", metaDescription='" + metaDescription + '\'' +
+                ", parentId=" + parentId +
+                '}';
+    }
 }

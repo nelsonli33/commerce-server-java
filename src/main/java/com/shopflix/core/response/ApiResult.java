@@ -10,12 +10,12 @@ public class ApiResult implements Serializable {
 
     private ApiResult() {}
 
+
     private ApiResult(int code, String message, Object data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
-
 
     public static ApiResult success() {
         return new ApiResult(0, "success", null);
@@ -24,11 +24,6 @@ public class ApiResult implements Serializable {
     public static ApiResult success(Object data) {
         return new ApiResult(0, "success", data);
     }
-
-    public static ApiResult error(ResultCode resultCode) {
-        return new ApiResult(resultCode.getCode(), resultCode.getMessage(), null);
-    }
-
 
 
     public int getCode() {
@@ -55,12 +50,4 @@ public class ApiResult implements Serializable {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "ApiResult{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
-    }
 }
