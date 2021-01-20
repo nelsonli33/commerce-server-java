@@ -2,7 +2,6 @@ package com.shopflix.core.response;
 
 /**
  * https://developer.intuit.com/app/developer/qbo/docs/develop/troubleshooting/error-codes
- *
  */
 
 /**

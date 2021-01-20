@@ -23,7 +23,6 @@ public class CategoryModel extends ItemModel {
     private CategoryModel parent;
 
 
-
     public Long getId() {
         return id;
     }

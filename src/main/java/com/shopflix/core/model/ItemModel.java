@@ -10,11 +10,11 @@ import java.util.Date;
 @MappedSuperclass
 public class ItemModel {
 
-    @Column(name = "created_at", columnDefinition="DATETIME", length = 6, updatable = false)
+    @Column(name = "created_at", columnDefinition = "DATETIME", length = 6, updatable = false)
     @CreationTimestamp
     private Date createdAt;
 
-    @Column(name = "updated_at", columnDefinition="DATETIME", length = 6)
+    @Column(name = "updated_at", columnDefinition = "DATETIME", length = 6)
     @UpdateTimestamp
     private Date updatedAt;
 

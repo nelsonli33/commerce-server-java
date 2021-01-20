@@ -8,7 +8,8 @@ public class ApiResult implements Serializable {
     private String message;
     private Object data;
 
-    private ApiResult() {}
+    private ApiResult() {
+    }
 
 
     private ApiResult(int code, String message, Object data) {

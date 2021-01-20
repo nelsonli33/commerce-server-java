@@ -34,4 +34,4 @@ build/
 
 
 
-!**/src/main/**/resources/key.json
+/src/main/resources/key.json

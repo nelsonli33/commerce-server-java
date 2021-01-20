@@ -41,13 +41,13 @@ public class DefaultCategoryReversePopulator implements Populator<CategoryData, 
 
     }
 
+    public MerchantCategoryService getMerchantCategoryService() {
+        return merchantCategoryService;
+    }
+
     @Resource(name = "merchantCategoryService")
     public void setMerchantCategoryService(MerchantCategoryService merchantCategoryService) {
         this.merchantCategoryService = merchantCategoryService;
-    }
-
-    public MerchantCategoryService getMerchantCategoryService() {
-        return merchantCategoryService;
     }
 
 

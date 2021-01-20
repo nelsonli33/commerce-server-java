@@ -1,6 +1,11 @@
 package com.shopflix.core.data;
 
-public class CategoryData {
+import java.io.Serializable;
+
+public class CategoryData implements Serializable {
+
+    private static final long serialVersionUID = 8534008910931200841L;
+
     private Long id;
     private String code;
     private String name;

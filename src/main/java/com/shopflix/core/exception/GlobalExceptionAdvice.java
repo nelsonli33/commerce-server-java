@@ -1,7 +1,6 @@
 package com.shopflix.core.exception;
 
 import com.shopflix.core.response.ApiError;
-import com.shopflix.core.response.ApiResult;
 import com.shopflix.core.response.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +15,8 @@ public class GlobalExceptionAdvice {
     public ResponseEntity<Object> handleModelNotFoundException(ModelNotFoundException ex) {
         ApiError error = new ApiError(ErrorCode.ERROR_CODE_1000, ex.getMessage());
         return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(error);
+                .status(HttpStatus.BAD_REQUEST)
+                .body(error);
     }
 
     @ExceptionHandler(ParentSelfRefException.class)
