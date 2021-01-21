@@ -2,28 +2,30 @@ package com.shopflix.core.response;
 
 import java.io.Serializable;
 
-public class ApiResult implements Serializable {
+public class ApiResult<T> implements Serializable {
+
+    private static final long serialVersionUID = -1757097435621102942L;
 
     private int code;
     private String message;
-    private Object data;
+    private T data;
 
     private ApiResult() {
     }
 
 
-    private ApiResult(int code, String message, Object data) {
+    private ApiResult(int code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public static ApiResult success() {
-        return new ApiResult(0, "success", null);
+    public static <T> ApiResult<T> success() {
+        return new ApiResult<>(0, "success", null);
     }
 
-    public static ApiResult success(Object data) {
-        return new ApiResult(0, "success", data);
+    public static <T> ApiResult<T> success(T data) {
+        return new ApiResult<>(0, "success", data);
     }
 
 
@@ -43,11 +45,11 @@ public class ApiResult implements Serializable {
         this.message = message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 
