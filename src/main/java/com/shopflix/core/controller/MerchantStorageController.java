@@ -5,6 +5,7 @@ import com.shopflix.core.data.MediaData;
 import com.shopflix.core.data.MediaImageData;
 import com.shopflix.core.model.MediaImageModel;
 import com.shopflix.core.model.MediaModel;
+import com.shopflix.core.response.ApiResult;
 import com.shopflix.core.service.media.MerchantMediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,37 +47,32 @@ public class MerchantStorageController {
             byte[] bytes = uploadFile.getBytes();
             Blob blob = storage.create(blobInfo, bytes);
             blob.createAcl(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
-
-            String type = fileMimeType.split("/")[0];
-            if (type.equals("image")) {
-                MediaImageData imageData = new MediaImageData();
-                imageData.setCode(filename);
-                imageData.setFilename(uploadFile.getOriginalFilename());
-                imageData.setMime(fileMimeType);
-                imageData.setAlt(uploadFile.getOriginalFilename());
-                MediaImageModel mediaImageModel = merchantMediaService.createMediaImage(imageData);
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body(mediaImageModel);
-            } else {
-                MediaData mediaData = new MediaData();
-                mediaData.setCode(filename);
-                mediaData.setFilename(uploadFile.getOriginalFilename());
-                mediaData.setMime(fileMimeType);
-                MediaModel mediaModel = merchantMediaService.createMedia(mediaData);
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body(mediaModel);
-            }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(null);
+
+        String type = fileMimeType.split("/")[0];
+        if (type.equals("image")) {
+            MediaImageData imageData = new MediaImageData();
+            imageData.setFilename(filename);
+            imageData.setOriginFilename(uploadFile.getOriginalFilename());
+            imageData.setMime(fileMimeType);
+            imageData.setAlt(uploadFile.getOriginalFilename());
+            MediaImageModel mediaImageModel = merchantMediaService.createMediaImage(imageData);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(ApiResult.success(mediaImageModel));
+        } else {
+            MediaData mediaData = new MediaData();
+            mediaData.setFilename(filename);
+            mediaData.setOriginFilename(uploadFile.getOriginalFilename());
+            mediaData.setMime(fileMimeType);
+            MediaModel mediaModel = merchantMediaService.createMedia(mediaData);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(ApiResult.success(mediaModel));
+        }
     }
 
 }

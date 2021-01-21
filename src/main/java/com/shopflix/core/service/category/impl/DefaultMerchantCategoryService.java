@@ -36,7 +36,7 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
         if (categoryModel.isPresent()) {
             return categoryModel.get();
         } else {
-            throw new ModelNotFoundException("ID requested for the object does not exists in the system");
+            throw new ModelNotFoundException("Category with id "+id+" requested for the object does not exists in the system");
         }
     }
 

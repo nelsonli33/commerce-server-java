@@ -10,4 +10,6 @@ public interface MerchantMediaService {
     MediaModel createMedia(MediaData mediaData);
 
     MediaImageModel createMediaImage(MediaImageData mediaImageData);
+
+    MediaImageModel getMediaImageForId(Long id);
 }

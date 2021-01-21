@@ -7,29 +7,10 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class MediaModel extends ItemModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String code;
     private String filename;
+    private String originFilename;
     private String mime;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getFilename() {
         return filename;
@@ -39,6 +20,14 @@ public class MediaModel extends ItemModel {
         this.filename = filename;
     }
 
+    public String getOriginFilename() {
+        return originFilename;
+    }
+
+    public void setOriginFilename(String originFilename) {
+        this.originFilename = originFilename;
+    }
+
     public String getMime() {
         return mime;
     }
@@ -46,5 +35,4 @@ public class MediaModel extends ItemModel {
     public void setMime(String mime) {
         this.mime = mime;
     }
-
 }

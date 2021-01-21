@@ -19,8 +19,8 @@ public class MerchantCategoryController {
     private MerchantCategoryService merchantCategoryService;
 
 
-    @GetMapping("/")
-    public ResponseEntity categories() {
+    @GetMapping
+    public ResponseEntity<ApiResult<List<CategoryModel>>> categories() {
         List<CategoryModel> categoryModels = merchantCategoryService.getAllCategories();
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -28,24 +28,23 @@ public class MerchantCategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity categoryDetail(@PathVariable("id") Long id) {
+    public ResponseEntity<ApiResult<CategoryModel>> categoryDetail(@PathVariable("id") Long id) {
         CategoryModel categoryModels = merchantCategoryService.getCategoryForId(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResult.success(categoryModels));
     }
 
-    @PostMapping("/")
-    public ResponseEntity newCategory(@RequestBody CategoryData categoryData) {
+    @PostMapping
+    public ResponseEntity<ApiResult<CategoryModel>> newCategory(@RequestBody CategoryData categoryData) {
         CategoryModel categoryModel = merchantCategoryService.createCategory(categoryData);
-
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResult.success(categoryModel));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editCategory(@PathVariable Long id, @RequestBody CategoryData data) {
+    public ResponseEntity<ApiResult<CategoryModel>> editCategory(@PathVariable Long id, @RequestBody CategoryData data) {
         CategoryModel updatedCategoryModel = merchantCategoryService.updateCategory(id, data);
 
         return ResponseEntity
@@ -54,10 +53,8 @@ public class MerchantCategoryController {
     }
 
     @PutMapping("/bulk_update")
-    public ResponseEntity bulkEditCategories(@RequestBody List<CategoryData> data) {
-
+    public ResponseEntity<ApiResult<List<CategoryModel>>> bulkEditCategories(@RequestBody List<CategoryData> data) {
         List<CategoryModel> updatedCategoryModels = merchantCategoryService.bulkUpdateCategories(data);
-
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResult.success(updatedCategoryModels));
@@ -65,11 +62,11 @@ public class MerchantCategoryController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteCategory(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
         merchantCategoryService.deleteCategory(id);
 
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
-                .body(ApiResult.success());
+                .body("");
     }
 }

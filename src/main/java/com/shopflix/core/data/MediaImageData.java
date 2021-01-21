@@ -6,11 +6,9 @@ public class MediaImageData extends MediaData implements Serializable {
 
     private static final long serialVersionUID = -170224471653619759L;
 
-
     private String alt;
     private int width;
     private int height;
-
 
     public String getAlt() {
         return alt;

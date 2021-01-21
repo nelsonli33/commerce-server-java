@@ -15,6 +15,7 @@ public class CategoryData implements Serializable {
     private String metaTitle;
     private String metaDescription;
     private Long parentId;
+    private Long imageId;
 
     public Long getId() {
         return id;
@@ -89,18 +90,11 @@ public class CategoryData implements Serializable {
         this.parentId = parentId;
     }
 
-    @Override
-    public String toString() {
-        return "CategoryData{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", sortOrder=" + sortOrder +
-                ", status=" + status +
-                ", metaTitle='" + metaTitle + '\'' +
-                ", metaDescription='" + metaDescription + '\'' +
-                ", parentId=" + parentId +
-                '}';
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 }

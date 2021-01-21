@@ -5,7 +5,9 @@ import com.shopflix.core.data.CategoryData;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.CategoryModel;
+import com.shopflix.core.model.MediaImageModel;
 import com.shopflix.core.service.category.MerchantCategoryService;
+import com.shopflix.core.service.media.MerchantMediaService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -15,6 +17,7 @@ import javax.annotation.Resource;
 public class DefaultCategoryReversePopulator implements Populator<CategoryData, CategoryModel> {
 
     private MerchantCategoryService merchantCategoryService;
+    private MerchantMediaService merchantMediaService;
 
     @Override
     public void populate(CategoryData categoryData, CategoryModel categoryModel) throws ConversionException {
@@ -30,8 +33,23 @@ public class DefaultCategoryReversePopulator implements Populator<CategoryData, 
         categoryModel.setMetaDescription(categoryData.getMetaDescription());
         categoryModel.setParent(null);
 
+
         try {
-            if (categoryData.getParentId() != null) {
+            if (categoryData.getImageId() == null) {
+                categoryModel.setImage(null);
+            } else {
+                MediaImageModel mediaImageModel =
+                        getMerchantMediaService().getMediaImageForId(categoryData.getImageId());
+                categoryModel.setImage(mediaImageModel);
+            }
+        } catch (ModelNotFoundException ex) {
+            throw new ConversionException("No media image with the id " + categoryData.getImageId() + " found.", ex);
+        }
+
+        try {
+            if (categoryData.getParentId() == null) {
+                categoryModel.setParent(null);
+            } else {
                 CategoryModel parent = getMerchantCategoryService().getCategoryForId(categoryData.getParentId());
                 categoryModel.setParent(parent);
             }
@@ -41,14 +59,24 @@ public class DefaultCategoryReversePopulator implements Populator<CategoryData, 
 
     }
 
-    public MerchantCategoryService getMerchantCategoryService() {
-        return merchantCategoryService;
-    }
 
     @Resource(name = "merchantCategoryService")
     public void setMerchantCategoryService(MerchantCategoryService merchantCategoryService) {
         this.merchantCategoryService = merchantCategoryService;
     }
 
+
+    @Resource(name = "merchantMediaService")
+    public void setMerchantMediaService(MerchantMediaService merchantMediaService) {
+        this.merchantMediaService = merchantMediaService;
+    }
+
+    public MerchantMediaService getMerchantMediaService() {
+        return merchantMediaService;
+    }
+
+    public MerchantCategoryService getMerchantCategoryService() {
+        return merchantCategoryService;
+    }
 
 }

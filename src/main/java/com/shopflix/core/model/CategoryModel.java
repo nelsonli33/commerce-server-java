@@ -6,10 +6,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "categories")
 public class CategoryModel extends ItemModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String code;
     private String name;
     private String description;
@@ -18,14 +14,15 @@ public class CategoryModel extends ItemModel {
     private String metaTitle;
     private String metaDescription;
 
-    @ManyToOne(optional = true)
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private MediaImageModel image;
+
+    @ManyToOne
     @JoinColumn(name = "parent_id")
     private CategoryModel parent;
 
 
-    public Long getId() {
-        return id;
-    }
 
     public String getCode() {
         return code;
@@ -81,6 +78,14 @@ public class CategoryModel extends ItemModel {
 
     public void setMetaDescription(String metaDescription) {
         this.metaDescription = metaDescription;
+    }
+
+    public MediaImageModel getImage() {
+        return image;
+    }
+
+    public void setImage(MediaImageModel image) {
+        this.image = image;
     }
 
     public CategoryModel getParent() {

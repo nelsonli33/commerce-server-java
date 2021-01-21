@@ -2,6 +2,7 @@ package com.shopflix.core.service.media.impl;
 
 import com.shopflix.core.data.MediaData;
 import com.shopflix.core.data.MediaImageData;
+import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.MediaImageModel;
 import com.shopflix.core.model.MediaModel;
 import com.shopflix.core.repository.MediaImageRepository;
@@ -10,6 +11,8 @@ import com.shopflix.core.service.media.MerchantMediaService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import java.util.Optional;
 
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;
 
@@ -24,8 +27,8 @@ public class DefaultMerchantMediaService implements MerchantMediaService {
     public MediaModel createMedia(MediaData mediaData) {
         validateParameterNotNull(mediaData, "Media cannot be null");
         MediaModel mediaModel = new MediaModel();
-        mediaModel.setCode(mediaData.getCode());
         mediaModel.setFilename(mediaData.getFilename());
+        mediaModel.setOriginFilename(mediaData.getOriginFilename());
         mediaModel.setMime(mediaData.getMime());
         return mediaRepository.save(mediaModel);
     }
@@ -33,13 +36,24 @@ public class DefaultMerchantMediaService implements MerchantMediaService {
     public MediaImageModel createMediaImage(MediaImageData mediaImageData) {
         validateParameterNotNull(mediaImageData, "Media Image cannot be null");
         MediaImageModel mediaImageModel = new MediaImageModel();
-        mediaImageModel.setCode(mediaImageData.getCode());
         mediaImageModel.setFilename(mediaImageData.getFilename());
+        mediaImageModel.setOriginFilename(mediaImageData.getOriginFilename());
         mediaImageModel.setMime(mediaImageData.getMime());
         mediaImageModel.setAlt(mediaImageData.getAlt());
         mediaImageModel.setWidth(mediaImageData.getWidth());
         mediaImageModel.setHeight(mediaImageData.getHeight());
         return mediaImageRepository.save(mediaImageModel);
+    }
+
+    @Override
+    public MediaImageModel getMediaImageForId(Long id) {
+        validateParameterNotNull(id, "Media image id cannot be null");
+        Optional<MediaImageModel> mediaImageModel = mediaImageRepository.findById(id);
+        if (mediaImageModel.isPresent()) {
+            return mediaImageModel.get();
+        } else {
+            throw new ModelNotFoundException("Media image with id "+id+" not found.");
+        }
     }
 
     public MediaRepository getMediaRepository() {

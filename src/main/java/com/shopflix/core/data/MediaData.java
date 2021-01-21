@@ -7,8 +7,8 @@ public class MediaData implements Serializable {
 
     private static final long serialVersionUID = 6990949911914899373L;
     private Long id;
-    private String code;
     private String filename;
+    private String originFilename;
     private String mime;
 
     public Long getId() {
@@ -19,20 +19,20 @@ public class MediaData implements Serializable {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getFilename() {
         return filename;
     }
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public String getOriginFilename() {
+        return originFilename;
+    }
+
+    public void setOriginFilename(String originFilename) {
+        this.originFilename = originFilename;
     }
 
     public String getMime() {
