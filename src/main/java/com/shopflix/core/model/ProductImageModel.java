@@ -8,23 +8,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "productimages")
 public class ProductImageModel extends ItemModel {
-    private String image;
+
     private String alt;
     private Integer position;
+    private String originfilename;
+    private String tiny;
+    private String thumbnail;
+    private String normal;
+    private String detail;
+    private String zoom;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductOptionValueModel optionValue;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductModel product;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getAlt() {
         return alt;
@@ -42,11 +40,67 @@ public class ProductImageModel extends ItemModel {
         this.position = position;
     }
 
+    public String getOriginfilename() {
+        return originfilename;
+    }
+
+    public void setOriginfilename(String originfilename) {
+        this.originfilename = originfilename;
+    }
+
+    public String getTiny() {
+        return tiny;
+    }
+
+    public void setTiny(String tiny) {
+        this.tiny = tiny;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public String getNormal() {
+        return normal;
+    }
+
+    public void setNormal(String normal) {
+        this.normal = normal;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(String zoom) {
+        this.zoom = zoom;
+    }
+
     public ProductOptionValueModel getOptionValue() {
         return optionValue;
     }
 
     public void setOptionValue(ProductOptionValueModel optionValue) {
         this.optionValue = optionValue;
+    }
+
+    public ProductModel getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductModel product) {
+        this.product = product;
     }
 }

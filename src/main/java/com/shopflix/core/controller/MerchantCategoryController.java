@@ -69,4 +69,6 @@ public class MerchantCategoryController {
                 .status(HttpStatus.NO_CONTENT)
                 .body("");
     }
+
+
 }

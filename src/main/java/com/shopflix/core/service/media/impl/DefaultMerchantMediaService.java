@@ -28,7 +28,7 @@ public class DefaultMerchantMediaService implements MerchantMediaService {
         validateParameterNotNull(mediaData, "Media cannot be null");
         MediaModel mediaModel = new MediaModel();
         mediaModel.setFilename(mediaData.getFilename());
-        mediaModel.setOriginFilename(mediaData.getOriginFilename());
+        mediaModel.setOriginfilename(mediaData.getOriginFilename());
         mediaModel.setMime(mediaData.getMime());
         return mediaRepository.save(mediaModel);
     }
@@ -37,7 +37,7 @@ public class DefaultMerchantMediaService implements MerchantMediaService {
         validateParameterNotNull(mediaImageData, "Media Image cannot be null");
         MediaImageModel mediaImageModel = new MediaImageModel();
         mediaImageModel.setFilename(mediaImageData.getFilename());
-        mediaImageModel.setOriginFilename(mediaImageData.getOriginFilename());
+        mediaImageModel.setOriginfilename(mediaImageData.getOriginFilename());
         mediaImageModel.setMime(mediaImageData.getMime());
         mediaImageModel.setAlt(mediaImageData.getAlt());
         mediaImageModel.setWidth(mediaImageData.getWidth());

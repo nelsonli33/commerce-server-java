@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class MediaModel extends ItemModel {
 
     private String filename;
-    private String originFilename;
+    private String originfilename;
     private String mime;
 
 
@@ -20,12 +20,12 @@ public class MediaModel extends ItemModel {
         this.filename = filename;
     }
 
-    public String getOriginFilename() {
-        return originFilename;
+    public String getOriginfilename() {
+        return originfilename;
     }
 
-    public void setOriginFilename(String originFilename) {
-        this.originFilename = originFilename;
+    public void setOriginfilename(String originfilename) {
+        this.originfilename = originfilename;
     }
 
     public String getMime() {
