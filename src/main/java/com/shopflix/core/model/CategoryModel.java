@@ -1,15 +1,23 @@
 package com.shopflix.core.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
+@DynamicUpdate
 public class CategoryModel extends ItemModel {
     private String code;
     private String name;
     private String description;
     private Integer sortOrder;
+    @ColumnDefault(value = "1")
     private Integer status;
     private String metaTitle;
     private String metaDescription;
@@ -18,10 +26,13 @@ public class CategoryModel extends ItemModel {
     @JoinColumn(name = "image_id")
     private MediaImageModel image;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "parent_id")
     private CategoryModel parent;
 
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<ProductModel> products = new HashSet<>();
 
 
     public String getCode() {

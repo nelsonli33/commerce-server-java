@@ -43,12 +43,10 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
     public CategoryModel getCategoryForId(Long id) {
         validateParameterNotNullStandardMessage("id", id);
         Optional<CategoryModel> categoryModel = this.categoryRepository.findById(id);
-
         if (categoryModel.isPresent()) {
             return categoryModel.get();
-        } else {
-            throw new ModelNotFoundException("Category with id "+id+" requested for the object does not exists in the system");
         }
+        throw new ModelNotFoundException("Category with id "+id+" requested for the object does not exists in the system");
     }
 
     @Override
