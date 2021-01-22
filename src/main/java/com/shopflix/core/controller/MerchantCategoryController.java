@@ -1,6 +1,6 @@
 package com.shopflix.core.controller;
 
-import com.shopflix.core.data.CategoryData;
+import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.model.CategoryModel;
 import com.shopflix.core.response.ApiResult;
 import com.shopflix.core.service.category.MerchantCategoryService;
@@ -36,16 +36,16 @@ public class MerchantCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResult<CategoryModel>> newCategory(@RequestBody CategoryData categoryData) {
-        CategoryModel categoryModel = merchantCategoryService.createCategory(categoryData);
+    public ResponseEntity<ApiResult<CategoryModel>> newCategory(@RequestBody CategoryForm categoryForm) {
+        CategoryModel categoryModel = merchantCategoryService.createCategory(categoryForm);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResult.success(categoryModel));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResult<CategoryModel>> editCategory(@PathVariable Long id, @RequestBody CategoryData data) {
-        CategoryModel updatedCategoryModel = merchantCategoryService.updateCategory(id, data);
+    public ResponseEntity<ApiResult<CategoryModel>> editCategory(@PathVariable Long id, @RequestBody CategoryForm categoryForm) {
+        CategoryModel updatedCategoryModel = merchantCategoryService.updateCategory(id, categoryForm);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -53,8 +53,8 @@ public class MerchantCategoryController {
     }
 
     @PutMapping("/bulk_update")
-    public ResponseEntity<ApiResult<List<CategoryModel>>> bulkEditCategories(@RequestBody List<CategoryData> data) {
-        List<CategoryModel> updatedCategoryModels = merchantCategoryService.bulkUpdateCategories(data);
+    public ResponseEntity<ApiResult<List<CategoryModel>>> bulkEditCategories(@RequestBody List<CategoryForm> categoryForms) {
+        List<CategoryModel> updatedCategoryModels = merchantCategoryService.bulkUpdateCategories(categoryForms);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResult.success(updatedCategoryModels));

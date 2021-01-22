@@ -1,13 +1,15 @@
 package com.shopflix.core.service.category.impl;
 
 import com.shopflix.core.converters.Populator;
-import com.shopflix.core.data.CategoryData;
+import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.exception.ParentSelfRefException;
 import com.shopflix.core.model.CategoryModel;
 import com.shopflix.core.repository.CategoryRepository;
 import com.shopflix.core.service.category.MerchantCategoryService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -21,11 +23,20 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
 
 
     private CategoryRepository categoryRepository;
-    private Populator<CategoryData, CategoryModel> categoryReversePopulator;
+    private Populator<CategoryForm, CategoryModel> categoryReversePopulator;
 
     @Override
     public List<CategoryModel> getAllCategories() {
         return this.categoryRepository.findAll();
+    }
+
+    @Override
+    public List<CategoryModel> getAllCategoriesByIds(List<Long> ids) {
+        List<CategoryModel> categoryModels = this.categoryRepository.findAllById(ids);
+        if (CollectionUtils.isEmpty(categoryModels)) {
+            throw new ModelNotFoundException("Category with ids: " + StringUtils.join(ids, ',') + " not found.");
+        }
+        return categoryModels;
     }
 
     @Override
@@ -41,38 +52,38 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
     }
 
     @Override
-    public CategoryModel createCategory(CategoryData categoryData) {
+    public CategoryModel createCategory(CategoryForm categoryForm) {
         CategoryModel categoryModel = new CategoryModel();
-        categoryReversePopulator.populate(categoryData, categoryModel);
+        categoryReversePopulator.populate(categoryForm, categoryModel);
         return categoryRepository.save(categoryModel);
     }
 
     @Override
-    public CategoryModel updateCategory(Long id, CategoryData categoryData) {
+    public CategoryModel updateCategory(Long id, CategoryForm categoryForm) {
         CategoryModel categoryModel = getCategoryForId(id);
 
-        if (categoryModel.getId().equals(categoryData.getParentId())) {
+        if (categoryModel.getId().equals(categoryForm.getParentId())) {
             throw new ParentSelfRefException("Same object cannot be parent to itself. (Category Id:" + id + ")");
         }
 
-        categoryReversePopulator.populate(categoryData, categoryModel);
+        categoryReversePopulator.populate(categoryForm, categoryModel);
         return categoryRepository.save(categoryModel);
     }
 
     @Override
-    public List<CategoryModel> bulkUpdateCategories(List<CategoryData> dataList) {
+    public List<CategoryModel> bulkUpdateCategories(List<CategoryForm> categoryForms) {
 
         List<CategoryModel> categoryModels = new ArrayList<>();
 
-        for (int i = 0; i < dataList.size(); i++) {
-            CategoryData categoryData = dataList.get(i);
-            CategoryModel categoryModel = getCategoryForId(categoryData.getId());
+        for (int i = 0; i < categoryForms.size(); i++) {
+            CategoryForm categoryForm = categoryForms.get(i);
+            CategoryModel categoryModel = getCategoryForId(categoryForm.getId());
 
-            if (categoryModel.getId().equals(categoryData.getParentId())) {
-                throw new ParentSelfRefException("Same object cannot be parent to itself. (Category Id:" + categoryData.getId() + ")");
+            if (categoryModel.getId().equals(categoryForm.getParentId())) {
+                throw new ParentSelfRefException("Same object cannot be parent to itself. (Category Id:" + categoryForm.getId() + ")");
             }
 
-            categoryReversePopulator.populate(categoryData, categoryModel);
+            categoryReversePopulator.populate(categoryForm, categoryModel);
             categoryModels.add(categoryModel);
         }
 
@@ -86,22 +97,26 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
         categoryRepository.delete(categoryModel);
     }
 
-    public CategoryRepository getCategoryRepository() {
-        return categoryRepository;
-    }
+
 
     @Resource(name = "categoryRepository")
     public void setCategoryRepository(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
-    public Populator<CategoryData, CategoryModel> getCategoryReversePopulator() {
+    @Resource(name = "categoryReversePopulator")
+    public void setCategoryReversePopulator(Populator<CategoryForm, CategoryModel> categoryReversePopulator) {
+        this.categoryReversePopulator = categoryReversePopulator;
+    }
+
+
+
+    public Populator<CategoryForm, CategoryModel> getCategoryReversePopulator() {
         return categoryReversePopulator;
     }
 
-    @Resource(name = "categoryReversePopulator")
-    public void setCategoryReversePopulator(Populator<CategoryData, CategoryModel> categoryReversePopulator) {
-        this.categoryReversePopulator = categoryReversePopulator;
+    public CategoryRepository getCategoryRepository() {
+        return categoryRepository;
     }
 
 }

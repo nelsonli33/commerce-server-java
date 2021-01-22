@@ -1,7 +1,7 @@
 package com.shopflix.core.converters.populator;
 
 import com.shopflix.core.converters.Populator;
-import com.shopflix.core.data.CategoryData;
+import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.CategoryModel;
@@ -14,47 +14,47 @@ import org.springframework.util.Assert;
 import javax.annotation.Resource;
 
 @Component("categoryReversePopulator")
-public class DefaultCategoryReversePopulator implements Populator<CategoryData, CategoryModel> {
+public class DefaultCategoryReversePopulator implements Populator<CategoryForm, CategoryModel> {
 
     private MerchantCategoryService merchantCategoryService;
     private MerchantMediaService merchantMediaService;
 
     @Override
-    public void populate(CategoryData categoryData, CategoryModel categoryModel) throws ConversionException {
-        Assert.notNull(categoryData, "Parameter categoryData cannot be null.");
-        Assert.notNull(categoryModel, "Parameter categoryModel cannot be null.");
+    public void populate(CategoryForm source, CategoryModel target) throws ConversionException {
+        Assert.notNull(source, "Parameter categoryData cannot be null.");
+        Assert.notNull(target, "Parameter categoryModel cannot be null.");
 
-        categoryModel.setCode(categoryData.getCode());
-        categoryModel.setDescription(categoryData.getDescription());
-        categoryModel.setName(categoryData.getName());
-        categoryModel.setStatus(categoryData.getStatus());
-        categoryModel.setSortOrder(categoryData.getSortOrder());
-        categoryModel.setMetaTitle(categoryData.getMetaTitle());
-        categoryModel.setMetaDescription(categoryData.getMetaDescription());
-        categoryModel.setParent(null);
+        target.setCode(source.getCode());
+        target.setDescription(source.getDescription());
+        target.setName(source.getName());
+        target.setStatus(source.getStatus());
+        target.setSortOrder(source.getSortOrder());
+        target.setMetaTitle(source.getMetaTitle());
+        target.setMetaDescription(source.getMetaDescription());
+        target.setParent(null);
 
 
         try {
-            if (categoryData.getImageId() == null) {
-                categoryModel.setImage(null);
+            if (source.getImageId() == null) {
+                target.setImage(null);
             } else {
                 MediaImageModel mediaImageModel =
-                        getMerchantMediaService().getMediaImageForId(categoryData.getImageId());
-                categoryModel.setImage(mediaImageModel);
+                        getMerchantMediaService().getMediaImageForId(source.getImageId());
+                target.setImage(mediaImageModel);
             }
         } catch (ModelNotFoundException ex) {
-            throw new ConversionException("No media image with the id " + categoryData.getImageId() + " found.", ex);
+            throw new ConversionException("No media image with the id " + source.getImageId() + " found.", ex);
         }
 
         try {
-            if (categoryData.getParentId() == null) {
-                categoryModel.setParent(null);
+            if (source.getParentId() == null) {
+                target.setParent(null);
             } else {
-                CategoryModel parent = getMerchantCategoryService().getCategoryForId(categoryData.getParentId());
-                categoryModel.setParent(parent);
+                CategoryModel parent = getMerchantCategoryService().getCategoryForId(source.getParentId());
+                target.setParent(parent);
             }
         } catch (ModelNotFoundException ex) {
-            throw new ConversionException("No category with the id " + categoryData.getParentId() + " found.", ex);
+            throw new ConversionException("No category with the id " + source.getParentId() + " found.", ex);
         }
 
     }

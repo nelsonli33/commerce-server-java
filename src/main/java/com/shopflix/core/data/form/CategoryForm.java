@@ -1,11 +1,6 @@
-package com.shopflix.core.data;
+package com.shopflix.core.data.form;
 
-import java.io.Serializable;
-
-public class CategoryData implements Serializable {
-
-    private static final long serialVersionUID = 8534008910931200841L;
-
+public class CategoryForm {
     private Long id;
     private String code;
     private String name;
@@ -80,7 +75,6 @@ public class CategoryData implements Serializable {
     public void setMetaDescription(String metaDescription) {
         this.metaDescription = metaDescription;
     }
-
 
     public Long getParentId() {
         return parentId;
