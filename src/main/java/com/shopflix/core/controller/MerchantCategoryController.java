@@ -1,7 +1,7 @@
 package com.shopflix.core.controller;
 
 import com.shopflix.core.data.form.CategoryForm;
-import com.shopflix.core.model.CategoryModel;
+import com.shopflix.core.model.category.CategoryModel;
 import com.shopflix.core.response.ApiResult;
 import com.shopflix.core.service.category.MerchantCategoryService;
 import org.springframework.http.HttpStatus;

@@ -3,8 +3,8 @@ package com.shopflix.core.controller;
 import com.google.cloud.storage.Blob;
 import com.shopflix.core.data.MediaData;
 import com.shopflix.core.data.MediaImageData;
-import com.shopflix.core.model.MediaImageModel;
-import com.shopflix.core.model.MediaModel;
+import com.shopflix.core.model.media.MediaImageModel;
+import com.shopflix.core.model.media.MediaModel;
 import com.shopflix.core.response.ApiResult;
 import com.shopflix.core.service.media.MerchantMediaService;
 import com.shopflix.core.service.media.StorageService;
@@ -38,7 +38,6 @@ public class MerchantStorageController {
         String fileMimeType = uploadFile.getContentType();
         String type = fileMimeType.split("/")[0];
         if (type.equals("image")) {
-            System.out.println(blob.getName());
             MediaImageData imageData = new MediaImageData();
             imageData.setFilename(blob.getName());
             imageData.setOriginFilename(uploadFile.getOriginalFilename());

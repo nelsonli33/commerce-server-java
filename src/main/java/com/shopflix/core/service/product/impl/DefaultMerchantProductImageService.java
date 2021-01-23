@@ -1,7 +1,7 @@
 package com.shopflix.core.service.product.impl;
 
 import com.shopflix.core.data.ProductImageData;
-import com.shopflix.core.model.ProductImageModel;
+import com.shopflix.core.model.product.ProductImageModel;
 import com.shopflix.core.repository.ProductImageRepository;
 import com.shopflix.core.service.product.MerchantProductImageService;
 import org.springframework.stereotype.Service;

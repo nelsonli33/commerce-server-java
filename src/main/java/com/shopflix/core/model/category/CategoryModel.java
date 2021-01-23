@@ -1,7 +1,9 @@
-package com.shopflix.core.model;
+package com.shopflix.core.model.category;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.shopflix.core.model.ItemModel;
+import com.shopflix.core.model.media.MediaImageModel;
+import com.shopflix.core.model.product.ProductModel;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 

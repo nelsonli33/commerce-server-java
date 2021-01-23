@@ -3,18 +3,15 @@ package com.shopflix.core.service.product.impl;
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.form.ProductForm;
 import com.shopflix.core.exception.ModelNotFoundException;
-import com.shopflix.core.model.ProductModel;
-import com.shopflix.core.repository.CategoryRepository;
+import com.shopflix.core.model.product.ProductModel;
 import com.shopflix.core.repository.ProductRepository;
 import com.shopflix.core.service.product.MerchantProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Optional;
 
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;

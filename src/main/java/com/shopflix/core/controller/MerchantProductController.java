@@ -4,8 +4,8 @@ import com.google.cloud.storage.Storage;
 import com.shopflix.core.data.PageData;
 import com.shopflix.core.data.ProductImageData;
 import com.shopflix.core.data.form.ProductForm;
-import com.shopflix.core.model.ProductImageModel;
-import com.shopflix.core.model.ProductModel;
+import com.shopflix.core.model.product.ProductImageModel;
+import com.shopflix.core.model.product.ProductModel;
 import com.shopflix.core.response.ApiResult;
 import com.shopflix.core.service.media.StorageService;
 import com.shopflix.core.service.product.MerchantProductImageService;
@@ -102,6 +102,7 @@ public class MerchantProductController {
     @PostMapping("/images")
     public ResponseEntity<ApiResult<ProductImageModel>> uploadProductImage(@RequestParam("file") MultipartFile uploadFile) throws IOException {
 
+        
         String filename = String.join("", UUID.randomUUID().toString().split("-"));
 
         List<ProductImage> productImages = new ArrayList<>();

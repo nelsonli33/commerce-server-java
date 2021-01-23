@@ -2,8 +2,8 @@ package com.shopflix.core.service.media;
 
 import com.shopflix.core.data.MediaData;
 import com.shopflix.core.data.MediaImageData;
-import com.shopflix.core.model.MediaImageModel;
-import com.shopflix.core.model.MediaModel;
+import com.shopflix.core.model.media.MediaImageModel;
+import com.shopflix.core.model.media.MediaModel;
 
 public interface MerchantMediaService {
 

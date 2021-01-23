@@ -4,7 +4,7 @@ import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.exception.ParentSelfRefException;
-import com.shopflix.core.model.CategoryModel;
+import com.shopflix.core.model.category.CategoryModel;
 import com.shopflix.core.repository.CategoryRepository;
 import com.shopflix.core.service.category.MerchantCategoryService;
 import org.apache.commons.lang3.StringUtils;

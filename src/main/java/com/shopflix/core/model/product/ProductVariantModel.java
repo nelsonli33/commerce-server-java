@@ -1,6 +1,7 @@
-package com.shopflix.core.model;
+package com.shopflix.core.model.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.shopflix.core.model.ItemModel;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;

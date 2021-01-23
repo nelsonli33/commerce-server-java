@@ -1,6 +1,4 @@
-package com.shopflix.core.model;
-
-import org.hibernate.annotations.ColumnDefault;
+package com.shopflix.core.model.media;
 
 import javax.persistence.*;
 

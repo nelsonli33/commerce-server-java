@@ -1,4 +1,6 @@
-package com.shopflix.core.model;
+package com.shopflix.core.model.product;
+
+import com.shopflix.core.model.ItemModel;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

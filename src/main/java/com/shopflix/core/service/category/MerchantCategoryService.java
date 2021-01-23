@@ -1,7 +1,7 @@
 package com.shopflix.core.service.category;
 
 import com.shopflix.core.data.form.CategoryForm;
-import com.shopflix.core.model.CategoryModel;
+import com.shopflix.core.model.category.CategoryModel;
 
 import java.util.List;
 

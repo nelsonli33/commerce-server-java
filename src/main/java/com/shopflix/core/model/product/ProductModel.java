@@ -1,8 +1,8 @@
-package com.shopflix.core.model;
+package com.shopflix.core.model.product;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.shopflix.core.enums.ProductStatus;
-import org.hibernate.annotations.ColumnDefault;
+import com.shopflix.core.model.ItemModel;
+import com.shopflix.core.model.category.CategoryModel;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
