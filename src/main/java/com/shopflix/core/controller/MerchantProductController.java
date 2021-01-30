@@ -102,7 +102,7 @@ public class MerchantProductController {
     @PostMapping("/images")
     public ResponseEntity<ApiResult<ProductImageModel>> uploadProductImage(@RequestParam("file") MultipartFile uploadFile) throws IOException {
 
-        
+        // TODO: validate upload file mimetype only accept image/*
         String filename = String.join("", UUID.randomUUID().toString().split("-"));
 
         List<ProductImage> productImages = new ArrayList<>();
