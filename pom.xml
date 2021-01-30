@@ -19,9 +19,9 @@
 	<description>Demo project for Spring Boot</description>
 
 	<modules>
+		<module>platform</module>
 		<module>core</module>
 		<module>merchant</module>
-		<module>platform</module>
 	</modules>
 
 

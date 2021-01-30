@@ -29,88 +29,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb136a25-f8e5-4bab-8b46-4572f82e6919" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/merchant/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/platform/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileChanges/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/6.5/fileChanges/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/6.5/gc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/core/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/core/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/core/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/fileChanges/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/fileChanges/last-build.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/gc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gradle/vcs-1/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/platform/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/platform/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merchant/merchant.iml" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/merchant.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/platform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/core/core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platform/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/CoreApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/main/java/com/shopflix/platform/CoreApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/controller/MerchantCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/controller/MerchantCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/controller/MerchantNavigationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/controller/MerchantNavigationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/controller/MerchantProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/controller/MerchantProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/controller/MerchantStorageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/controller/MerchantStorageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/converters/Populator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/converters/Populator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/converters/populator/DefaultCategoryReversePopulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/converters/populator/DefaultCategoryReversePopulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/converters/populator/DefaultProductReversePopulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/converters/populator/DefaultProductReversePopulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/MediaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/MediaData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/MediaImageData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/MediaImageData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/PageData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/PageData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/ProductImageData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/ProductImageData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/ProductOptionData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/ProductOptionData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/ProductOptionValueData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/ProductOptionValueData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/ProductVariantData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/ProductVariantData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/form/CategoryForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/form/CategoryForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/form/ProductForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/form/ProductForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/form/ProductOptionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/form/ProductOptionForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/form/ProductOptionValueForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/form/ProductOptionValueForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/data/form/ProductVariantForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/data/form/ProductVariantForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/exception/ConversionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ConversionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/exception/GlobalExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/GlobalExceptionAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/exception/ModelNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ModelNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/exception/ParentSelfRefException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ParentSelfRefException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/exception/SystemException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/SystemException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/ItemModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/ItemModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/category/CategoryModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/category/CategoryModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/media/MediaImageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/media/MediaImageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/media/MediaModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/media/MediaModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/navigation/CMSNavigationLinkModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/navigation/CMSNavigationLinkModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/navigation/CMSNavigationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/navigation/CMSNavigationModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/product/ProductImageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/product/ProductImageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/product/ProductModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/product/ProductModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/product/ProductOptionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/product/ProductOptionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/product/ProductOptionValueModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/product/ProductOptionValueModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/model/product/ProductVariantModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/product/ProductVariantModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/CMSNavigationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/CMSNavigationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/MediaImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/MediaImageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/MediaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/MediaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/ProductImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/ProductImageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/ProductOptionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/ProductOptionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/ProductOptionValueRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/ProductOptionValueRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/repository/ProductVariantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/ProductVariantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/response/ApiError.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ApiError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/response/ApiResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ApiResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/response/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/category/MerchantCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/category/MerchantCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/category/impl/DefaultMerchantCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/category/impl/DefaultMerchantCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/media/MerchantMediaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/media/MerchantMediaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/media/StorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/media/StorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/media/impl/DefaultMerchantMediaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/media/impl/DefaultMerchantMediaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/media/impl/DefaultStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/media/impl/DefaultStorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/navigation/MerchantNavigationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/navigation/MerchantNavigationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/navigation/impl/DefaultMerchantNavigationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/navigation/impl/DefaultMerchantNavigationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/product/MerchantProductImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/product/MerchantProductImageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/product/MerchantProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/product/MerchantProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/product/impl/DefaultMerchantProductImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/product/impl/DefaultMerchantProductImageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/service/product/impl/DefaultMerchantProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/src/main/java/com/shopflix/merchant/service/product/impl/DefaultMerchantProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shopflix/core/util/ServicesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/util/ServicesUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/main/resources/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shopflix/core/CoreApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/shopflix/platform/core/CoreApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,9 +113,10 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.google.cloudcode.ide_session_index" value="20210130_0008" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210130_0009" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/commons" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -193,6 +132,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/platform" />
       <recent name="$PROJECT_DIR$/platform/src/main/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/commons" />
@@ -224,28 +164,10 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CoreApplication (1)">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CoreApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <component name="RunManager">
+    <configuration name="CoreApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="platform" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.shopflix.platform.CoreApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CoreApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="core" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.shopflix.core.CoreApplication" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -279,6 +201,7 @@
       <workItem from="1611971118781" duration="254000" />
       <workItem from="1611971430513" duration="2651000" />
       <workItem from="1611974166257" duration="3798000" />
+      <workItem from="1611978407396" duration="1150000" />
     </task>
     <task id="LOCAL-00001" summary="uniform response message">
       <created>1611043159763</created>
