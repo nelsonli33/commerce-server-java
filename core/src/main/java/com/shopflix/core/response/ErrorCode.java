@@ -13,25 +13,29 @@ package com.shopflix.core.response;
  */
 
 public enum ErrorCode {
-    SUCCESS(0, "success"),
 
-    ERROR_CODE_1000(1000, "Item Not Found"),
-    ERROR_CODE_1010(1010, "Data conversion error"),
-    ERROR_CODE_1020(1020, "Parent cannot be child");
+    E_1000(1000, "Item Not Found"),
+    E_1010(1010, "Data conversion error"),
+    E_1020(1020, "Parent cannot be child"),
 
-    private int code;
-    private String message;
+    E_3000(3000, "Validation error"),
+    E_3001(3001, "Duplicate uid error");
 
-    private ErrorCode(int code, String message) {
-        this.code = code;
-        this.message = message;
+
+
+    private int errorCode;
+    private String errorMessage;
+
+    ErrorCode(int errorCode, String errorMessage) {
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
     }
 
-    public int getCode() {
-        return code;
+    public int getErrorCode() {
+        return errorCode;
     }
 
-    public String getMessage() {
-        return message;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

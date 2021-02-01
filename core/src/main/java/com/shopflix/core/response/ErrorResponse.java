@@ -1,13 +1,13 @@
 package com.shopflix.core.response;
 
-public class ApiError {
+public class ErrorResponse {
     private int code;
     private String message;
     private String detail;
 
-    public ApiError(ErrorCode errorCode, String detail) {
-        this.code = errorCode.getCode();
-        this.message = errorCode.getMessage();
+    public ErrorResponse(ErrorCode errorCode, String detail) {
+        this.code = errorCode.getErrorCode();
+        this.message = errorCode.getErrorMessage();
         this.detail = detail;
     }
 

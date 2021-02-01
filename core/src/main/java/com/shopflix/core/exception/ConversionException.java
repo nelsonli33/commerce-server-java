@@ -1,13 +1,12 @@
 package com.shopflix.core.exception;
 
 public class ConversionException extends RuntimeException {
-
-    public ConversionException(String msg, Throwable cause) {
-        super(msg, cause);
+    public ConversionException(String message) {
+        super(message);
     }
 
-    public ConversionException(String msg) {
-        super(msg);
+    public ConversionException(String message, Throwable cause) {
+        super(message, cause);
     }
 }
 

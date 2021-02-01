@@ -28,6 +28,10 @@ public class ApiResult<T> implements Serializable {
         return new ApiResult<>(0, "success", data);
     }
 
+    public static ErrorResponse error(ErrorCode errorCode, String detail) {
+        return new ErrorResponse(errorCode, detail);
+    }
+
 
     public int getCode() {
         return code;

@@ -29,25 +29,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb136a25-f8e5-4bab-8b46-4572f82e6919" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_4_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_4_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_test_5_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_data_redis_2_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_5_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/controllers/AbstractController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ValidationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/model/user/CustomerModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/repository/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/controllers/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/exceptions/DuplicateUidException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/exceptions/StorefrontExcceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/facades/user/CustomerFacade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/facades/user/data/RegisterData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/facades/user/impl/DefaultCustomerFacade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/forms/RegisterForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/forms/validation/RegistrationValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/security/AutoLoginStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/security/CoreAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/security/CoreUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/security/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/security/StorefrontAuthenticationFailureHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/security/StorefrontAuthenticationSuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/security/impl/DefaultAutoLoginStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/services/customer/impl/CustomerAccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/java/com/shopflix/storefront/services/customer/impl/DefaultCustomerAccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/resources/messages/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/src/main/resources/messages/messages_zh_TW.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storefront/storefront.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/commerce-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/commerce-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/fileChanges/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/fileChanges/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/6.5/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/6.5/gc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.gradle/vcs-1/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/platform/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/platform/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/core/core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ConversionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ConversionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/GlobalExceptionAdvice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ParentSelfRefException.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/exception/ParentSelfRefException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ApiError.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ApiResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ApiResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/shopflix/core/response/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/exception/ConversionException.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/exception/ConversionException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/exception/GlobalExceptionAdvice.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/exception/ParentSelfRefException.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/exception/ParentSelfRefException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/response/ApiError.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/response/ApiResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/response/ApiResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/response/ErrorCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/target/classes/com/shopflix/core/response/ErrorCode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/merchant/merchant.iml" beforeDir="false" afterPath="$PROJECT_DIR$/merchant/merchant.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/platform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/core/core.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/platform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/platform/platform.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platform/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/platform/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,9 +134,6 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
-  </component>
   <component name="ProjectId" id="1nESIPgC4ySiHMz6gqcrzzK3uTT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -116,7 +156,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.google.cloudcode.ide_session_index" value="20210130_0009" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210201_0000" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/commons" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -139,9 +179,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.shopflix.storefront.facades.user" />
       <recent name="com.shopflix.core" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.shopflix.storefront.exceptions" />
       <recent name="com.shopflix.core.repository" />
       <recent name="com.shopflix.core.data" />
     </key>
@@ -202,6 +244,9 @@
       <workItem from="1611971430513" duration="2651000" />
       <workItem from="1611974166257" duration="3798000" />
       <workItem from="1611978407396" duration="1150000" />
+      <workItem from="1611979728593" duration="3684000" />
+      <workItem from="1612010501381" duration="27765000" />
+      <workItem from="1612140686610" duration="9481000" />
     </task>
     <task id="LOCAL-00001" summary="uniform response message">
       <created>1611043159763</created>

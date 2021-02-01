@@ -22,6 +22,7 @@
 		<module>platform</module>
 		<module>core</module>
 		<module>merchant</module>
+		<module>storefront</module>
 	</modules>
 
 
@@ -52,10 +53,6 @@
 			<version>${spring-cloud-gcp.version}</version>
 		</dependency>
 <!--		<dependency>-->
-<!--			<groupId>com.google.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-gcp-starter-storage</artifactId>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
 <!--			<groupId>org.flywaydb</groupId>-->
 <!--			<artifactId>flyway-core</artifactId>-->
 <!--		</dependency>-->
@@ -63,7 +60,19 @@
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-core</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
