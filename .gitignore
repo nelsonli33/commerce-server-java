@@ -15,9 +15,13 @@ HELP.md
 
 ### IntelliJ IDEA ###
 commons/.idea
+.idea
 *.iws
 *.iml
 *.ipr
+
+### Java ###
+*.class
 
 ### NetBeans ###
 /nbproject/private/

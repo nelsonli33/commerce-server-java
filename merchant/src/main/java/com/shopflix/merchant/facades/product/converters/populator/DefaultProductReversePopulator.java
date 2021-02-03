@@ -1,4 +1,4 @@
-package com.shopflix.merchant.converters.populator;
+package com.shopflix.merchant.facades.product.converters.populator;
 
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.form.ProductForm;

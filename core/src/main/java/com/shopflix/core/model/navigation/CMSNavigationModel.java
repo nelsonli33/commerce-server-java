@@ -37,11 +37,13 @@ public class CMSNavigationModel extends ItemModel {
         this.name = name;
     }
 
-    public List<CMSNavigationLinkModel> getLinks() {
+    public List<CMSNavigationLinkModel> getLinks()
+    {
         return links;
     }
 
-    public void setLinks(List<CMSNavigationLinkModel> links) {
+    public void setLinks(List<CMSNavigationLinkModel> links)
+    {
         this.links = links;
     }
 }

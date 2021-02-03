@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/api/v1/user/register").permitAll()
+                .antMatchers("/merchant/api/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
