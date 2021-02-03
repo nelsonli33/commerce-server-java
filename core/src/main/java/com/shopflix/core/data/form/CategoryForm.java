@@ -6,7 +6,6 @@ public class CategoryForm {
     private String name;
     private String description;
     private int sortOrder;
-    private int status;
     private String metaTitle;
     private String metaDescription;
     private Long parentId;
@@ -50,14 +49,6 @@ public class CategoryForm {
 
     public void setSortOrder(int sortOrder) {
         this.sortOrder = sortOrder;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public String getMetaTitle() {

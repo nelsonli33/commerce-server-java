@@ -3,71 +3,111 @@ package com.shopflix.merchant.controller;
 import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.model.category.CategoryModel;
 import com.shopflix.core.response.ApiResult;
+import com.shopflix.merchant.data.CategoryData;
+import com.shopflix.merchant.facades.category.MerchantCategoryFacade;
 import com.shopflix.merchant.service.category.MerchantCategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/merchant/api/v1/categories")
 public class MerchantCategoryController {
 
-    @Resource(name = "merchantCategoryService")
-    private MerchantCategoryService merchantCategoryService;
+
+    @Resource(name = "merchantCategoryFacade")
+    private MerchantCategoryFacade merchantCategoryFacade;
 
 
     @GetMapping
-    public ResponseEntity<ApiResult<List<CategoryModel>>> categories() {
-        List<CategoryModel> categoryModels = merchantCategoryService.getAllCategories();
+    public ResponseEntity<ApiResult<List<CategoryData>>> categories() {
+        List<CategoryData> data = merchantCategoryFacade.getAllCategories();
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(ApiResult.success(categoryModels));
+                .body(ApiResult.success(data));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResult<CategoryModel>> categoryDetail(@PathVariable("id") Long id) {
-        CategoryModel categoryModels = merchantCategoryService.getCategoryForId(id);
+    public ResponseEntity<ApiResult<CategoryData>> categoryDetail(@PathVariable("id") Long categoryId) {
+        CategoryData categoryData = merchantCategoryFacade.getCategoryForId(categoryId);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(ApiResult.success(categoryModels));
+                .body(ApiResult.success(categoryData));
     }
 
     @PostMapping
-    public ResponseEntity<ApiResult<CategoryModel>> newCategory(@RequestBody CategoryForm categoryForm) {
-        CategoryModel categoryModel = merchantCategoryService.createCategory(categoryForm);
+    public ResponseEntity<ApiResult<CategoryData>> postCategory(@RequestBody CategoryForm form) {
+
+        CategoryData data = fillCategoryFormToData(form);
+        CategoryData categoryData = merchantCategoryFacade.createCategory(data);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(ApiResult.success(categoryModel));
+                .body(ApiResult.success(categoryData));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResult<CategoryModel>> editCategory(@PathVariable Long id, @RequestBody CategoryForm categoryForm) {
-        CategoryModel updatedCategoryModel = merchantCategoryService.updateCategory(id, categoryForm);
+    public ResponseEntity<ApiResult<CategoryData>> editCategory(@PathVariable("id") Long categoryId, @RequestBody CategoryForm form) {
+
+        CategoryData data = fillCategoryFormToData(form);
+        CategoryData categoryData = merchantCategoryFacade.editCategory(categoryId, data);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(ApiResult.success(updatedCategoryModel));
+                .body(ApiResult.success(categoryData));
     }
 
-    @PutMapping("/bulk_update")
-    public ResponseEntity<ApiResult<List<CategoryModel>>> bulkEditCategories(@RequestBody List<CategoryForm> categoryForms) {
-        List<CategoryModel> updatedCategoryModels = merchantCategoryService.bulkUpdateCategories(categoryForms);
+
+
+    @PutMapping("/ordering")
+    public ResponseEntity<ApiResult<List<Object>>> bulkEditCategories(@RequestBody List<CategoryForm> forms) {
+
+
+        List<CategoryData> categoryDataList = forms.stream().map(form -> {
+            CategoryData categoryData = new CategoryData();
+            categoryData.setId(form.getId());
+            categoryData.setSortOrder(form.getSortOrder());
+            return categoryData;
+        }).collect(Collectors.toList());
+
+
+        merchantCategoryFacade.orderingCategories(categoryDataList);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(ApiResult.success(updatedCategoryModels));
+                .body(ApiResult.success());
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
-        merchantCategoryService.deleteCategory(id);
+    public ResponseEntity<?> deleteCategory(@PathVariable("id") Long categoryId) {
+        merchantCategoryFacade.deleteCategory(categoryId);
 
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .body("");
+    }
+
+
+    private CategoryData fillCategoryFormToData(@RequestBody CategoryForm form)
+    {
+        CategoryData data = new CategoryData();
+        data.setCode(form.getCode());
+        data.setName(form.getName());
+        data.setDescription(form.getDescription());
+        data.setSortOrder(form.getSortOrder());
+        data.setMetaTitle(form.getMetaTitle());
+        data.setMetaDescription(form.getMetaDescription());
+        data.setParentId(form.getParentId());
+        data.setImageId(form.getImageId());
+        return data;
     }
 
 

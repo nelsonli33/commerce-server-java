@@ -1,6 +1,5 @@
 package com.shopflix.merchant.service.category.impl;
 
-import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.exception.ParentSelfRefException;
@@ -22,7 +21,7 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
 
 
     private CategoryRepository categoryRepository;
-    private Populator<CategoryForm, CategoryModel> categoryReversePopulator;
+
 
     @Override
     public List<CategoryModel> getAllCategories() {
@@ -49,48 +48,40 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
     }
 
     @Override
-    public CategoryModel createCategory(CategoryForm categoryForm) {
-        CategoryModel categoryModel = new CategoryModel();
-        categoryReversePopulator.populate(categoryForm, categoryModel);
-        return categoryRepository.save(categoryModel);
+    public CategoryModel save(CategoryModel categoryModel)
+    {
+        return categoryRepository.saveAndFlush(categoryModel);
     }
 
     @Override
-    public CategoryModel updateCategory(Long id, CategoryForm categoryForm) {
-        CategoryModel categoryModel = getCategoryForId(id);
-
-        if (categoryModel.getId().equals(categoryForm.getParentId())) {
-            throw new ParentSelfRefException("Same object cannot be parent to itself. (Category Id:" + id + ")");
-        }
-
-        categoryReversePopulator.populate(categoryForm, categoryModel);
-        return categoryRepository.save(categoryModel);
+    public List<CategoryModel> saveAll(List<CategoryModel> categoryModels)
+    {
+        return categoryRepository.saveAll(categoryModels);
     }
 
     @Override
-    public List<CategoryModel> bulkUpdateCategories(List<CategoryForm> categoryForms) {
-
-        List<CategoryModel> categoryModels = new ArrayList<>();
-
-        for (int i = 0; i < categoryForms.size(); i++) {
-            CategoryForm categoryForm = categoryForms.get(i);
-            CategoryModel categoryModel = getCategoryForId(categoryForm.getId());
-
-            if (categoryModel.getId().equals(categoryForm.getParentId())) {
-                throw new ParentSelfRefException("Same object cannot be parent to itself. (Category Id:" + categoryForm.getId() + ")");
-            }
-
-            categoryReversePopulator.populate(categoryForm, categoryModel);
-            categoryModels.add(categoryModel);
+    public void addParentCategory(CategoryModel categoryModel, Long parentId)
+    {
+        CategoryModel parentCategory = null;
+        if (parentId != null) {
+            parentCategory = getCategoryForId(parentId);
+            categoryModel.getChildren().add(parentCategory);
         }
+        categoryModel.setParent(parentCategory);
+        categoryRepository.save(categoryModel);
+    }
+
+
+    @Override
+    public List<CategoryModel> orderingCategories(List<CategoryModel> categoryModels) {
+
 
 
         return categoryRepository.saveAll(categoryModels);
     }
 
     @Override
-    public void deleteCategory(Long id) {
-        CategoryModel categoryModel = getCategoryForId(id);
+    public void deleteCategory(CategoryModel categoryModel) {
         categoryRepository.delete(categoryModel);
     }
 
@@ -101,16 +92,6 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    @Resource(name = "categoryReversePopulator")
-    public void setCategoryReversePopulator(Populator<CategoryForm, CategoryModel> categoryReversePopulator) {
-        this.categoryReversePopulator = categoryReversePopulator;
-    }
-
-
-
-    public Populator<CategoryForm, CategoryModel> getCategoryReversePopulator() {
-        return categoryReversePopulator;
-    }
 
     public CategoryRepository getCategoryRepository() {
         return categoryRepository;

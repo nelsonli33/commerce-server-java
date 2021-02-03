@@ -3,7 +3,6 @@ package com.shopflix.core.model.media;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "mediaimages")
 public class MediaImageModel extends MediaModel {
 
     @Column(columnDefinition="int default null")

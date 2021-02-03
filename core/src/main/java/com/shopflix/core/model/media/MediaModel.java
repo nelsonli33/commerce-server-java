@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "medias")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class MediaModel extends ItemModel {
 
     private String filename;
