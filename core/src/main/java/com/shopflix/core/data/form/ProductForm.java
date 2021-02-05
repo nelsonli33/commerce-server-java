@@ -21,7 +21,7 @@ public class ProductForm implements Serializable {
     public Double weight;
     public String weightUnit;
     public Integer daysToShip;
-    public Integer status;
+    public String status;
     public Integer minOrderQuantity;
     public Integer maxOrderQuantity;
     public String metaTitle;
@@ -29,6 +29,7 @@ public class ProductForm implements Serializable {
     public List<Long> imageIds;
     public List<ProductOptionForm> options;
     public List<ProductVariantForm> variants;
+    public List<ProductImageForm> images;
 
     public List<Long> getCategoryIds() {
         return categoryIds;
@@ -142,11 +143,13 @@ public class ProductForm implements Serializable {
         this.daysToShip = daysToShip;
     }
 
-    public Integer getStatus() {
+    public String getStatus()
+    {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status)
+    {
         this.status = status;
     }
 
@@ -204,5 +207,15 @@ public class ProductForm implements Serializable {
 
     public void setVariants(List<ProductVariantForm> variants) {
         this.variants = variants;
+    }
+
+    public List<ProductImageForm> getImages()
+    {
+        return images;
+    }
+
+    public void setImages(List<ProductImageForm> images)
+    {
+        this.images = images;
     }
 }

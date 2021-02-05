@@ -1,31 +1,24 @@
-package com.shopflix.core.model.product;
+package com.shopflix.merchant.data;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.shopflix.core.data.ProductImageData;
 import com.shopflix.core.data.product.ProductStatus;
-import com.shopflix.core.model.ItemModel;
 
-import com.shopflix.core.model.category.CategoryModel;
-import org.hibernate.annotations.DynamicUpdate;
+import java.math.BigDecimal;
+import java.util.Collection;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-@Entity
-@Table(name = "products")
-@DynamicUpdate
-public class ProductModel extends ItemModel
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductData
 {
-
+    private Long id;
     private String code;
     private String name;
     private String summary;
-    @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
+    private String status;
     private Integer quantity;
-    private Double price;
+    private BigDecimal price;
     private Double weight;
     private String weightUnit;
     private String sku;
@@ -33,35 +26,25 @@ public class ProductModel extends ItemModel
     private Double packageWidth;
     private Double packageHeight;
     private Integer daysToShip;
-    private ProductStatus status;
     private Integer sold;
     private Integer maxOrderQuantity;
     private Integer minOrderQuantity;
     private String metaTitle;
-    @Column(length = 1000, columnDefinition = "TEXT")
     private String metaDescription;
+    private Collection<CategoryData> categories;
+    private Collection<ProductOptionData> options;
+    private Collection<ProductVariantData> variants;
+    private Collection<ProductImageData> images;
 
-    @ManyToMany(
-            cascade = { CascadeType.PERSIST, CascadeType.MERGE }
-    )
-    @JoinTable(
-            name = "cat2productrel",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    Set<CategoryModel> categories = new HashSet<>();
+    public Long getId()
+    {
+        return id;
+    }
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    List<ProductImageModel> images = new ArrayList<>();
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<ProductOptionModel> options = new ArrayList<>();
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<ProductVariantModel> variants = new ArrayList<>();
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public String getCode()
     {
@@ -103,6 +86,16 @@ public class ProductModel extends ItemModel
         this.description = description;
     }
 
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
     public Integer getQuantity()
     {
         return quantity;
@@ -113,12 +106,12 @@ public class ProductModel extends ItemModel
         this.quantity = quantity;
     }
 
-    public Double getPrice()
+    public BigDecimal getPrice()
     {
         return price;
     }
 
-    public void setPrice(Double price)
+    public void setPrice(BigDecimal price)
     {
         this.price = price;
     }
@@ -193,16 +186,6 @@ public class ProductModel extends ItemModel
         this.daysToShip = daysToShip;
     }
 
-    public ProductStatus getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(ProductStatus status)
-    {
-        this.status = status;
-    }
-
     public Integer getSold()
     {
         return sold;
@@ -253,43 +236,43 @@ public class ProductModel extends ItemModel
         this.metaDescription = metaDescription;
     }
 
-    public Set<CategoryModel> getCategories()
+    public Collection<CategoryData> getCategories()
     {
         return categories;
     }
 
-    public void setCategories(Set<CategoryModel> categories)
+    public void setCategories(Collection<CategoryData> categories)
     {
         this.categories = categories;
     }
 
-    public List<ProductImageModel> getImages()
-    {
-        return images;
-    }
-
-    public void setImages(List<ProductImageModel> images)
-    {
-        this.images = images;
-    }
-
-    public List<ProductOptionModel> getOptions()
+    public Collection<ProductOptionData> getOptions()
     {
         return options;
     }
 
-    public void setOptions(List<ProductOptionModel> options)
+    public void setOptions(Collection<ProductOptionData> options)
     {
         this.options = options;
     }
 
-    public List<ProductVariantModel> getVariants()
+    public Collection<ProductVariantData> getVariants()
     {
         return variants;
     }
 
-    public void setVariants(List<ProductVariantModel> variants)
+    public void setVariants(Collection<ProductVariantData> variants)
     {
         this.variants = variants;
+    }
+
+    public Collection<ProductImageData> getImages()
+    {
+        return images;
+    }
+
+    public void setImages(Collection<ProductImageData> images)
+    {
+        this.images = images;
     }
 }

@@ -1,19 +1,35 @@
 package com.shopflix.core.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
 public class ProductImageData implements Serializable {
 
     private static final long serialVersionUID = -4723196236176145251L;
 
+    private Long id;
     private String alt;
     private Integer position;
+    private String filename;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String originfilename;
     private String tiny;
     private String thumbnail;
     private String normal;
     private String detail;
     private String zoom;
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public String getAlt() {
         return alt;
@@ -29,6 +45,16 @@ public class ProductImageData implements Serializable {
 
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    public String getFilename()
+    {
+        return filename;
+    }
+
+    public void setFilename(String filename)
+    {
+        this.filename = filename;
     }
 
     public String getOriginfilename() {

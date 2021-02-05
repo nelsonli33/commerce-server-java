@@ -7,7 +7,7 @@ public class ProductOptionValueForm {
     public Long id;
     public String label;
     public Integer position;
-    public List<Long> imageIds;
+    public List<ProductImageForm> images;
 
     public Long getId() {
         return id;
@@ -33,11 +33,13 @@ public class ProductOptionValueForm {
         this.position = position;
     }
 
-    public List<Long> getImageIds() {
-        return imageIds;
+    public List<ProductImageForm> getImages()
+    {
+        return images;
     }
 
-    public void setImageIds(List<Long> imageIds) {
-        this.imageIds = imageIds;
+    public void setImages(List<ProductImageForm> images)
+    {
+        this.images = images;
     }
 }

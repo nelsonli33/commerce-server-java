@@ -1,14 +1,16 @@
 package com.shopflix.core.data.form;
 
+import java.math.BigDecimal;
+
 public class ProductVariantForm {
     public Long id;
     public String name;
-    public Double price;
+    public BigDecimal price;
     public Integer quantity;
     public String sku;
     public Integer position;
-    public String option1;
-    public String option2;
+    public String value1;
+    public String value2;
 
     public Long getId() {
         return id;
@@ -26,11 +28,13 @@ public class ProductVariantForm {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice()
+    {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price)
+    {
         this.price = price;
     }
 
@@ -58,19 +62,23 @@ public class ProductVariantForm {
         this.position = position;
     }
 
-    public String getOption1() {
-        return option1;
+    public String getValue1()
+    {
+        return value1;
     }
 
-    public void setOption1(String option1) {
-        this.option1 = option1;
+    public void setValue1(String value1)
+    {
+        this.value1 = value1;
     }
 
-    public String getOption2() {
-        return option2;
+    public String getValue2()
+    {
+        return value2;
     }
 
-    public void setOption2(String option2) {
-        this.option2 = option2;
+    public void setValue2(String value2)
+    {
+        this.value2 = value2;
     }
 }

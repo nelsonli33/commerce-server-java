@@ -1,18 +1,23 @@
 package com.shopflix.merchant.service.product;
 
 import com.shopflix.core.data.form.ProductForm;
-import com.shopflix.core.model.product.ProductModel;
+import com.shopflix.core.model.product.*;
+import com.shopflix.merchant.data.ProductSearchCriteria;
 import org.springframework.data.domain.Page;
 
 public interface MerchantProductService {
 
-    Page<ProductModel> getProducts(int page, int size);
+    Page<ProductModel> getProducts(ProductSearchCriteria searchCriteria);
 
     ProductModel getProduct(Long id);
 
-    ProductModel createProduct(ProductForm productForm);
+    ProductModel save(ProductModel productModel);
 
-    ProductModel updateProduct(Long id, ProductForm productForm);
+    void deleteProduct(ProductModel productModel);
 
-    void deleteProduct(Long id);
+    ProductOptionModel getProductOption(Long optionId);
+
+    ProductOptionValueModel getProductOptionValue(Long optionValueId);
+
+    ProductVariantModel getProductVariant(Long variantId);
 }

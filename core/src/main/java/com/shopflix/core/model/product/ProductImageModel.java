@@ -13,6 +13,7 @@ public class ProductImageModel extends ItemModel {
 
     private String alt;
     private Integer position;
+    private String filename;
     private String originfilename;
     private String tiny;
     private String thumbnail;
@@ -25,6 +26,16 @@ public class ProductImageModel extends ItemModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductModel product;
+
+    public String getFilename()
+    {
+        return filename;
+    }
+
+    public void setFilename(String filename)
+    {
+        this.filename = filename;
+    }
 
     public String getAlt() {
         return alt;
