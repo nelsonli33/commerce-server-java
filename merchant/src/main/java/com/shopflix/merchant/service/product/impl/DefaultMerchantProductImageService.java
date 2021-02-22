@@ -1,9 +1,8 @@
 package com.shopflix.merchant.service.product.impl;
 
-import com.shopflix.core.data.ProductImageData;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.product.ProductImageModel;
-import com.shopflix.core.repository.ProductImageRepository;
+import com.shopflix.core.repository.product.ProductImageRepository;
 import com.shopflix.merchant.service.media.StorageService;
 import com.shopflix.merchant.service.product.MerchantProductImageService;
 import com.shopflix.merchant.service.product.ProductImage;

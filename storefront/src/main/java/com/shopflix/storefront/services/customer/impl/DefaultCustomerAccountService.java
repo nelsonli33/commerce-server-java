@@ -1,8 +1,9 @@
 package com.shopflix.storefront.services.customer.impl;
 
 import com.shopflix.core.model.user.CustomerModel;
-import com.shopflix.core.repository.CustomerRepository;
+import com.shopflix.core.repository.user.CustomerRepository;
 import com.shopflix.storefront.exceptions.DuplicateUidException;
+import com.shopflix.storefront.services.customer.CustomerAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -24,7 +24,7 @@ public class ProductModel extends ItemModel
     private String summary;
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
-    private Integer quantity;
+    private Long quantity;
     private Double price;
     private Double weight;
     private String weightUnit;
@@ -103,12 +103,12 @@ public class ProductModel extends ItemModel
         this.description = description;
     }
 
-    public Integer getQuantity()
+    public Long getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity)
+    public void setQuantity(Long quantity)
     {
         this.quantity = quantity;
     }

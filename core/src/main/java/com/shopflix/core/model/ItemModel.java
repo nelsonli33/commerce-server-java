@@ -4,11 +4,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
-public class ItemModel {
-
+public class ItemModel implements Serializable
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

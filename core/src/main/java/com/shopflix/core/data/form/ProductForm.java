@@ -13,7 +13,7 @@ public class ProductForm implements Serializable {
     public String summary;
     public String description;
     public Double price;
-    public Integer quantity;
+    public Long quantity;
     public String sku;
     public Double packageLength;
     public Double packageWidth;
@@ -79,11 +79,13 @@ public class ProductForm implements Serializable {
         this.price = price;
     }
 
-    public Integer getQuantity() {
+    public Long getQuantity()
+    {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Long quantity)
+    {
         this.quantity = quantity;
     }
 

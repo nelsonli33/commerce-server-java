@@ -1,11 +1,10 @@
 package com.shopflix.merchant.service.navigation.impl;
 
 import com.shopflix.core.exception.ModelNotFoundException;
-import com.shopflix.core.model.category.CategoryModel;
 import com.shopflix.core.model.navigation.CMSNavigationLinkModel;
 import com.shopflix.core.model.navigation.CMSNavigationModel;
-import com.shopflix.core.repository.CMSNavigationLinkRepository;
-import com.shopflix.core.repository.CMSNavigationRepository;
+import com.shopflix.core.repository.navigation.CMSNavigationLinkRepository;
+import com.shopflix.core.repository.navigation.CMSNavigationRepository;
 import com.shopflix.merchant.service.navigation.MerchantNavigationService;
 import org.springframework.stereotype.Service;
 

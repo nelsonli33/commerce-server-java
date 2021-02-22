@@ -1,10 +1,8 @@
 package com.shopflix.merchant.service.category.impl;
 
-import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.exception.ModelNotFoundException;
-import com.shopflix.core.exception.ParentSelfRefException;
 import com.shopflix.core.model.category.CategoryModel;
-import com.shopflix.core.repository.CategoryRepository;
+import com.shopflix.core.repository.category.CategoryRepository;
 import com.shopflix.core.util.ServicesUtil;
 import com.shopflix.merchant.service.category.MerchantCategoryService;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

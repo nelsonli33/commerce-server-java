@@ -1,15 +1,19 @@
 package com.shopflix.core.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.shopflix.core.model.ItemModel;
+import com.shopflix.core.model.order.CartModel;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "customers")
-public class CustomerModel extends ItemModel {
+public class CustomerModel extends ItemModel implements Serializable
+{
+    private static final long serialVersionUID = 2180973506725092772L;
 
     @Column(nullable = false, unique = true)
     private String uid;
@@ -37,10 +41,12 @@ public class CustomerModel extends ItemModel {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -84,4 +90,5 @@ public class CustomerModel extends ItemModel {
     public void setAcceptsMarketing(boolean acceptsMarketing) {
         this.acceptsMarketing = acceptsMarketing;
     }
+
 }

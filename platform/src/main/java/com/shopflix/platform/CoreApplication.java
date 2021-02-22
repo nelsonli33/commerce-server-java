@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.shopflix")
 @EnableJpaRepositories(basePackages = "com.shopflix")
-@EntityScan(basePackages = "com.shopflix")
+@EntityScan(basePackages = "com.shopflix.core")
 @PropertySource("classpath:project.properties")
 public class CoreApplication {
 

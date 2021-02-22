@@ -1,7 +1,7 @@
 package com.shopflix.storefront.security;
 
 import com.shopflix.core.model.user.CustomerModel;
-import com.shopflix.core.repository.CustomerRepository;
+import com.shopflix.core.repository.user.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

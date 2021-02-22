@@ -6,7 +6,7 @@ public class ProductVariantForm {
     public Long id;
     public String name;
     public BigDecimal price;
-    public Integer quantity;
+    public Long quantity;
     public String sku;
     public Integer position;
     public String value1;
@@ -38,11 +38,13 @@ public class ProductVariantForm {
         this.price = price;
     }
 
-    public Integer getQuantity() {
+    public Long getQuantity()
+    {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Long quantity)
+    {
         this.quantity = quantity;
     }
 

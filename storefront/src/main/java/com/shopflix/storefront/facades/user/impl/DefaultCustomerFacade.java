@@ -3,7 +3,7 @@ package com.shopflix.storefront.facades.user.impl;
 import com.shopflix.core.model.user.CustomerModel;
 import com.shopflix.storefront.facades.user.CustomerFacade;
 import com.shopflix.storefront.facades.user.data.RegisterData;
-import com.shopflix.storefront.services.customer.impl.CustomerAccountService;
+import com.shopflix.storefront.services.customer.CustomerAccountService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 

@@ -45,15 +45,7 @@ public class UserController extends AbstractController {
 
         registrationValidator.validate(form, bindingResult);
 
-        Locale locale = LocaleContextHolder.getLocale();
-        if (bindingResult.hasErrors()) {
-            List<String> errorMessages = bindingResult.getAllErrors()
-                    .stream()
-                    .map(err -> getMessageSource().getMessage(err, locale))
-                    .collect(Collectors.toList());
-
-            throw new ValidationException(errorMessages.toString());
-        }
+        doBindingResult(bindingResult);
 
 
         RegisterData data = new RegisterData();
