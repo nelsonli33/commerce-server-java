@@ -16,16 +16,20 @@ public class DefaultSKUProductFactory implements SKUProductFactory
         Long quantity = product.getQuantity();
         String sku = product.getSku();
 
+        skuProduct.setVariantType(Boolean.FALSE);
+        skuProduct.setProductId(product.getId());
+
         if (variant != null) {
             name = name.concat(" - ").concat(variant.getName());
             price = variant.getPrice();
             quantity = variant.getQuantity();
             sku = variant.getSku();
+            skuProduct.setVariant(variant);
+            skuProduct.setVariantId(variant.getId());
             skuProduct.setVariantType(Boolean.TRUE);
         }
 
-        skuProduct.setVariantType(Boolean.FALSE);
-        skuProduct.setVariant(variant);
+
         skuProduct.setName(name);
         skuProduct.setPrice(price);
         skuProduct.setSku(sku);

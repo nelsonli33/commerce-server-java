@@ -53,6 +53,7 @@ public abstract class DefaultAbstractOrderService<O extends AbstractOrderModel, 
                 ret.setVariantName(skuProduct.getVariant().getName());
                 ret.setGiveAway(skuProduct.getGiveAway());
                 ret.setQuantity(qty);
+                order.getLineItems().add(ret);
                 return (E) ret;
             }
         }
@@ -74,9 +75,10 @@ public abstract class DefaultAbstractOrderService<O extends AbstractOrderModel, 
 
         for (final AbstractOrderLineItemModel lineItem : lineItems)
         {
-            if (lineItem != null &&
-                    lineItem.getProduct() != null && lineItem.getProduct().equals(skuProduct.getProduct()) &&
-                    lineItem.getVariant().equals(skuProduct.getVariant()))
+            System.out.println(lineItem.getProductId());
+            System.out.println(lineItem.getVariantId());
+            if (lineItem != null && lineItem.getProductId().equals(skuProduct.getProductId()) &&
+                    skuProduct.isVariantType() && lineItem.getVariantId().equals(skuProduct.getVariantId()))
             {
                 return (E) lineItem;
             }

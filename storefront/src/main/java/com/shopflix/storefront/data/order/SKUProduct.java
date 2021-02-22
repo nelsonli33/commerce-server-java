@@ -15,7 +15,11 @@ public class SKUProduct implements Serializable {
 
     private Double price;
 
+    private Long productId;
+
     private ProductModel product;
+
+    private Long variantId;
 
     private ProductVariantModel variant;
 
@@ -55,6 +59,26 @@ public class SKUProduct implements Serializable {
 
     public void setProduct(ProductModel product) {
         this.product = product;
+    }
+
+    public Long getProductId()
+    {
+        return productId;
+    }
+
+    public void setProductId(Long productId)
+    {
+        this.productId = productId;
+    }
+
+    public Long getVariantId()
+    {
+        return variantId;
+    }
+
+    public void setVariantId(Long variantId)
+    {
+        this.variantId = variantId;
     }
 
     public ProductVariantModel getVariant() {
