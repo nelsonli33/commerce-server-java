@@ -1,4 +1,4 @@
-package com.shopflix.core.repository;
+package com.shopflix.core.repository.user;
 
 import com.shopflix.core.model.user.CustomerModel;
 import org.springframework.data.jpa.repository.JpaRepository;

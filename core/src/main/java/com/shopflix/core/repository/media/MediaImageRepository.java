@@ -1,4 +1,4 @@
-package com.shopflix.core.repository;
+package com.shopflix.core.repository.media;
 
 import com.shopflix.core.model.media.MediaImageModel;
 import org.springframework.data.jpa.repository.JpaRepository;

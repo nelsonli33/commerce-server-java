@@ -1,4 +1,4 @@
-package com.shopflix.core.repository;
+package com.shopflix.core.repository.navigation;
 
 import com.shopflix.core.model.navigation.CMSNavigationLinkModel;
 import com.shopflix.core.model.navigation.CMSNavigationModel;

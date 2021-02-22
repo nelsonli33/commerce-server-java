@@ -1,4 +1,4 @@
-package com.shopflix.core.repository;
+package com.shopflix.core.repository.category;
 
 import com.shopflix.core.model.category.CategoryModel;
 import org.springframework.data.jpa.repository.JpaRepository;
