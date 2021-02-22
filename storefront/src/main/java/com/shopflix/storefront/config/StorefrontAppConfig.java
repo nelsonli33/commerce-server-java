@@ -4,6 +4,7 @@ import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.converters.impl.PopulatingConverter;
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
+import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.repository.order.CartRepository;
 import com.shopflix.core.repository.product.ProductRepository;
 import com.shopflix.core.repository.user.CustomerRepository;
@@ -11,6 +12,7 @@ import com.shopflix.core.service.ModelService;
 import com.shopflix.core.service.SessionService;
 import com.shopflix.storefront.data.order.*;
 import com.shopflix.storefront.facades.order.converters.populator.CartModificationPopulator;
+import com.shopflix.storefront.facades.order.converters.populator.CartPopulator;
 import com.shopflix.storefront.facades.order.converters.populator.CommerceCartParameterPopulator;
 import com.shopflix.storefront.facades.order.converters.populator.OrderLineItemPopulator;
 import com.shopflix.storefront.facades.order.impl.DefaultCartFacade;
@@ -133,11 +135,15 @@ public class StorefrontAppConfig
     // <!--- facade layer --->
     @Bean
     public DefaultCartFacade cartFacade(
+            @Qualifier("cartService") CartService cartService,
             @Qualifier("commerceCartService") CommerceCartService commerceCartService,
+            @Qualifier("cartConverter") Converter<CartModel, CartData> cartConverter,
             @Qualifier("commerceCartParameterConverter") Converter<AddToCartParams, CommerceCartParameter> commerceCartParameterConverter,
             @Qualifier("cartModificationConverter") Converter<CommerceCartModification, CartModificationData> cartModificationConverter
     ) {
         DefaultCartFacade cartFacade = new DefaultCartFacade();
+        cartFacade.setCartService(cartService);
+        cartFacade.setCartConverter(cartConverter);
         cartFacade.setCommerceCartService(commerceCartService);
         cartFacade.setCommerceCartParameterConverter(commerceCartParameterConverter);
         cartFacade.setCartModificationConverter(cartModificationConverter);
@@ -206,4 +212,25 @@ public class StorefrontAppConfig
         converter.setPopulators(Arrays.asList(cartModificationPopulator));
         return converter;
     }
+
+    @Bean
+    public CartPopulator cartPopulator(
+            @Qualifier("orderLineItemConverter") Converter<AbstractOrderLineItemModel, OrderLineItemData> orderLineItemConverter
+    ) {
+        CartPopulator populator = new CartPopulator();
+        populator.setOrderLineItemConverter(orderLineItemConverter);
+        return populator;
+    }
+
+    @Bean
+    public Converter<CartModel, CartData> cartConverter(
+            @Qualifier("cartPopulator") Populator<CartModel, CartData> cartPopulator
+    ) {
+        PopulatingConverter<CartModel, CartData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(CartData.class);
+        converter.setPopulators(Arrays.asList(cartPopulator));
+        return converter;
+    }
+
+
 }
