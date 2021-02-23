@@ -1,13 +1,12 @@
 package com.shopflix.storefront.services.product.impl;
 
-import com.shopflix.core.data.product.ProductStatus;
+import com.shopflix.core.enums.ProductStatus;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.product.ProductModel;
 import com.shopflix.core.model.product.ProductModel_;
 import com.shopflix.core.model.product.ProductVariantModel;
 import com.shopflix.core.repository.product.ProductRepository;
 import com.shopflix.storefront.services.product.ProductService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;

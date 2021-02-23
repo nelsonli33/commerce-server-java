@@ -1,9 +1,8 @@
-package com.shopflix.merchant.facades.converters;
+package com.shopflix.merchant.config;
 
 import com.shopflix.core.converters.ConfigurableConverter;
 import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.Populator;
-import com.shopflix.core.converters.PopulatorList;
 import com.shopflix.core.converters.impl.DefaultConfigurableConverter;
 import com.shopflix.core.converters.impl.DefaultPopulatorList;
 import com.shopflix.core.converters.impl.PopulatingConverter;
@@ -13,28 +12,63 @@ import com.shopflix.core.model.category.CategoryModel;
 import com.shopflix.core.model.media.MediaImageModel;
 import com.shopflix.core.model.navigation.CMSNavigationLinkModel;
 import com.shopflix.core.model.navigation.CMSNavigationModel;
+import com.shopflix.core.model.order.delivery.DeliveryModeModel;
+import com.shopflix.core.model.order.delivery.DeliveryModeValueModel;
 import com.shopflix.core.model.product.ProductImageModel;
 import com.shopflix.core.model.product.ProductModel;
 import com.shopflix.core.model.product.ProductOptionModel;
 import com.shopflix.core.model.product.ProductOptionValueModel;
+import com.shopflix.core.repository.delivery.DeliveryModeRepository;
 import com.shopflix.merchant.data.*;
+import com.shopflix.merchant.facades.delivery.converters.populator.MerchantDeliveryModePopulator;
+import com.shopflix.merchant.facades.delivery.converters.populator.MerchantDeliveryModeValuePopulator;
+import com.shopflix.merchant.facades.delivery.data.DeliveryModeData;
+import com.shopflix.merchant.facades.delivery.data.DeliveryModeValueData;
+import com.shopflix.merchant.facades.delivery.impl.DefaultMerchantDeliveryModeFacade;
+import com.shopflix.merchant.service.delivery.impl.DefaultMerchantDeliveryModeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 @ComponentScan(value = "com.shopflix.merchant")
-public class ConverterConfiguration
+public class MerchantAppConfig
 {
 
+    @Autowired
+    public DeliveryModeRepository deliveryModeRepository;
 
+    // <!--- services --->
+    @Bean
+    public DefaultMerchantDeliveryModeService merchantDeliveryModeService() {
+        DefaultMerchantDeliveryModeService merchantDeliveryModeService = new DefaultMerchantDeliveryModeService();
+        merchantDeliveryModeService.setDeliveryModeRepository(deliveryModeRepository);
+        return merchantDeliveryModeService;
+    }
+
+
+    // <!--- facades --->
+    @Bean
+    public DefaultMerchantDeliveryModeFacade merchantDeliveryModeFacade() {
+        DefaultMerchantDeliveryModeFacade merchantDeliveryModeFacade = new DefaultMerchantDeliveryModeFacade();
+        merchantDeliveryModeFacade.setMerchantDeliveryModeService(merchantDeliveryModeService());
+        merchantDeliveryModeFacade.setMerchantDeliveryModeConverter(merchantDeliveryModeConverter());
+        return merchantDeliveryModeFacade;
+    }
+
+
+
+
+
+    // <!--- converters and populators --->
     @Bean(name = "mediaImageConverter")
     public Converter<MediaImageModel, MediaImageData> mediaImageConverter(
             @Qualifier(value = "mediaImagePopulator") Populator<MediaImageModel, MediaImageData> mediaImagePopulator
@@ -156,6 +190,35 @@ public class ConverterConfiguration
         PopulatingConverter<ProductImageModel, ProductImageData> converter = new PopulatingConverter<>();
         converter.setTargetClass(ProductImageData.class);
         converter.setPopulators(Arrays.asList(productInnerImagePopulator));
+        return converter;
+    }
+
+
+    @Bean
+    public MerchantDeliveryModePopulator merchantDeliveryModePopulator() {
+        MerchantDeliveryModePopulator populator = new MerchantDeliveryModePopulator();
+        populator.setMerchantDeliveryModeValueConverter(merchantDeliveryModeValueConverter());
+        return populator;
+    }
+
+    @Bean
+    public Converter<DeliveryModeModel, DeliveryModeData> merchantDeliveryModeConverter() {
+        PopulatingConverter<DeliveryModeModel, DeliveryModeData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(DeliveryModeData.class);
+        converter.setPopulators(Arrays.asList(merchantDeliveryModePopulator()));
+        return converter;
+    }
+
+    @Bean
+    public MerchantDeliveryModeValuePopulator merchantDeliveryModeValuePopulator() {
+        return new MerchantDeliveryModeValuePopulator();
+    }
+
+    @Bean
+    public Converter<DeliveryModeValueModel, DeliveryModeValueData> merchantDeliveryModeValueConverter() {
+        PopulatingConverter<DeliveryModeValueModel, DeliveryModeValueData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(DeliveryModeValueData.class);
+        converter.setPopulators(Arrays.asList(merchantDeliveryModeValuePopulator()));
         return converter;
     }
 

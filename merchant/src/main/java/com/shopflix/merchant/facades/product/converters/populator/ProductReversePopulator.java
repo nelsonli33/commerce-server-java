@@ -2,7 +2,7 @@ package com.shopflix.merchant.facades.product.converters.populator;
 
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.form.ProductForm;
-import com.shopflix.core.data.product.ProductStatus;
+import com.shopflix.core.enums.ProductStatus;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.product.ProductModel;
 import org.springframework.stereotype.Component;

@@ -1,8 +1,7 @@
-package com.shopflix.core.data.product;
+package com.shopflix.core.enums;
 
 
 import com.shopflix.core.converters.AbstractEnumConverter;
-import com.shopflix.core.enums.PersistableEnum;
 
 public enum ProductStatus implements PersistableEnum
 {

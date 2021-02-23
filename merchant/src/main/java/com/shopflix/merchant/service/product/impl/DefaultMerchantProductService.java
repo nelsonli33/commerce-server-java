@@ -1,6 +1,6 @@
 package com.shopflix.merchant.service.product.impl;
 
-import com.shopflix.core.data.product.ProductStatus;
+import com.shopflix.core.enums.ProductStatus;
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.product.*;
 import com.shopflix.core.repository.product.ProductOptionRepository;

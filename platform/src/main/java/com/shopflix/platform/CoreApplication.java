@@ -8,8 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.shopflix")
-@EnableJpaRepositories(basePackages = "com.shopflix.core", repositoryBaseClass = CustomJpaRepositoryImpl.class)
-@EntityScan(basePackages = "com.shopflix.core")
+@EnableJpaRepositories(basePackages = "com.shopflix", repositoryBaseClass = CustomJpaRepositoryImpl.class)
+@EntityScan(basePackages = "com.shopflix")
 @PropertySource("classpath:project.properties")
 public class CoreApplication {
 

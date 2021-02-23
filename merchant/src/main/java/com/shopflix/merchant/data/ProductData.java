@@ -1,9 +1,7 @@
 package com.shopflix.merchant.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.shopflix.core.data.ProductImageData;
-import com.shopflix.core.data.product.ProductStatus;
 
 import java.math.BigDecimal;
 import java.util.Collection;

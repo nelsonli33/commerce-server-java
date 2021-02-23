@@ -1,7 +1,7 @@
 package com.shopflix.core.model.product;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.shopflix.core.data.product.ProductStatus;
+import com.shopflix.core.enums.ProductStatus;
 import com.shopflix.core.model.ItemModel;
 
 import com.shopflix.core.model.category.CategoryModel;
@@ -18,7 +18,6 @@ import java.util.Set;
 @DynamicUpdate
 public class ProductModel extends ItemModel
 {
-
     private String code;
     private String name;
     private String summary;
