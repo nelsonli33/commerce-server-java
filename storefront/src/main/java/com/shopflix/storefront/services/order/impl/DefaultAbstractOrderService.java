@@ -1,8 +1,10 @@
 package com.shopflix.storefront.services.order.impl;
 
+import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.order.*;
 import com.shopflix.storefront.data.order.SKUProduct;
 import com.shopflix.storefront.services.order.AbstractOrderService;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
@@ -22,7 +24,8 @@ public abstract class DefaultAbstractOrderService<O extends AbstractOrderModel, 
             throw new IllegalArgumentException("Quantity must be a positive non-zero value");
         }
 
-        AbstractOrderLineItemModel ret = getLineItemForSKUProduct(order, skuProduct);;
+        AbstractOrderLineItemModel ret = getLineItemForSKUProduct(order, skuProduct);
+        ;
 
         if (ret != null && Boolean.FALSE.equals(ret.getGiveAway()))
         {
@@ -75,8 +78,6 @@ public abstract class DefaultAbstractOrderService<O extends AbstractOrderModel, 
 
         for (final AbstractOrderLineItemModel lineItem : lineItems)
         {
-            System.out.println(lineItem.getProductId());
-            System.out.println(lineItem.getVariantId());
             if (lineItem != null && lineItem.getProductId().equals(skuProduct.getProductId()) &&
                     skuProduct.isVariantType() && lineItem.getVariantId().equals(skuProduct.getVariantId()))
             {
@@ -85,5 +86,22 @@ public abstract class DefaultAbstractOrderService<O extends AbstractOrderModel, 
         }
 
         return null;
+    }
+
+    @Override
+    public E getLineItemForId(O order, Long lineItemId)
+    {
+        final List<AbstractOrderLineItemModel> lineItems = order.getLineItems();
+        if (CollectionUtils.isNotEmpty(lineItems))
+        {
+            for (final AbstractOrderLineItemModel lineItem : lineItems)
+            {
+                if (lineItem != null && lineItem.getId().equals(lineItemId)) {
+                    return (E) lineItem;
+                }
+            }
+        }
+
+        throw new ModelNotFoundException("Line Item with id "+lineItemId+" requested for the object does not exists in the cart or system");
     }
 }

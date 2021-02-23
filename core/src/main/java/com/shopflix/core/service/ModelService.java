@@ -9,4 +9,8 @@ public interface ModelService
     void save(ItemModel model);
 
     void saveAll(List<ItemModel> models);
+
+    void remove(ItemModel model);
+
+    void refresh(ItemModel model);
 }

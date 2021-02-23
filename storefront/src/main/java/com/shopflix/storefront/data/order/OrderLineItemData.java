@@ -6,6 +6,8 @@ public class OrderLineItemData implements Serializable
 {
     private static final long serialVersionUID = 646064757726830593L;
 
+    private Long id;
+
     private String name;
 
     private Long productId;
@@ -29,6 +31,15 @@ public class OrderLineItemData implements Serializable
     private boolean updateable;
 
 
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public String getName()
     {

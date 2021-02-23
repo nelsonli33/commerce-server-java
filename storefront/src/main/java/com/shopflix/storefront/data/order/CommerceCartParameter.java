@@ -15,6 +15,8 @@ public class CommerceCartParameter implements Serializable {
 
     private long quantity;
 
+    private Long lineItemId;
+
 
 
     public CartModel getCart() {
@@ -41,4 +43,13 @@ public class CommerceCartParameter implements Serializable {
         this.quantity = quantity;
     }
 
+    public Long getLineItemId()
+    {
+        return lineItemId;
+    }
+
+    public void setLineItemId(Long lineItemId)
+    {
+        this.lineItemId = lineItemId;
+    }
 }

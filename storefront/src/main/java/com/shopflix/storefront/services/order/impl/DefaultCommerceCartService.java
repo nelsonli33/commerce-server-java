@@ -5,10 +5,12 @@ import com.shopflix.storefront.data.order.CommerceCartParameter;
 import com.shopflix.storefront.exceptions.CommerceCartModificationException;
 import com.shopflix.storefront.services.order.CommerceCartService;
 import com.shopflix.storefront.services.order.strategies.CommerceAddToCartStrategy;
+import com.shopflix.storefront.services.order.strategies.CommerceUpdateCartLineItemStrategy;
 
 public class DefaultCommerceCartService implements CommerceCartService {
 
     private CommerceAddToCartStrategy commerceAddToCartStrategy;
+    private CommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy;
 
     @Override
     public CommerceCartModification addToCart(CommerceCartParameter parameter) throws CommerceCartModificationException {
@@ -17,8 +19,10 @@ public class DefaultCommerceCartService implements CommerceCartService {
 
     @Override
     public CommerceCartModification updateQuantityForCartLineItem(CommerceCartParameter parameter) throws CommerceCartModificationException {
-        return null;
+        return getCommerceUpdateCartLineItemStrategy().updateQuantityForCartLineItem(parameter);
     }
+
+
 
     public CommerceAddToCartStrategy getCommerceAddToCartStrategy()
     {
@@ -28,5 +32,15 @@ public class DefaultCommerceCartService implements CommerceCartService {
     public void setCommerceAddToCartStrategy(CommerceAddToCartStrategy commerceAddToCartStrategy)
     {
         this.commerceAddToCartStrategy = commerceAddToCartStrategy;
+    }
+
+    public CommerceUpdateCartLineItemStrategy getCommerceUpdateCartLineItemStrategy()
+    {
+        return commerceUpdateCartLineItemStrategy;
+    }
+
+    public void setCommerceUpdateCartLineItemStrategy(CommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy)
+    {
+        this.commerceUpdateCartLineItemStrategy = commerceUpdateCartLineItemStrategy;
     }
 }

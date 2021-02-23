@@ -10,4 +10,6 @@ public interface AbstractOrderService<O extends AbstractOrderModel, E extends Ab
     E addNewLineItem(final O order, final SKUProduct skuProduct, final long qty);
 
     E getLineItemForSKUProduct(final O order, final SKUProduct skuProduct);
+
+    E getLineItemForId(final O order, final Long lineItemId);
 }

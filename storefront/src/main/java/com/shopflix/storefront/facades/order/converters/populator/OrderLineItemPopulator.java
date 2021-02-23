@@ -24,6 +24,7 @@ public class OrderLineItemPopulator implements Populator<AbstractOrderLineItemMo
 
     protected void addCommon(final AbstractOrderLineItemModel source, final OrderLineItemData target)
     {
+        target.setId(source.getId());
         target.setUpdateable(getOrderLineItemModelModifiableChecker().canModify(source));
     }
 

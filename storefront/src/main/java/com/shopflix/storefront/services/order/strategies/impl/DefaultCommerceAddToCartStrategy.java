@@ -18,7 +18,6 @@ import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;
 
 public class DefaultCommerceAddToCartStrategy extends AbstractCommerceCartStrategy implements CommerceAddToCartStrategy
 {
-    private CommerceCartCalculationStrategy commerceCartCalculationStrategy;
 
     @Override
     public CommerceCartModification addToCart(CommerceCartParameter parameter) throws CommerceCartModificationException
@@ -136,13 +135,4 @@ public class DefaultCommerceAddToCartStrategy extends AbstractCommerceCartStrate
     }
 
 
-    public CommerceCartCalculationStrategy getCommerceCartCalculationStrategy()
-    {
-        return commerceCartCalculationStrategy;
-    }
-
-    public void setCommerceCartCalculationStrategy(CommerceCartCalculationStrategy commerceCartCalculationStrategy)
-    {
-        this.commerceCartCalculationStrategy = commerceCartCalculationStrategy;
-    }
 }

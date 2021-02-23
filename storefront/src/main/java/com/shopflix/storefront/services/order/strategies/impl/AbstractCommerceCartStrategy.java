@@ -1,10 +1,13 @@
 package com.shopflix.storefront.services.order.strategies.impl;
 
+import com.shopflix.core.model.order.AbstractOrderLineItemModel;
 import com.shopflix.core.model.order.CartLineItemModel;
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.service.ModelService;
 import com.shopflix.storefront.data.order.SKUProduct;
 import com.shopflix.storefront.services.order.CartService;
+import com.shopflix.storefront.services.order.strategies.CommerceCartCalculationStrategy;
+import com.shopflix.storefront.services.strategies.ModifiableChecker;
 
 import javax.annotation.Resource;
 
@@ -16,6 +19,8 @@ public abstract class AbstractCommerceCartStrategy
 
     private ModelService modelService;
     private CartService cartService;
+    private ModifiableChecker<AbstractOrderLineItemModel> orderLineItemModifiableChecker;
+    private CommerceCartCalculationStrategy commerceCartCalculationStrategy;
 
     protected long getAllowedCartQtyAdjustmentForProduct(final CartModel cartModel, final SKUProduct skuProduct,
                                                       final long quantityToAdd)
@@ -104,5 +109,27 @@ public abstract class AbstractCommerceCartStrategy
     public void setModelService(ModelService modelService)
     {
         this.modelService = modelService;
+    }
+
+    public ModifiableChecker<AbstractOrderLineItemModel> getOrderLineItemModifiableChecker()
+    {
+        return orderLineItemModifiableChecker;
+    }
+
+    @Resource(name = "orderLineItemModifiableChecker")
+    public void setOrderLineItemModifiableChecker(ModifiableChecker<AbstractOrderLineItemModel> orderLineItemModifiableChecker)
+    {
+        this.orderLineItemModifiableChecker = orderLineItemModifiableChecker;
+    }
+
+    public CommerceCartCalculationStrategy getCommerceCartCalculationStrategy()
+    {
+        return commerceCartCalculationStrategy;
+    }
+
+    @Resource(name = "commerceCartCalculationStrategy")
+    public void setCommerceCartCalculationStrategy(CommerceCartCalculationStrategy commerceCartCalculationStrategy)
+    {
+        this.commerceCartCalculationStrategy = commerceCartCalculationStrategy;
     }
 }

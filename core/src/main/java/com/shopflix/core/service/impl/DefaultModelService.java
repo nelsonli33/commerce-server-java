@@ -25,6 +25,18 @@ public class DefaultModelService implements ModelService
         getModelRepository().saveAll(models);
     }
 
+    @Override
+    public void remove(ItemModel model)
+    {
+        getModelRepository().delete(model);
+    }
+
+    @Override
+    public void refresh(ItemModel model)
+    {
+        getModelRepository().refresh(model);
+    }
+
 
     public ModelRepository<ItemModel> getModelRepository()
     {

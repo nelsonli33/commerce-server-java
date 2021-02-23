@@ -11,10 +11,7 @@ import com.shopflix.core.repository.user.CustomerRepository;
 import com.shopflix.core.service.ModelService;
 import com.shopflix.core.service.SessionService;
 import com.shopflix.storefront.data.order.*;
-import com.shopflix.storefront.facades.order.converters.populator.CartModificationPopulator;
-import com.shopflix.storefront.facades.order.converters.populator.CartPopulator;
-import com.shopflix.storefront.facades.order.converters.populator.CommerceCartParameterPopulator;
-import com.shopflix.storefront.facades.order.converters.populator.OrderLineItemPopulator;
+import com.shopflix.storefront.facades.order.converters.populator.*;
 import com.shopflix.storefront.facades.order.impl.DefaultCartFacade;
 import com.shopflix.storefront.services.customer.CustomerService;
 import com.shopflix.storefront.services.customer.impl.DefaultCustomerService;
@@ -28,8 +25,10 @@ import com.shopflix.storefront.services.order.impl.DefaultCartService;
 import com.shopflix.storefront.services.order.impl.DefaultCommerceCartService;
 import com.shopflix.storefront.services.order.strategies.CommerceAddToCartStrategy;
 import com.shopflix.storefront.services.order.strategies.CommerceCartCalculationStrategy;
+import com.shopflix.storefront.services.order.strategies.CommerceUpdateCartLineItemStrategy;
 import com.shopflix.storefront.services.order.strategies.impl.DefaultCommerceAddToCartStrategy;
 import com.shopflix.storefront.services.order.strategies.impl.DefaultCommerceCartCalculationStrategy;
+import com.shopflix.storefront.services.order.strategies.impl.DefaultCommerceUpdateCartLineItemStrategy;
 import com.shopflix.storefront.services.product.ProductService;
 import com.shopflix.storefront.services.product.SKUProductFactory;
 import com.shopflix.storefront.services.product.impl.DefaultProductService;
@@ -92,10 +91,12 @@ public class StorefrontAppConfig
 
     @Bean
     public DefaultCommerceCartService commerceCartService(
-            @Qualifier("commerceAddToCartStrategy") CommerceAddToCartStrategy commerceAddToCartStrategy
+            @Qualifier("commerceAddToCartStrategy") CommerceAddToCartStrategy commerceAddToCartStrategy,
+            @Qualifier("commerceUpdateCartLineItemStrategy") CommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy
     ) {
         DefaultCommerceCartService commerceCartService = new DefaultCommerceCartService();
         commerceCartService.setCommerceAddToCartStrategy(commerceAddToCartStrategy);
+        commerceCartService.setCommerceUpdateCartLineItemStrategy(commerceUpdateCartLineItemStrategy);
         return commerceCartService;
     }
 
@@ -105,12 +106,13 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCommerceAddToCartStrategy commerceAddToCartStrategy(
-            @Qualifier("commerceCartCalculationStrategy") CommerceCartCalculationStrategy commerceCartCalculationStrategy
-    ) {
-        DefaultCommerceAddToCartStrategy commerceAddToCartStrategy = new DefaultCommerceAddToCartStrategy();
-        commerceAddToCartStrategy.setCommerceCartCalculationStrategy(commerceCartCalculationStrategy);
-        return commerceAddToCartStrategy;
+    public DefaultCommerceAddToCartStrategy commerceAddToCartStrategy() {
+        return new DefaultCommerceAddToCartStrategy();
+    }
+
+    @Bean
+    public DefaultCommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy() {
+        return new DefaultCommerceUpdateCartLineItemStrategy();
     }
 
     @Bean
@@ -139,6 +141,7 @@ public class StorefrontAppConfig
             @Qualifier("commerceCartService") CommerceCartService commerceCartService,
             @Qualifier("cartConverter") Converter<CartModel, CartData> cartConverter,
             @Qualifier("commerceCartParameterConverter") Converter<AddToCartParams, CommerceCartParameter> commerceCartParameterConverter,
+            @Qualifier("commerceUpdateCartParameterConverter") Converter<UpdateCartParams, CommerceCartParameter> commerceUpdateCartParameterConverter,
             @Qualifier("cartModificationConverter") Converter<CommerceCartModification, CartModificationData> cartModificationConverter
     ) {
         DefaultCartFacade cartFacade = new DefaultCartFacade();
@@ -146,6 +149,7 @@ public class StorefrontAppConfig
         cartFacade.setCartConverter(cartConverter);
         cartFacade.setCommerceCartService(commerceCartService);
         cartFacade.setCommerceCartParameterConverter(commerceCartParameterConverter);
+        cartFacade.setCommerceUpdateCartParameterConverter(commerceUpdateCartParameterConverter);
         cartFacade.setCartModificationConverter(cartModificationConverter);
         return cartFacade;
     }
@@ -190,6 +194,27 @@ public class StorefrontAppConfig
         PopulatingConverter<AddToCartParams, CommerceCartParameter> converter = new PopulatingConverter<>();
         converter.setTargetClass(CommerceCartParameter.class);
         converter.setPopulators(Arrays.asList(commerceCartParameterPopulator));
+        return converter;
+    }
+
+    @Bean
+    public CommerceUpdateCartParameterPopulator commerceUpdateCartParameterPopulator(
+            @Qualifier("cartService") CartService cartService,
+            @Qualifier("skuProductFactory") SKUProductFactory skuProductFactory
+    ) {
+        CommerceUpdateCartParameterPopulator populator = new CommerceUpdateCartParameterPopulator();
+        populator.setCartService(cartService);
+        populator.setSkuProductFactory(skuProductFactory);
+        return populator;
+    }
+
+    @Bean
+    public Converter<UpdateCartParams, CommerceCartParameter> commerceUpdateCartParameterConverter(
+            @Qualifier("commerceUpdateCartParameterPopulator") Populator<UpdateCartParams, CommerceCartParameter> commerceUpdateCartParameterPopulator
+    ) {
+        PopulatingConverter<UpdateCartParams, CommerceCartParameter> converter = new PopulatingConverter<>();
+        converter.setTargetClass(CommerceCartParameter.class);
+        converter.setPopulators(Arrays.asList(commerceUpdateCartParameterPopulator));
         return converter;
     }
 

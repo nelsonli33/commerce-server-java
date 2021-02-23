@@ -16,6 +16,8 @@ public class DefaultCartFacade implements CartFacade
     private CommerceCartService commerceCartService;
     private Converter<CartModel, CartData> cartConverter;
     private Converter<AddToCartParams, CommerceCartParameter> commerceCartParameterConverter;
+    private Converter<UpdateCartParams, CommerceCartParameter> commerceUpdateCartParameterConverter;
+
     private Converter<CommerceCartModification, CartModificationData> cartModificationConverter;
 
 
@@ -35,13 +37,29 @@ public class DefaultCartFacade implements CartFacade
         return addToCart(params);
     }
 
-    public CartModificationData addToCart(final AddToCartParams addToCartParams)
+    protected CartModificationData addToCart(final AddToCartParams addToCartParams)
     {
         final CommerceCartParameter parameter = getCommerceCartParameterConverter().convert(addToCartParams);
         final CommerceCartModification modification = getCommerceCartService().addToCart(parameter);
 
         return getCartModificationConverter().convert(modification);
     }
+
+    @Override
+    public CartModificationData updateCartLineItem(Long lineItemId, long quantity)
+    {
+        UpdateCartParams params = new UpdateCartParams();
+        params.setLineItemId(lineItemId);
+        params.setQty(quantity);
+
+        final CommerceCartParameter parameter = getCommerceUpdateCartParameterConverter().convert(params);
+        final CommerceCartModification modification = getCommerceCartService().updateQuantityForCartLineItem(parameter);
+
+        return getCartModificationConverter().convert(modification);
+    }
+
+
+
 
 
     public CartService getCartService()
@@ -92,5 +110,15 @@ public class DefaultCartFacade implements CartFacade
     public void setCartModificationConverter(Converter<CommerceCartModification, CartModificationData> cartModificationConverter)
     {
         this.cartModificationConverter = cartModificationConverter;
+    }
+
+    public Converter<UpdateCartParams, CommerceCartParameter> getCommerceUpdateCartParameterConverter()
+    {
+        return commerceUpdateCartParameterConverter;
+    }
+
+    public void setCommerceUpdateCartParameterConverter(Converter<UpdateCartParams, CommerceCartParameter> commerceUpdateCartParameterConverter)
+    {
+        this.commerceUpdateCartParameterConverter = commerceUpdateCartParameterConverter;
     }
 }
