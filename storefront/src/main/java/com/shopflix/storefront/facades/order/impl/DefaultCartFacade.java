@@ -58,8 +58,14 @@ public class DefaultCartFacade implements CartFacade
         return getCartModificationConverter().convert(modification);
     }
 
+    @Override
+    public void clearCart()
+    {
+        final CommerceCartParameter parameter = new CommerceCartParameter();
+        parameter.setCart(getCartService().getCartForCurrentCustomer());
 
-
+        getCommerceCartService().removeAllLineItems(parameter);
+    }
 
 
     public CartService getCartService()

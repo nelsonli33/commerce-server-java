@@ -31,7 +31,7 @@ public interface CommerceCartService {
 
 
     /**
-     * Update quantity for the cart line item with given <code>entryNumber</code> with the given <code>newQuantity</code>.
+     * Update quantity for the cart line item with given <code>lineItemId</code> with the given <code>newQuantity</code>.
      * Then cart is calculated.
      *
      * @param parameter
@@ -49,4 +49,8 @@ public interface CommerceCartService {
      */
     CommerceCartModification updateQuantityForCartLineItem(final CommerceCartParameter parameter)
             throws CommerceCartModificationException;
+
+
+
+    void removeAllLineItems(final CommerceCartParameter parameter);
 }

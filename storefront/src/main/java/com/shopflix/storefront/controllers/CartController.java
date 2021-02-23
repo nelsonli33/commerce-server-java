@@ -59,4 +59,14 @@ public class CartController extends AbstractController
                 .status(HttpStatus.OK)
                 .body(ApiResult.success(cartModificationData));
     }
+
+    @PostMapping(value = "/clear")
+    public ResponseEntity<ApiResult<Object>> clearCart() {
+
+        cartFacade.clearCart();
+
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .body(ApiResult.success());
+    }
 }

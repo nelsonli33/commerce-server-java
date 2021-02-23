@@ -5,12 +5,18 @@ import com.shopflix.storefront.data.order.CommerceCartParameter;
 import com.shopflix.storefront.exceptions.CommerceCartModificationException;
 import com.shopflix.storefront.services.order.CommerceCartService;
 import com.shopflix.storefront.services.order.strategies.CommerceAddToCartStrategy;
+import com.shopflix.storefront.services.order.strategies.CommerceCartCalculationStrategy;
+import com.shopflix.storefront.services.order.strategies.CommerceRemoveLineItemsStrategy;
 import com.shopflix.storefront.services.order.strategies.CommerceUpdateCartLineItemStrategy;
+
+import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;
 
 public class DefaultCommerceCartService implements CommerceCartService {
 
+    private CommerceCartCalculationStrategy commerceCartCalculationStrategy;
     private CommerceAddToCartStrategy commerceAddToCartStrategy;
     private CommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy;
+    private CommerceRemoveLineItemsStrategy commerceRemoveLineItemsStrategy;
 
     @Override
     public CommerceCartModification addToCart(CommerceCartParameter parameter) throws CommerceCartModificationException {
@@ -22,7 +28,22 @@ public class DefaultCommerceCartService implements CommerceCartService {
         return getCommerceUpdateCartLineItemStrategy().updateQuantityForCartLineItem(parameter);
     }
 
+    @Override
+    public void removeAllLineItems(final CommerceCartParameter parameter) {
+        getCommerceRemoveLineItemsStrategy().removeAllLineItems(parameter);
+        getCommerceCartCalculationStrategy().calculateCart(parameter);
+    }
 
+
+    public CommerceCartCalculationStrategy getCommerceCartCalculationStrategy()
+    {
+        return commerceCartCalculationStrategy;
+    }
+
+    public void setCommerceCartCalculationStrategy(CommerceCartCalculationStrategy commerceCartCalculationStrategy)
+    {
+        this.commerceCartCalculationStrategy = commerceCartCalculationStrategy;
+    }
 
     public CommerceAddToCartStrategy getCommerceAddToCartStrategy()
     {
@@ -42,5 +63,15 @@ public class DefaultCommerceCartService implements CommerceCartService {
     public void setCommerceUpdateCartLineItemStrategy(CommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy)
     {
         this.commerceUpdateCartLineItemStrategy = commerceUpdateCartLineItemStrategy;
+    }
+
+    public CommerceRemoveLineItemsStrategy getCommerceRemoveLineItemsStrategy()
+    {
+        return commerceRemoveLineItemsStrategy;
+    }
+
+    public void setCommerceRemoveLineItemsStrategy(CommerceRemoveLineItemsStrategy commerceRemoveLineItemsStrategy)
+    {
+        this.commerceRemoveLineItemsStrategy = commerceRemoveLineItemsStrategy;
     }
 }

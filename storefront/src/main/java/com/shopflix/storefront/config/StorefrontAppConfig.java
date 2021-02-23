@@ -25,9 +25,11 @@ import com.shopflix.storefront.services.order.impl.DefaultCartService;
 import com.shopflix.storefront.services.order.impl.DefaultCommerceCartService;
 import com.shopflix.storefront.services.order.strategies.CommerceAddToCartStrategy;
 import com.shopflix.storefront.services.order.strategies.CommerceCartCalculationStrategy;
+import com.shopflix.storefront.services.order.strategies.CommerceRemoveLineItemsStrategy;
 import com.shopflix.storefront.services.order.strategies.CommerceUpdateCartLineItemStrategy;
 import com.shopflix.storefront.services.order.strategies.impl.DefaultCommerceAddToCartStrategy;
 import com.shopflix.storefront.services.order.strategies.impl.DefaultCommerceCartCalculationStrategy;
+import com.shopflix.storefront.services.order.strategies.impl.DefaultCommerceRemoveLineItemsStrategy;
 import com.shopflix.storefront.services.order.strategies.impl.DefaultCommerceUpdateCartLineItemStrategy;
 import com.shopflix.storefront.services.product.ProductService;
 import com.shopflix.storefront.services.product.SKUProductFactory;
@@ -91,12 +93,16 @@ public class StorefrontAppConfig
 
     @Bean
     public DefaultCommerceCartService commerceCartService(
+            @Qualifier("commerceCartCalculationStrategy")  CommerceCartCalculationStrategy commerceCartCalculationStrategy,
             @Qualifier("commerceAddToCartStrategy") CommerceAddToCartStrategy commerceAddToCartStrategy,
-            @Qualifier("commerceUpdateCartLineItemStrategy") CommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy
+            @Qualifier("commerceUpdateCartLineItemStrategy") CommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy,
+            @Qualifier("commerceRemoveLineItemsStrategy") CommerceRemoveLineItemsStrategy commerceRemoveLineItemsStrategy
     ) {
         DefaultCommerceCartService commerceCartService = new DefaultCommerceCartService();
+        commerceCartService.setCommerceCartCalculationStrategy(commerceCartCalculationStrategy);
         commerceCartService.setCommerceAddToCartStrategy(commerceAddToCartStrategy);
         commerceCartService.setCommerceUpdateCartLineItemStrategy(commerceUpdateCartLineItemStrategy);
+        commerceCartService.setCommerceRemoveLineItemsStrategy(commerceRemoveLineItemsStrategy);
         return commerceCartService;
     }
 
@@ -113,6 +119,15 @@ public class StorefrontAppConfig
     @Bean
     public DefaultCommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy() {
         return new DefaultCommerceUpdateCartLineItemStrategy();
+    }
+
+    @Bean
+    public DefaultCommerceRemoveLineItemsStrategy commerceRemoveLineItemsStrategy(
+            @Qualifier("modelService") ModelService modelService
+    ) {
+        DefaultCommerceRemoveLineItemsStrategy strategy = new DefaultCommerceRemoveLineItemsStrategy();
+        strategy.setModelService(modelService);
+        return strategy;
     }
 
     @Bean
