@@ -16,13 +16,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
 
-@Service(value = "merchantProductImageService")
 public class DefaultMerchantProductImageService implements MerchantProductImageService
 {
     private StorageService storageService;
     private ProductImageRepository productImageRepository;
 
-
+    @Override
     public List<ProductImage> uploadProductImage(MultipartFile uploadFile) throws IOException
     {
         // TODO: validate upload file mimetype only accept image/*
@@ -64,7 +63,7 @@ public class DefaultMerchantProductImageService implements MerchantProductImageS
         throw new ModelNotFoundException("Product Image with id "+id+" requested for the object does not exists in the system");
     }
 
-
+    @Override
     public ProductImageModel save(ProductImageModel productImageModel)
     {
         return productImageRepository.save(productImageModel);
@@ -76,7 +75,6 @@ public class DefaultMerchantProductImageService implements MerchantProductImageS
         return productImageRepository;
     }
 
-    @Resource(name = "productImageRepository")
     public void setProductImageRepository(ProductImageRepository productImageRepository)
     {
         this.productImageRepository = productImageRepository;
@@ -87,7 +85,6 @@ public class DefaultMerchantProductImageService implements MerchantProductImageS
         return storageService;
     }
 
-    @Resource(name = "storageService")
     public void setStorageService(StorageService storageService)
     {
         this.storageService = storageService;

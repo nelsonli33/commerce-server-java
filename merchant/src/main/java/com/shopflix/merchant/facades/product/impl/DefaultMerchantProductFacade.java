@@ -17,6 +17,7 @@ import com.shopflix.merchant.service.category.MerchantCategoryService;
 import com.shopflix.merchant.service.product.MerchantProductImageService;
 import com.shopflix.merchant.service.product.MerchantProductService;
 import com.shopflix.merchant.service.product.ProductImage;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +26,6 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
 
-@Component(value = "merchantProductFacade")
 public class DefaultMerchantProductFacade implements MerchantProductFacade
 {
     private MerchantCategoryService merchantCategoryService;
@@ -91,7 +91,8 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
     }
 
     @Override
-    public ProductImageData uploadProductImage(MultipartFile uploadFile) {
+    public ProductImageData uploadProductImage(MultipartFile uploadFile)
+    {
         try
         {
             List<ProductImage> productImages = merchantProductImageService.uploadProductImage(uploadFile);
@@ -125,16 +126,21 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
     }
 
 
-    protected void setProductOptionsForProduct(List<ProductOptionForm> options, ProductModel productModel) {
+    protected void setProductOptionsForProduct(List<ProductOptionForm> options, ProductModel productModel)
+    {
         List<ProductOptionModel> productOptionModels = new ArrayList<>();
-        for (int i = 0; i < options.size(); i++) {
+        for (int i = 0; i < options.size(); i++)
+        {
             ProductOptionForm optionForm = options.get(i);
 
             ProductOptionModel productOptionModel;
 
-            if (optionForm.getId() != null) {
+            if (optionForm.getId() != null)
+            {
                 productOptionModel = merchantProductService.getProductOption(optionForm.getId());
-            } else {
+            }
+            else
+            {
                 productOptionModel = new ProductOptionModel();
             }
 
@@ -150,16 +156,21 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
         productModel.getOptions().addAll(productOptionModels);
     }
 
-    protected void setOptionValueForOption(List<ProductOptionValueForm> optionValues, ProductOptionModel productOptionModel) {
+    protected void setOptionValueForOption(List<ProductOptionValueForm> optionValues, ProductOptionModel productOptionModel)
+    {
         List<ProductOptionValueModel> productOptionValueModels = new ArrayList<>();
 
-        for (int i = 0; i < optionValues.size(); i++) {
+        for (int i = 0; i < optionValues.size(); i++)
+        {
             ProductOptionValueForm optionValueForm = optionValues.get(i);
 
             ProductOptionValueModel productOptionValueModel;
-            if (optionValueForm.getId() != null) {
+            if (optionValueForm.getId() != null)
+            {
                 productOptionValueModel = merchantProductService.getProductOptionValue(optionValueForm.getId());
-            } else {
+            }
+            else
+            {
                 productOptionValueModel = new ProductOptionValueModel();
             }
             productOptionValueModel.setLabel(optionValueForm.getLabel());
@@ -174,11 +185,13 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
         productOptionModel.getValues().addAll(productOptionValueModels);
     }
 
-    protected void setProductVariantsForProduct(List<ProductVariantForm> variantForms, ProductModel productModel) {
+    protected void setProductVariantsForProduct(List<ProductVariantForm> variantForms, ProductModel productModel)
+    {
 
 
         Map<String, ProductOptionValueModel> optionValueMap = new HashMap<>();
-        for (int i = 0; i < productModel.getOptions().size(); i++) {
+        for (int i = 0; i < productModel.getOptions().size(); i++)
+        {
             ProductOptionModel productOptionModel = productModel.getOptions().get(i);
             productOptionModel.getValues().forEach(productOptionValueModel -> {
                 optionValueMap.put(productOptionValueModel.getLabel(), productOptionValueModel);
@@ -186,13 +199,17 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
         }
 
         List<ProductVariantModel> productVariantModels = new ArrayList<>();
-        for (int i = 0; i < variantForms.size(); i++) {
+        for (int i = 0; i < variantForms.size(); i++)
+        {
             ProductVariantForm variantForm = variantForms.get(i);
 
             ProductVariantModel productVariantModel;
-            if (variantForm.getId() != null) {
+            if (variantForm.getId() != null)
+            {
                 productVariantModel = merchantProductService.getProductVariant(variantForm.getId());
-            } else {
+            }
+            else
+            {
                 productVariantModel = new ProductVariantModel();
             }
             productVariantModel.setName(variantForm.getName());
@@ -211,7 +228,8 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
 
     private void setProductImageForProduct(List<ProductImageForm> imageForms, ProductModel productModel)
     {
-        for(ProductImageForm imageForm : imageForms) {
+        for (ProductImageForm imageForm : imageForms)
+        {
             ProductImageModel imageModel = merchantProductImageService.getProductImageForId(imageForm.getId());
             imageModel.setPosition(imageForm.getPosition());
             imageModel.setProduct(productModel);
@@ -221,7 +239,8 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
 
     private void setProductImageForOptionValue(List<ProductImageForm> imageForms, ProductOptionValueModel optionValueModel)
     {
-        for(ProductImageForm imageForm : imageForms) {
+        for (ProductImageForm imageForm : imageForms)
+        {
             ProductImageModel imageModel = merchantProductImageService.getProductImageForId(imageForm.getId());
             imageModel.setPosition(imageForm.getPosition());
             imageModel.setOptionValue(optionValueModel);
@@ -229,13 +248,11 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
         }
     }
 
-
     public MerchantCategoryService getMerchantCategoryService()
     {
         return merchantCategoryService;
     }
 
-    @Resource(name = "merchantCategoryService")
     public void setMerchantCategoryService(MerchantCategoryService merchantCategoryService)
     {
         this.merchantCategoryService = merchantCategoryService;
@@ -246,7 +263,6 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
         return merchantProductService;
     }
 
-    @Resource(name = "merchantProductService")
     public void setMerchantProductService(MerchantProductService merchantProductService)
     {
         this.merchantProductService = merchantProductService;
@@ -257,7 +273,6 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
         return merchantProductImageService;
     }
 
-    @Resource(name = "merchantProductImageService")
     public void setMerchantProductImageService(MerchantProductImageService merchantProductImageService)
     {
         this.merchantProductImageService = merchantProductImageService;
@@ -268,24 +283,26 @@ public class DefaultMerchantProductFacade implements MerchantProductFacade
         return productReversePopulator;
     }
 
-    @Resource(name = "productReversePopulator")
     public void setProductReversePopulator(Populator<ProductForm, ProductModel> productReversePopulator)
     {
         this.productReversePopulator = productReversePopulator;
     }
 
-    public Converter<ProductModel, ProductData> getProductConverter()
+    public ConfigurableConverter<ProductModel, ProductData, ProductOption> getProductConverter()
     {
         return productConverter;
     }
 
-    @Resource(name = "productConverter")
     public void setProductConverter(ConfigurableConverter<ProductModel, ProductData, ProductOption> productConverter)
     {
         this.productConverter = productConverter;
     }
 
-    @Resource(name = "productInnerImageConverter")
+    public Converter<ProductImageModel, ProductImageData> getProductInnerImageConverter()
+    {
+        return productInnerImageConverter;
+    }
+
     public void setProductInnerImageConverter(Converter<ProductImageModel, ProductImageData> productInnerImageConverter)
     {
         this.productInnerImageConverter = productInnerImageConverter;

@@ -13,16 +13,9 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component(value = "categoryPopulator")
 public class CategoryPopulator implements Populator<CategoryModel, CategoryData>
 {
     private Converter<MediaImageModel, MediaImageData> mediaImageConverter;
-
-    @Autowired
-    public CategoryPopulator(Converter<MediaImageModel, MediaImageData> mediaImageConverter)
-    {
-        this.mediaImageConverter = mediaImageConverter;
-    }
 
     @Override
     public void populate(CategoryModel source, CategoryData target) throws ConversionException
@@ -46,5 +39,13 @@ public class CategoryPopulator implements Populator<CategoryModel, CategoryData>
 
     }
 
+    public Converter<MediaImageModel, MediaImageData> getMediaImageConverter()
+    {
+        return mediaImageConverter;
+    }
 
+    public void setMediaImageConverter(Converter<MediaImageModel, MediaImageData> mediaImageConverter)
+    {
+        this.mediaImageConverter = mediaImageConverter;
+    }
 }

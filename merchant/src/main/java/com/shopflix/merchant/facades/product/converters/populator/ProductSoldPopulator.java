@@ -6,7 +6,6 @@ import com.shopflix.core.model.product.ProductModel;
 import com.shopflix.merchant.data.ProductData;
 import org.springframework.stereotype.Component;
 
-@Component(value = "productSoldPopulator")
 public class ProductSoldPopulator implements Populator<ProductModel, ProductData>
 {
     @Override

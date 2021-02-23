@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Component(value = "productVariantPopulator")
 public class ProductVariantPopulator implements Populator<ProductModel, ProductData>
 {
     Converter<ProductOptionValueModel, ProductOptionValueData> productInnerOptionValueConverter;
@@ -50,13 +49,11 @@ public class ProductVariantPopulator implements Populator<ProductModel, ProductD
         variantData.setValueIds(Arrays.asList(optionValue1.getId(), optionValue2 != null ? optionValue2.getId() : null));
     }
 
-
     public Converter<ProductOptionValueModel, ProductOptionValueData> getProductInnerOptionValueConverter()
     {
         return productInnerOptionValueConverter;
     }
 
-    @Resource(name = "productInnerOptionValueConverter")
     public void setProductInnerOptionValueConverter(Converter<ProductOptionValueModel, ProductOptionValueData> productInnerOptionValueConverter)
     {
         this.productInnerOptionValueConverter = productInnerOptionValueConverter;

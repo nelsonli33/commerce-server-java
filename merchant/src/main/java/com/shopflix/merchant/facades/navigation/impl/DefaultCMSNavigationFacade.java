@@ -18,7 +18,6 @@ import java.util.Set;
 
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
-@Component(value = "cmsNavigationFacade")
 public class DefaultCMSNavigationFacade implements CMSNavigationFacade
 {
     private MerchantNavigationService merchantNavigationService;
@@ -93,44 +92,24 @@ public class DefaultCMSNavigationFacade implements CMSNavigationFacade
     }
 
 
+    public MerchantNavigationService getMerchantNavigationService()
+    {
+        return merchantNavigationService;
+    }
 
-
-
-
-    @Resource(name = "merchantNavigationService")
     public void setMerchantNavigationService(MerchantNavigationService merchantNavigationService)
     {
         this.merchantNavigationService = merchantNavigationService;
     }
-
-    @Resource(name = "navigationConverter")
-    public void setNavigationConverter(Converter<CMSNavigationModel, NavigationData> navigationConverter)
-    {
-        this.navigationConverter = navigationConverter;
-    }
-
-    @Resource(name = "navigationLinkConverter")
-    public void setNavigationLinkConverter(Converter<CMSNavigationLinkModel, NavigationLinkData> navigationLinkConverter)
-    {
-        this.navigationLinkConverter = navigationLinkConverter;
-    }
-
-    @Resource(name = "navigationLinkReversePopulator")
-    public void setNavigationLinkReversePopulator(Populator<NavigationLinkData, CMSNavigationLinkModel> navigationLinkReversePopulator)
-    {
-        this.navigationLinkReversePopulator = navigationLinkReversePopulator;
-    }
-
 
     public Populator<NavigationLinkData, CMSNavigationLinkModel> getNavigationLinkReversePopulator()
     {
         return navigationLinkReversePopulator;
     }
 
-
-    public Converter<CMSNavigationLinkModel, NavigationLinkData> getNavigationLinkConverter()
+    public void setNavigationLinkReversePopulator(Populator<NavigationLinkData, CMSNavigationLinkModel> navigationLinkReversePopulator)
     {
-        return navigationLinkConverter;
+        this.navigationLinkReversePopulator = navigationLinkReversePopulator;
     }
 
     public Converter<CMSNavigationModel, NavigationData> getNavigationConverter()
@@ -138,10 +117,18 @@ public class DefaultCMSNavigationFacade implements CMSNavigationFacade
         return navigationConverter;
     }
 
-    public MerchantNavigationService getMerchantNavigationService()
+    public void setNavigationConverter(Converter<CMSNavigationModel, NavigationData> navigationConverter)
     {
-        return merchantNavigationService;
+        this.navigationConverter = navigationConverter;
     }
 
+    public Converter<CMSNavigationLinkModel, NavigationLinkData> getNavigationLinkConverter()
+    {
+        return navigationLinkConverter;
+    }
 
+    public void setNavigationLinkConverter(Converter<CMSNavigationLinkModel, NavigationLinkData> navigationLinkConverter)
+    {
+        this.navigationLinkConverter = navigationLinkConverter;
+    }
 }

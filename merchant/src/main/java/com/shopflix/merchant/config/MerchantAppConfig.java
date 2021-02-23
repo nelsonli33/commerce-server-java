@@ -1,5 +1,6 @@
 package com.shopflix.merchant.config;
 
+import com.google.cloud.storage.Storage;
 import com.shopflix.core.converters.ConfigurableConverter;
 import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.Populator;
@@ -18,20 +19,42 @@ import com.shopflix.core.model.product.ProductImageModel;
 import com.shopflix.core.model.product.ProductModel;
 import com.shopflix.core.model.product.ProductOptionModel;
 import com.shopflix.core.model.product.ProductOptionValueModel;
+import com.shopflix.core.repository.category.CategoryRepository;
 import com.shopflix.core.repository.delivery.DeliveryModeRepository;
+import com.shopflix.core.repository.media.MediaImageRepository;
+import com.shopflix.core.repository.media.MediaRepository;
+import com.shopflix.core.repository.navigation.CMSNavigationLinkRepository;
+import com.shopflix.core.repository.navigation.CMSNavigationRepository;
+import com.shopflix.core.repository.product.*;
+import com.shopflix.core.service.ModelService;
 import com.shopflix.merchant.data.*;
+import com.shopflix.merchant.facades.category.converters.populator.CategoryPopulator;
+import com.shopflix.merchant.facades.category.converters.populator.CategoryReversePopulator;
+import com.shopflix.merchant.facades.category.impl.DefaultMerchantCategoryFacade;
 import com.shopflix.merchant.facades.delivery.converters.populator.MerchantDeliveryModePopulator;
 import com.shopflix.merchant.facades.delivery.converters.populator.MerchantDeliveryModeValuePopulator;
 import com.shopflix.merchant.facades.delivery.data.DeliveryModeData;
 import com.shopflix.merchant.facades.delivery.data.DeliveryModeValueData;
 import com.shopflix.merchant.facades.delivery.impl.DefaultMerchantDeliveryModeFacade;
+import com.shopflix.merchant.facades.media.converters.populator.MediaImagePopulator;
+import com.shopflix.merchant.facades.navigation.converters.populator.NavigationLinkPopulator;
+import com.shopflix.merchant.facades.navigation.converters.populator.NavigationLinkReversePopulator;
+import com.shopflix.merchant.facades.navigation.converters.populator.NavigationPopulator;
+import com.shopflix.merchant.facades.navigation.impl.DefaultCMSNavigationFacade;
+import com.shopflix.merchant.facades.product.converters.populator.*;
+import com.shopflix.merchant.facades.product.impl.DefaultMerchantProductFacade;
+import com.shopflix.merchant.service.category.impl.DefaultMerchantCategoryService;
 import com.shopflix.merchant.service.delivery.impl.DefaultMerchantDeliveryModeService;
+import com.shopflix.merchant.service.media.impl.DefaultMerchantMediaService;
+import com.shopflix.merchant.service.media.impl.DefaultStorageService;
+import com.shopflix.merchant.service.navigation.impl.DefaultMerchantNavigationService;
+import com.shopflix.merchant.service.product.impl.DefaultMerchantProductImageService;
+import com.shopflix.merchant.service.product.impl.DefaultMerchantProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,167 +65,386 @@ import java.util.concurrent.ConcurrentHashMap;
 @ComponentScan(value = "com.shopflix.merchant")
 public class MerchantAppConfig
 {
+    @Value("${storage.bucketname}")
+    private String BucketName;
+
+    @Autowired
+    private Storage storage;
 
     @Autowired
     public DeliveryModeRepository deliveryModeRepository;
 
+    @Autowired
+    public CategoryRepository categoryRepository;
+
+    @Autowired
+    private MediaRepository mediaRepository;
+
+    @Autowired
+    private MediaImageRepository mediaImageRepository;
+
+    @Autowired
+    private CMSNavigationRepository cmsNavigationRepository;
+
+    @Autowired
+    private CMSNavigationLinkRepository cmsNavigationLinkRepository;
+
+    @Autowired
+    private ProductImageRepository productImageRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private ProductOptionRepository productOptionRepository;
+
+    @Autowired
+    private ProductOptionValueRepository productOptionValueRepository;
+
+    @Autowired
+    private ProductVariantRepository productVariantRepository;
+
+    @Autowired
+    private ModelService modelService;
+
+
     // <!--- services --->
     @Bean
-    public DefaultMerchantDeliveryModeService merchantDeliveryModeService() {
+    public DefaultMerchantCategoryService merchantCategoryService() {
+        DefaultMerchantCategoryService merchantCategoryService = new DefaultMerchantCategoryService();
+        merchantCategoryService.setCategoryRepository(categoryRepository);
+        return merchantCategoryService;
+    }
+
+    @Bean
+    public DefaultMerchantDeliveryModeService merchantDeliveryModeService()
+    {
         DefaultMerchantDeliveryModeService merchantDeliveryModeService = new DefaultMerchantDeliveryModeService();
         merchantDeliveryModeService.setDeliveryModeRepository(deliveryModeRepository);
         return merchantDeliveryModeService;
     }
 
+    @Bean
+    public DefaultMerchantMediaService merchantMediaService() {
+        DefaultMerchantMediaService merchantMediaService = new DefaultMerchantMediaService();
+        merchantMediaService.setMediaRepository(mediaRepository);
+        merchantMediaService.setMediaImageRepository(mediaImageRepository);
+        return merchantMediaService;
+    }
+
+    @Bean
+    public DefaultStorageService storageService() {
+        DefaultStorageService storageService = new DefaultStorageService();
+        storageService.setBucketName(BucketName);
+        storageService.setStorage(storage);
+        return storageService;
+    }
+
+    @Bean
+    public DefaultMerchantNavigationService merchantNavigationService() {
+        DefaultMerchantNavigationService merchantNavigationService = new DefaultMerchantNavigationService();
+        merchantNavigationService.setCmsNavigationRepository(cmsNavigationRepository);
+        merchantNavigationService.setCmsNavigationLinkRepository(cmsNavigationLinkRepository);
+        return merchantNavigationService;
+    }
+
+    @Bean
+    public DefaultMerchantProductImageService merchantProductImageService() {
+        DefaultMerchantProductImageService merchantProductImageService = new DefaultMerchantProductImageService();
+        merchantProductImageService.setProductImageRepository(productImageRepository);
+        merchantProductImageService.setStorageService(storageService());
+        return merchantProductImageService;
+    }
+
+    @Bean
+    public DefaultMerchantProductService merchantProductService() {
+        DefaultMerchantProductService merchantProductService = new DefaultMerchantProductService();
+        merchantProductService.setProductRepository(productRepository);
+        merchantProductService.setProductOptionRepository(productOptionRepository);
+        merchantProductService.setProductOptionValueRepository(productOptionValueRepository);
+        merchantProductService.setProductVariantRepository(productVariantRepository);
+        return merchantProductService;
+    }
 
     // <!--- facades --->
     @Bean
-    public DefaultMerchantDeliveryModeFacade merchantDeliveryModeFacade() {
+    public DefaultMerchantCategoryFacade merchantCategoryFacade() {
+        DefaultMerchantCategoryFacade merchantCategoryFacade = new DefaultMerchantCategoryFacade();
+        merchantCategoryFacade.setCategoryConverter(categoryConverter());
+        merchantCategoryFacade.setMerchantMediaService(merchantMediaService());
+        merchantCategoryFacade.setModelService(modelService);
+        merchantCategoryFacade.setCategoryReversePopulator(categoryReversePopulator());
+        merchantCategoryFacade.setMerchantCategoryService(merchantCategoryService());
+        return merchantCategoryFacade;
+    }
+
+    @Bean
+    public DefaultMerchantDeliveryModeFacade merchantDeliveryModeFacade()
+    {
         DefaultMerchantDeliveryModeFacade merchantDeliveryModeFacade = new DefaultMerchantDeliveryModeFacade();
         merchantDeliveryModeFacade.setMerchantDeliveryModeService(merchantDeliveryModeService());
         merchantDeliveryModeFacade.setMerchantDeliveryModeConverter(merchantDeliveryModeConverter());
         return merchantDeliveryModeFacade;
     }
 
+    @Bean
+    public DefaultCMSNavigationFacade cmsNavigationFacade() {
+        DefaultCMSNavigationFacade cmsNavigationFacade = new DefaultCMSNavigationFacade();
+        cmsNavigationFacade.setNavigationConverter(navigationConverter());
+        cmsNavigationFacade.setNavigationLinkConverter(navigationLinkConverter());
+        cmsNavigationFacade.setNavigationLinkReversePopulator(navigationLinkReversePopulator());
+        cmsNavigationFacade.setMerchantNavigationService(merchantNavigationService());
+        return cmsNavigationFacade;
+    }
 
-
-
+    @Bean
+    public DefaultMerchantProductFacade merchantProductFacade() {
+        DefaultMerchantProductFacade merchantProductFacade = new DefaultMerchantProductFacade();
+        merchantProductFacade.setMerchantProductService(merchantProductService());
+        merchantProductFacade.setMerchantProductImageService(merchantProductImageService());
+        merchantProductFacade.setMerchantCategoryService(merchantCategoryService());
+        merchantProductFacade.setProductConverter(productConverter());
+        merchantProductFacade.setProductInnerImageConverter(productInnerImageConverter());
+        merchantProductFacade.setProductReversePopulator(productReversePopulator());
+        return merchantProductFacade;
+    }
 
     // <!--- converters and populators --->
-    @Bean(name = "mediaImageConverter")
-    public Converter<MediaImageModel, MediaImageData> mediaImageConverter(
-            @Qualifier(value = "mediaImagePopulator") Populator<MediaImageModel, MediaImageData> mediaImagePopulator
-    ) {
+    @Bean
+    public MediaImagePopulator mediaImagePopulator()
+    {
+        return new MediaImagePopulator();
+    }
+
+    @Bean
+    public Converter<MediaImageModel, MediaImageData> mediaImageConverter()
+    {
         PopulatingConverter<MediaImageModel, MediaImageData> converter = new PopulatingConverter<>();
         converter.setTargetClass(MediaImageData.class);
-        converter.setPopulators(Arrays.asList(mediaImagePopulator));
+        converter.setPopulators(Arrays.asList(mediaImagePopulator()));
         return converter;
     }
 
-    @Bean(name = "categoryConverter")
-    public Converter<CategoryModel, CategoryData> categoryConverter(
-            @Qualifier("categoryPopulator") Populator<CategoryModel, CategoryData> categoryPopulator
-    ) {
+    @Bean
+    public CategoryReversePopulator categoryReversePopulator() {
+        return new CategoryReversePopulator();
+    }
+
+    @Bean
+    public CategoryPopulator categoryPopulator()
+    {
+        CategoryPopulator populator = new CategoryPopulator();
+        populator.setMediaImageConverter(mediaImageConverter());
+        return populator;
+    }
+
+    @Bean
+    public Converter<CategoryModel, CategoryData> categoryConverter()
+    {
         PopulatingConverter<CategoryModel, CategoryData> converter = new PopulatingConverter<>();
         converter.setTargetClass(CategoryData.class);
-        converter.setPopulators(Arrays.asList(categoryPopulator));
+        converter.setPopulators(Arrays.asList(categoryPopulator()));
         return converter;
     }
 
-    @Bean(name = "navigationConverter")
-    public Converter<CMSNavigationModel, NavigationData> navigationConverter(
-            @Qualifier("navigationPopulator") Populator<CMSNavigationModel, NavigationData> navigationPopulator
-    ) {
+
+
+    @Bean
+    public NavigationPopulator navigationPopulator()
+    {
+        return new NavigationPopulator();
+    }
+
+    @Bean
+    public Converter<CMSNavigationModel, NavigationData> navigationConverter()
+    {
         PopulatingConverter<CMSNavigationModel, NavigationData> converter = new PopulatingConverter<>();
         converter.setTargetClass(NavigationData.class);
-        converter.setPopulators(Arrays.asList(navigationPopulator));
+        converter.setPopulators(Arrays.asList(navigationPopulator()));
         return converter;
     }
 
-    @Bean(name = "navigationLinkConverter")
-    public Converter<CMSNavigationLinkModel, NavigationLinkData> navigationLinkConverter(
-            @Qualifier("navigationLinkPopulator") Populator<CMSNavigationLinkModel, NavigationLinkData> navigationLinkPopulator
-    ) {
+    @Bean
+    public NavigationLinkReversePopulator navigationLinkReversePopulator() { return new NavigationLinkReversePopulator(); }
+
+    @Bean
+    public NavigationLinkPopulator navigationLinkPopulator()
+    {
+        return new NavigationLinkPopulator();
+    }
+
+    @Bean
+    public Converter<CMSNavigationLinkModel, NavigationLinkData> navigationLinkConverter()
+    {
         PopulatingConverter<CMSNavigationLinkModel, NavigationLinkData> converter = new PopulatingConverter<>();
         converter.setTargetClass(NavigationLinkData.class);
-        converter.setPopulators(Arrays.asList(navigationLinkPopulator));
+        converter.setPopulators(Arrays.asList(navigationLinkPopulator()));
         return converter;
     }
-
-
 
 
     // product
-    @Bean(name = "productBasicPopulators")
-    public Populator<ProductModel, ProductData> productBasicPopulators(
-            @Qualifier("productBasicPopulator") Populator<ProductModel, ProductData> productBasicPopulator
-    ) {
+    @Bean
+    public ProductReversePopulator productReversePopulator() {
+        return new ProductReversePopulator();
+    }
+
+    @Bean
+    public ProductBasicPopulator productBasicPopulator()
+    {
+        return new ProductBasicPopulator();
+    }
+
+    @Bean
+    public ProductDetailPopulator productDetailPopulator()
+    {
+        return new ProductDetailPopulator();
+    }
+
+    @Bean
+    public ProductCategoryPopulator productCategoryPopulator()
+    {
+        ProductCategoryPopulator populator = new ProductCategoryPopulator();
+        populator.setCategoryConverter(categoryConverter());
+        return populator;
+    }
+
+    @Bean
+    public ProductSoldPopulator productSoldPopulator()
+    {
+        return new ProductSoldPopulator();
+    }
+
+
+    @Bean
+    public ProductOptionPopulator productOptionPopulator()
+    {
+        ProductOptionPopulator populator = new ProductOptionPopulator();
+        populator.setProductInnerOptionConverter(productInnerOptionConverter());
+        return populator;
+    }
+
+    @Bean
+    public ProductInnerOptionPopulator productInnerOptionPopulator()
+    {
+        ProductInnerOptionPopulator populator = new ProductInnerOptionPopulator();
+        populator.setProductInnerOptionValueConverter(productInnerOptionValueConverter());
+        return populator;
+    }
+
+    @Bean
+    public Converter<ProductOptionModel, ProductOptionData> productInnerOptionConverter()
+    {
+        PopulatingConverter<ProductOptionModel, ProductOptionData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(ProductOptionData.class);
+        converter.setPopulators(Arrays.asList((productInnerOptionPopulator())));
+        return converter;
+    }
+
+
+
+    @Bean
+    public ProductInnerOptionValuePopulator productInnerOptionValuePopulator()
+    {
+        ProductInnerOptionValuePopulator populator = new ProductInnerOptionValuePopulator();
+        populator.setProductInnerImageConverter(productInnerImageConverter());
+        return populator;
+    }
+
+    @Bean
+    public Converter<ProductOptionValueModel, ProductOptionValueData> productInnerOptionValueConverter()
+    {
+        PopulatingConverter<ProductOptionValueModel, ProductOptionValueData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(ProductOptionValueData.class);
+        converter.setPopulators(Arrays.asList(productInnerOptionValuePopulator()));
+        return converter;
+    }
+
+    @Bean
+    public ProductInnerImagePopulator productInnerImagePopulator()
+    {
+        return new ProductInnerImagePopulator();
+    }
+
+    @Bean
+    public Converter<ProductImageModel, ProductImageData> productInnerImageConverter()
+    {
+        PopulatingConverter<ProductImageModel, ProductImageData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(ProductImageData.class);
+        converter.setPopulators(Arrays.asList(productInnerImagePopulator()));
+        return converter;
+    }
+
+
+    @Bean
+    public ProductImagePopulator productImagePopulator()
+    {
+        ProductImagePopulator populator = new ProductImagePopulator();
+        populator.setProductInnerImageConverter(productInnerImageConverter());
+        return populator;
+    }
+
+    @Bean
+    public ProductVariantPopulator productVariantPopulator()
+    {
+        ProductVariantPopulator populator = new ProductVariantPopulator();
+        populator.setProductInnerOptionValueConverter(productInnerOptionValueConverter());
+        return populator;
+    }
+
+    @Bean
+    public Populator<ProductModel, ProductData> productBasicPopulators()
+    {
         DefaultPopulatorList<ProductModel, ProductData> populatorList = new DefaultPopulatorList<>();
-        populatorList.setPopulators(Arrays.asList(productBasicPopulator));
+        populatorList.setPopulators(Arrays.asList(productBasicPopulator()));
         return populatorList;
     }
 
-    @Bean(name = "productFullPopulators")
-    public Populator<ProductModel, ProductData> productFullPopulators(
-            @Qualifier("productBasicPopulator") Populator<ProductModel, ProductData> productBasicPopulator,
-            @Qualifier("productDetailPopulator") Populator<ProductModel, ProductData> productDetailPopulator,
-            @Qualifier("productCategoryPopulator") Populator<ProductModel, ProductData> productCategoryPopulator,
-            @Qualifier("productSoldPopulator") Populator<ProductModel, ProductData> productSoldPopulator,
-            @Qualifier("productOptionPopulator") Populator<ProductModel, ProductData> productOptionPopulator,
-            @Qualifier("productVariantPopulator") Populator<ProductModel, ProductData> productVariantPopulator,
-            @Qualifier("productImagePopulator") Populator<ProductModel, ProductData> productImagePopulator
-    ) {
+    @Bean
+    public Populator<ProductModel, ProductData> productFullPopulators()
+    {
         DefaultPopulatorList<ProductModel, ProductData> populatorList = new DefaultPopulatorList<>();
         populatorList.setPopulators(Arrays.asList(
-                productBasicPopulator,
-                productDetailPopulator,
-                productCategoryPopulator,
-                productSoldPopulator,
-                productOptionPopulator,
-                productVariantPopulator,
-                productImagePopulator
+                productBasicPopulator(),
+                productDetailPopulator(),
+                productCategoryPopulator(),
+                productSoldPopulator(),
+                productOptionPopulator(),
+                productVariantPopulator(),
+                productImagePopulator()
         ));
         return populatorList;
     }
 
-    @Bean(name = "productConverter")
-    public ConfigurableConverter<ProductModel, ProductData, ProductOption> productConverter(
-            @Qualifier("productBasicPopulators") Populator<ProductModel, ProductData> productBasicPopulators,
-            @Qualifier("productFullPopulators") Populator<ProductModel, ProductData> productFullPopulators
-    ) {
+    @Bean
+    public ConfigurableConverter<ProductModel, ProductData, ProductOption> productConverter()
+    {
         DefaultConfigurableConverter<ProductModel, ProductData, ProductOption> cxConverter = new DefaultConfigurableConverter<>();
         cxConverter.setTargetClass(ProductData.class);
         cxConverter.setDefaultOptions(Collections.singletonList(ProductOption.BASIC));
 
         Map<ProductOption, Populator<ProductModel, ProductData>> map = new ConcurrentHashMap<>();
-        map.put(ProductOption.BASIC, productBasicPopulators);
-        map.put(ProductOption.FULL, productFullPopulators);
+        map.put(ProductOption.BASIC, productBasicPopulators());
+        map.put(ProductOption.FULL, productFullPopulators());
         cxConverter.setPopulators(map);
 
         return cxConverter;
     }
 
 
-    @Bean(name = "productInnerOptionConverter")
-    public Converter<ProductOptionModel, ProductOptionData> productInnerOptionConverter(
-            @Qualifier("productInnerOptionPopulator") Populator<ProductOptionModel, ProductOptionData> productOptionPopulator
-    ) {
-        PopulatingConverter<ProductOptionModel, ProductOptionData> converter = new PopulatingConverter<>();
-        converter.setTargetClass(ProductOptionData.class);
-        converter.setPopulators(Arrays.asList(productOptionPopulator));
-        return converter;
-    }
-
-    @Bean(name = "productInnerOptionValueConverter")
-    public Converter<ProductOptionValueModel, ProductOptionValueData> productInnerOptionValueConverter(
-            @Qualifier("productInnerOptionValuePopulator") Populator<ProductOptionValueModel, ProductOptionValueData> productOptionValuePopulator
-    ) {
-        PopulatingConverter<ProductOptionValueModel, ProductOptionValueData> converter = new PopulatingConverter<>();
-        converter.setTargetClass(ProductOptionValueData.class);
-        converter.setPopulators(Arrays.asList(productOptionValuePopulator));
-        return converter;
-    }
-
-    @Bean(name = "productInnerImageConverter")
-    public Converter<ProductImageModel, ProductImageData> productInnerImageConverter(
-            @Qualifier("productInnerImagePopulator") Populator<ProductImageModel, ProductImageData> productInnerImagePopulator
-    ) {
-        PopulatingConverter<ProductImageModel, ProductImageData> converter = new PopulatingConverter<>();
-        converter.setTargetClass(ProductImageData.class);
-        converter.setPopulators(Arrays.asList(productInnerImagePopulator));
-        return converter;
-    }
 
 
     @Bean
-    public MerchantDeliveryModePopulator merchantDeliveryModePopulator() {
+    public MerchantDeliveryModePopulator merchantDeliveryModePopulator()
+    {
         MerchantDeliveryModePopulator populator = new MerchantDeliveryModePopulator();
         populator.setMerchantDeliveryModeValueConverter(merchantDeliveryModeValueConverter());
         return populator;
     }
 
     @Bean
-    public Converter<DeliveryModeModel, DeliveryModeData> merchantDeliveryModeConverter() {
+    public Converter<DeliveryModeModel, DeliveryModeData> merchantDeliveryModeConverter()
+    {
         PopulatingConverter<DeliveryModeModel, DeliveryModeData> converter = new PopulatingConverter<>();
         converter.setTargetClass(DeliveryModeData.class);
         converter.setPopulators(Arrays.asList(merchantDeliveryModePopulator()));
@@ -210,12 +452,14 @@ public class MerchantAppConfig
     }
 
     @Bean
-    public MerchantDeliveryModeValuePopulator merchantDeliveryModeValuePopulator() {
+    public MerchantDeliveryModeValuePopulator merchantDeliveryModeValuePopulator()
+    {
         return new MerchantDeliveryModeValuePopulator();
     }
 
     @Bean
-    public Converter<DeliveryModeValueModel, DeliveryModeValueData> merchantDeliveryModeValueConverter() {
+    public Converter<DeliveryModeValueModel, DeliveryModeValueData> merchantDeliveryModeValueConverter()
+    {
         PopulatingConverter<DeliveryModeValueModel, DeliveryModeValueData> converter = new PopulatingConverter<>();
         converter.setTargetClass(DeliveryModeValueData.class);
         converter.setPopulators(Arrays.asList(merchantDeliveryModeValuePopulator()));

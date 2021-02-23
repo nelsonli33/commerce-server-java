@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-@Component(value = "productOptionPopulator")
 public class ProductOptionPopulator implements Populator<ProductModel, ProductData>
 {
     Converter<ProductOptionModel, ProductOptionData> productInnerOptionConverter;
@@ -28,7 +27,6 @@ public class ProductOptionPopulator implements Populator<ProductModel, ProductDa
         return productInnerOptionConverter;
     }
 
-    @Resource(name = "productInnerOptionConverter")
     public void setProductInnerOptionConverter(Converter<ProductOptionModel, ProductOptionData> productInnerOptionConverter)
     {
         this.productInnerOptionConverter = productInnerOptionConverter;

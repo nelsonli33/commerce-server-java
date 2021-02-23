@@ -15,7 +15,6 @@ import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 
-@Component("categoryReversePopulator")
 public class CategoryReversePopulator implements Populator<CategoryData, CategoryModel> {
 
     @Override

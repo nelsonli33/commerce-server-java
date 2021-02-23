@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
-import java.util.List;
 
 @Service(value = "modelService")
 public class DefaultModelService implements ModelService

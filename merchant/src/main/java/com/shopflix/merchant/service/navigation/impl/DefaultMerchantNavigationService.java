@@ -15,7 +15,6 @@ import java.util.Optional;
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
-@Service(value = "merchantNavigationService")
 public class DefaultMerchantNavigationService implements MerchantNavigationService {
 
     private CMSNavigationRepository cmsNavigationRepository;
@@ -92,20 +91,14 @@ public class DefaultMerchantNavigationService implements MerchantNavigationServi
         cmsNavigationLinkRepository.delete(linkModel);
     }
 
-
-    @Resource(name = "CMSNavigationRepository")
-    public void setCmsNavigationRepository(CMSNavigationRepository cmsNavigationRepository) {
-        this.cmsNavigationRepository = cmsNavigationRepository;
-    }
-
-    @Resource(name = "CMSNavigationLinkRepository")
-    public void setCmsNavigationLinkRepository(CMSNavigationLinkRepository cmsNavigationLinkRepository)
+    public CMSNavigationRepository getCmsNavigationRepository()
     {
-        this.cmsNavigationLinkRepository = cmsNavigationLinkRepository;
+        return cmsNavigationRepository;
     }
 
-    public CMSNavigationRepository getCmsNavigationRepository() {
-        return cmsNavigationRepository;
+    public void setCmsNavigationRepository(CMSNavigationRepository cmsNavigationRepository)
+    {
+        this.cmsNavigationRepository = cmsNavigationRepository;
     }
 
     public CMSNavigationLinkRepository getCmsNavigationLinkRepository()
@@ -113,5 +106,8 @@ public class DefaultMerchantNavigationService implements MerchantNavigationServi
         return cmsNavigationLinkRepository;
     }
 
-
+    public void setCmsNavigationLinkRepository(CMSNavigationLinkRepository cmsNavigationLinkRepository)
+    {
+        this.cmsNavigationLinkRepository = cmsNavigationLinkRepository;
+    }
 }

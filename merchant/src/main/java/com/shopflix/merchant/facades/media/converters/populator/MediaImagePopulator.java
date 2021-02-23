@@ -7,7 +7,6 @@ import com.shopflix.core.model.media.MediaImageModel;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component(value = "mediaImagePopulator")
 public class MediaImagePopulator implements Populator<MediaImageModel, MediaImageData>
 {
     @Override

@@ -13,15 +13,6 @@ public interface MerchantCategoryService {
 
     CategoryModel getCategoryForId(Long id);
 
-    CategoryModel save(CategoryModel categoryModel);
-
-    List<CategoryModel> saveAll(List<CategoryModel> categoryModels);
-
     void addParentCategory(CategoryModel categoryModel, Long parentId);
-
-
-    List<CategoryModel> orderingCategories(List<CategoryModel> categoryModels);
-
-    void deleteCategory(CategoryModel categoryModel);
 
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-@Component(value = "productCategoryPopulator")
 public class ProductCategoryPopulator implements Populator<ProductModel, ProductData>
 {
     private Converter<CategoryModel, CategoryData> categoryConverter;
@@ -22,12 +21,12 @@ public class ProductCategoryPopulator implements Populator<ProductModel, Product
         target.setCategories(categoryConverter.convertAll(source.getCategories()));
     }
 
+
     public Converter<CategoryModel, CategoryData> getCategoryConverter()
     {
         return categoryConverter;
     }
 
-    @Resource(name = "categoryConverter")
     public void setCategoryConverter(Converter<CategoryModel, CategoryData> categoryConverter)
     {
         this.categoryConverter = categoryConverter;

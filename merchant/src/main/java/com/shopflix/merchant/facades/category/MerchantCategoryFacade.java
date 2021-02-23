@@ -10,7 +10,7 @@ public interface MerchantCategoryFacade
 
     CategoryData getCategoryForId(Long id);
 
-    CategoryData createCategory(CategoryData categoryData);
+    CategoryData postCategory(CategoryData categoryData);
 
     CategoryData editCategory(Long id, CategoryData categoryData);
 

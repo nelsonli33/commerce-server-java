@@ -1,6 +1,4 @@
-package com.shopflix.merchant.form;
-
-import com.shopflix.merchant.facades.delivery.data.DeliveryModeValueData;
+package com.shopflix.merchant.forms;
 
 import java.util.List;
 

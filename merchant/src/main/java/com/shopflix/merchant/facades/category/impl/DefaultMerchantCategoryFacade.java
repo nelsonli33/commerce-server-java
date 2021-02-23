@@ -6,6 +6,7 @@ import com.shopflix.core.data.MediaImageData;
 import com.shopflix.core.data.form.CategoryForm;
 import com.shopflix.core.model.category.CategoryModel;
 import com.shopflix.core.model.media.MediaImageModel;
+import com.shopflix.core.service.ModelService;
 import com.shopflix.merchant.data.CategoryData;
 import com.shopflix.merchant.facades.category.MerchantCategoryFacade;
 import com.shopflix.merchant.service.category.MerchantCategoryService;
@@ -17,11 +18,12 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component(value = "merchantCategoryFacade")
 public class DefaultMerchantCategoryFacade implements MerchantCategoryFacade
 {
+
     private MerchantCategoryService merchantCategoryService;
     private MerchantMediaService merchantMediaService;
+    private ModelService modelService;
     private Populator<CategoryData, CategoryModel> categoryReversePopulator;
     private Converter<CategoryModel, CategoryData> categoryConverter;
 
@@ -40,7 +42,7 @@ public class DefaultMerchantCategoryFacade implements MerchantCategoryFacade
     }
 
     @Override
-    public CategoryData createCategory(CategoryData categoryData)
+    public CategoryData postCategory(CategoryData categoryData)
     {
         CategoryModel categoryModel = new CategoryModel();
         categoryReversePopulator.populate(categoryData, categoryModel);
@@ -52,7 +54,9 @@ public class DefaultMerchantCategoryFacade implements MerchantCategoryFacade
             categoryModel.setImage(mediaImageModel);
         }
 
-        return categoryConverter.convert(merchantCategoryService.save(categoryModel));
+        getModelService().save(categoryModel);
+
+        return categoryConverter.convert(categoryModel);
     }
 
     @Override
@@ -67,14 +71,17 @@ public class DefaultMerchantCategoryFacade implements MerchantCategoryFacade
             MediaImageModel mediaImageModel = merchantMediaService.getMediaImageForId(categoryData.getImageId());
             categoryModel.setImage(mediaImageModel);
         }
-        return categoryConverter.convert(merchantCategoryService.save(categoryModel));
+
+        getModelService().save(categoryModel);
+
+        return categoryConverter.convert(categoryModel);
     }
 
     @Override
     public void deleteCategory(Long id)
     {
         CategoryModel categoryModel = merchantCategoryService.getCategoryForId(id);
-        merchantCategoryService.deleteCategory(categoryModel);
+        getModelService().remove(categoryModel);
     }
 
 
@@ -86,42 +93,7 @@ public class DefaultMerchantCategoryFacade implements MerchantCategoryFacade
             model.setSortOrder(categoryData.getSortOrder());
             models.add(model);
         }
-        merchantCategoryService.saveAll(models);
-    }
-
-
-    @Resource(name = "merchantCategoryService")
-    public void setMerchantCategoryService(MerchantCategoryService merchantCategoryService)
-    {
-        this.merchantCategoryService = merchantCategoryService;
-    }
-
-    @Resource(name = "merchantMediaService")
-    public void setMerchantMediaService(MerchantMediaService merchantMediaService)
-    {
-        this.merchantMediaService = merchantMediaService;
-    }
-
-    @Resource(name = "categoryConverter")
-    public void setCategoryConverter(Converter<CategoryModel, CategoryData> categoryConverter)
-    {
-        this.categoryConverter = categoryConverter;
-    }
-
-    @Resource(name = "categoryReversePopulator")
-    public void setCategoryReversePopulator(Populator<CategoryData, CategoryModel> categoryReversePopulator)
-    {
-        this.categoryReversePopulator = categoryReversePopulator;
-    }
-
-    public MerchantMediaService getMerchantMediaService()
-    {
-        return merchantMediaService;
-    }
-
-    public Populator<CategoryData, CategoryModel> getCategoryReversePopulator()
-    {
-        return categoryReversePopulator;
+        getModelService().saveAll(models);
     }
 
     public MerchantCategoryService getMerchantCategoryService()
@@ -129,9 +101,48 @@ public class DefaultMerchantCategoryFacade implements MerchantCategoryFacade
         return merchantCategoryService;
     }
 
+    public void setMerchantCategoryService(MerchantCategoryService merchantCategoryService)
+    {
+        this.merchantCategoryService = merchantCategoryService;
+    }
+
+    public MerchantMediaService getMerchantMediaService()
+    {
+        return merchantMediaService;
+    }
+
+    public void setMerchantMediaService(MerchantMediaService merchantMediaService)
+    {
+        this.merchantMediaService = merchantMediaService;
+    }
+
+    public ModelService getModelService()
+    {
+        return modelService;
+    }
+
+    public void setModelService(ModelService modelService)
+    {
+        this.modelService = modelService;
+    }
+
+    public Populator<CategoryData, CategoryModel> getCategoryReversePopulator()
+    {
+        return categoryReversePopulator;
+    }
+
+    public void setCategoryReversePopulator(Populator<CategoryData, CategoryModel> categoryReversePopulator)
+    {
+        this.categoryReversePopulator = categoryReversePopulator;
+    }
+
     public Converter<CategoryModel, CategoryData> getCategoryConverter()
     {
         return categoryConverter;
     }
 
+    public void setCategoryConverter(Converter<CategoryModel, CategoryData> categoryConverter)
+    {
+        this.categoryConverter = categoryConverter;
+    }
 }

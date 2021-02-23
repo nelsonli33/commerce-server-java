@@ -1,4 +1,4 @@
-package com.shopflix.merchant.form;
+package com.shopflix.merchant.forms;
 
 public class DeliveryModeValueForm
 {

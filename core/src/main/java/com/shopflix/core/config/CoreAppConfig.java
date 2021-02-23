@@ -1,5 +1,6 @@
 package com.shopflix.core.config;
 
+import com.shopflix.core.service.impl.DefaultModelService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +11,6 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @Configuration
 public class CoreAppConfig
 {
-
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
@@ -27,4 +27,6 @@ public class CoreAppConfig
         bean.setValidationMessageSource(messageSource);
         return bean;
     }
+
+
 }

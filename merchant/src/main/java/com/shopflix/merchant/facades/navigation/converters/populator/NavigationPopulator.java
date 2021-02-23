@@ -7,8 +7,7 @@ import com.shopflix.merchant.data.NavigationData;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component(value = "navigationPopulator")
-public class DefaultNavigationPopulator implements Populator<CMSNavigationModel, NavigationData>
+public class NavigationPopulator implements Populator<CMSNavigationModel, NavigationData>
 {
     @Override
     public void populate(CMSNavigationModel source, NavigationData target) throws ConversionException

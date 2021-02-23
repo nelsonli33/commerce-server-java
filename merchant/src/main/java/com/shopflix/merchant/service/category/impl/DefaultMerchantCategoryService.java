@@ -13,12 +13,9 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 
-@Service(value = "merchantCategoryService")
 public class DefaultMerchantCategoryService implements MerchantCategoryService {
 
-
     private CategoryRepository categoryRepository;
-
 
     @Override
     public List<CategoryModel> getAllCategories() {
@@ -45,18 +42,6 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
     }
 
     @Override
-    public CategoryModel save(CategoryModel categoryModel)
-    {
-        return categoryRepository.saveAndFlush(categoryModel);
-    }
-
-    @Override
-    public List<CategoryModel> saveAll(List<CategoryModel> categoryModels)
-    {
-        return categoryRepository.saveAll(categoryModels);
-    }
-
-    @Override
     public void addParentCategory(CategoryModel categoryModel, Long parentId)
     {
         CategoryModel parentCategory = null;
@@ -69,29 +54,13 @@ public class DefaultMerchantCategoryService implements MerchantCategoryService {
     }
 
 
-    @Override
-    public List<CategoryModel> orderingCategories(List<CategoryModel> categoryModels) {
-
-
-
-        return categoryRepository.saveAll(categoryModels);
-    }
-
-    @Override
-    public void deleteCategory(CategoryModel categoryModel) {
-        categoryRepository.delete(categoryModel);
-    }
-
-
-
-    @Resource(name = "categoryRepository")
-    public void setCategoryRepository(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
-
-
-    public CategoryRepository getCategoryRepository() {
+    public CategoryRepository getCategoryRepository()
+    {
         return categoryRepository;
     }
 
+    public void setCategoryRepository(CategoryRepository categoryRepository)
+    {
+        this.categoryRepository = categoryRepository;
+    }
 }

@@ -7,8 +7,7 @@ import com.shopflix.merchant.data.ProductData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-@Component(value = "productDetailPopulator")
-public class ProdcutDetailPopulator implements Populator<ProductModel, ProductData>
+public class ProductDetailPopulator implements Populator<ProductModel, ProductData>
 {
     @Override
     public void populate(ProductModel source, ProductData target) throws ConversionException

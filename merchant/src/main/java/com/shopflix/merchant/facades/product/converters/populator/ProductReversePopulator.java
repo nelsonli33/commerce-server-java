@@ -8,7 +8,6 @@ import com.shopflix.core.model.product.ProductModel;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component("productReversePopulator")
 public class ProductReversePopulator implements Populator<ProductForm, ProductModel> {
 
     @Override

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 
-@Component(value = "productBasicPopulator")
 public class ProductBasicPopulator implements Populator<ProductModel, ProductData>
 {
     @Override

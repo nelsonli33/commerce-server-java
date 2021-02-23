@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.Optional;
 
 
-@Service(value = "merchantMediaService")
+
 public class DefaultMerchantMediaService implements MerchantMediaService {
 
     private MediaRepository mediaRepository;
@@ -54,22 +54,23 @@ public class DefaultMerchantMediaService implements MerchantMediaService {
         }
     }
 
-    public MediaRepository getMediaRepository() {
+    public MediaRepository getMediaRepository()
+    {
         return mediaRepository;
     }
 
-    @Resource(name = "mediaRepository")
-    public void setMediaRepository(MediaRepository mediaRepository) {
+    public void setMediaRepository(MediaRepository mediaRepository)
+    {
         this.mediaRepository = mediaRepository;
     }
 
-    public MediaImageRepository getMediaImageRepository() {
+    public MediaImageRepository getMediaImageRepository()
+    {
         return mediaImageRepository;
     }
 
-    @Resource(name = "mediaImageRepository")
-    public void setMediaImageRepository(MediaImageRepository mediaImageRepository) {
+    public void setMediaImageRepository(MediaImageRepository mediaImageRepository)
+    {
         this.mediaImageRepository = mediaImageRepository;
     }
-
 }

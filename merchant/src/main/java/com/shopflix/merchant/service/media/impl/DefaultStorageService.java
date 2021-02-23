@@ -10,16 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.UUID;
 
-@Service(value = "storageService")
 public class DefaultStorageService implements StorageService {
 
-    @Value("${storage.bucketname}")
     private String BucketName;
-
-    @Autowired
     private Storage storage;
-
-
 
     public Blob sendFileToStorage(MultipartFile uploadFile) throws IOException {
         String filename = String.join("", UUID.randomUUID().toString().split("-"));
@@ -50,5 +44,25 @@ public class DefaultStorageService implements StorageService {
         Blob blob = storage.create(blobInfo, bytes);
         blob.createAcl(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
         return blob;
+    }
+
+    public String getBucketName()
+    {
+        return BucketName;
+    }
+
+    public void setBucketName(String bucketName)
+    {
+        BucketName = bucketName;
+    }
+
+    public Storage getStorage()
+    {
+        return storage;
+    }
+
+    public void setStorage(Storage storage)
+    {
+        this.storage = storage;
     }
 }

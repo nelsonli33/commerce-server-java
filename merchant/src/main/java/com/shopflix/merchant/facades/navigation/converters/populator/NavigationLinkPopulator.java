@@ -7,17 +7,16 @@ import com.shopflix.merchant.data.NavigationLinkData;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component(value = "navigationLinkReversePopulator")
-public class DefaultNavigationLinkReversePopulator implements Populator<NavigationLinkData, CMSNavigationLinkModel>
+public class NavigationLinkPopulator implements Populator<CMSNavigationLinkModel, NavigationLinkData>
 {
     @Override
-    public void populate(NavigationLinkData source, CMSNavigationLinkModel target) throws ConversionException
+    public void populate(CMSNavigationLinkModel source, NavigationLinkData target) throws ConversionException
     {
-        Assert.notNull(source, "Parameter navigation link data cannot be null.");
-        Assert.notNull(target, "Parameter navigation link model cannot be null.");
+        Assert.notNull(source, "Parameter navigation link model cannot be null.");
+        Assert.notNull(target, "Parameter navigation link data cannot be null.");
 
+        target.setId(source.getId());
         target.setName(source.getName());
-        target.setType(source.getType());
         target.setUrl(source.getUrl());
         target.setTarget(source.getTarget());
         target.setSortOrder(source.getSortOrder());

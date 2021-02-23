@@ -25,7 +25,6 @@ import java.util.Optional;
 
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
-@Service(value = "merchantProductService")
 public class DefaultMerchantProductService implements MerchantProductService {
 
     private ProductRepository productRepository;
@@ -117,12 +116,13 @@ public class DefaultMerchantProductService implements MerchantProductService {
     }
 
 
-    public ProductRepository getProductRepository() {
+    public ProductRepository getProductRepository()
+    {
         return productRepository;
     }
 
-    @Resource(name = "productRepository")
-    public void setProductRepository(ProductRepository productRepository) {
+    public void setProductRepository(ProductRepository productRepository)
+    {
         this.productRepository = productRepository;
     }
 
@@ -131,7 +131,6 @@ public class DefaultMerchantProductService implements MerchantProductService {
         return productOptionRepository;
     }
 
-    @Resource(name = "productOptionRepository")
     public void setProductOptionRepository(ProductOptionRepository productOptionRepository)
     {
         this.productOptionRepository = productOptionRepository;
@@ -142,7 +141,6 @@ public class DefaultMerchantProductService implements MerchantProductService {
         return productOptionValueRepository;
     }
 
-    @Resource(name = "productOptionValueRepository")
     public void setProductOptionValueRepository(ProductOptionValueRepository productOptionValueRepository)
     {
         this.productOptionValueRepository = productOptionValueRepository;
@@ -153,7 +151,6 @@ public class DefaultMerchantProductService implements MerchantProductService {
         return productVariantRepository;
     }
 
-    @Resource(name = "productVariantRepository")
     public void setProductVariantRepository(ProductVariantRepository productVariantRepository)
     {
         this.productVariantRepository = productVariantRepository;

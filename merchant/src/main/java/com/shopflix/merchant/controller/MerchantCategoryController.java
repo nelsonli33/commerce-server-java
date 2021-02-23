@@ -1,18 +1,14 @@
 package com.shopflix.merchant.controller;
 
 import com.shopflix.core.data.form.CategoryForm;
-import com.shopflix.core.model.category.CategoryModel;
 import com.shopflix.core.response.ApiResult;
 import com.shopflix.merchant.data.CategoryData;
 import com.shopflix.merchant.facades.category.MerchantCategoryFacade;
-import com.shopflix.merchant.service.category.MerchantCategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +42,7 @@ public class MerchantCategoryController {
     public ResponseEntity<ApiResult<CategoryData>> postCategory(@RequestBody CategoryForm form) {
 
         CategoryData data = fillCategoryFormToData(form);
-        CategoryData categoryData = merchantCategoryFacade.createCategory(data);
+        CategoryData categoryData = merchantCategoryFacade.postCategory(data);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

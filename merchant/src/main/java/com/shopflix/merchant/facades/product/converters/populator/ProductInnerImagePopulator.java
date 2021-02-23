@@ -7,10 +7,8 @@ import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.product.ProductImageModel;
 import org.springframework.stereotype.Component;
 
-@Component(value = "productInnerImagePopulator")
 public class ProductInnerImagePopulator implements Populator<ProductImageModel, ProductImageData>
 {
-
     @Override
     public void populate(ProductImageModel source, ProductImageData target) throws ConversionException
     {

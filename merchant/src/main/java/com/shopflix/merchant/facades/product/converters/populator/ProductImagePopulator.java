@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-@Component(value = "productImagePopulator")
+
 public class ProductImagePopulator implements Populator<ProductModel, ProductData>
 {
     private Converter<ProductImageModel, ProductImageData> productInnerImageConverter;
@@ -27,7 +27,6 @@ public class ProductImagePopulator implements Populator<ProductModel, ProductDat
         return productInnerImageConverter;
     }
 
-    @Resource(name = "productInnerImageConverter")
     public void setProductInnerImageConverter(Converter<ProductImageModel, ProductImageData> productInnerImageConverter)
     {
         this.productInnerImageConverter = productInnerImageConverter;
