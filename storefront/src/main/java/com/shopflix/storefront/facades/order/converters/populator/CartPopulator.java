@@ -44,6 +44,7 @@ public class CartPopulator implements Populator<CartModel, CartData>
 
     protected void addTotals(final CartModel source, final CartData target)
     {
+        target.setDeliveryCost(source.getDeliveryCost());
         target.setSubtotal(source.getSubtotal());
         target.setTotalDiscounts(source.getTotalDiscounts());
         target.setTotalPrice(source.getTotalPrice());

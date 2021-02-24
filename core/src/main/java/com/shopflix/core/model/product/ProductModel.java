@@ -5,6 +5,7 @@ import com.shopflix.core.enums.ProductStatus;
 import com.shopflix.core.model.ItemModel;
 
 import com.shopflix.core.model.category.CategoryModel;
+import com.shopflix.core.model.order.delivery.DeliveryModeModel;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -50,6 +51,17 @@ public class ProductModel extends ItemModel
     )
     Set<CategoryModel> categories = new HashSet<>();
 
+
+    @ManyToMany(
+            cascade = { CascadeType.PERSIST, CascadeType.MERGE}
+    )
+    @JoinTable(
+            name = "product2deliverymoderel",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "deliverymode_id")
+    )
+    Set<DeliveryModeModel> deliveryModes = new HashSet<>();
+
     @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     List<ProductImageModel> images = new ArrayList<>();
@@ -61,6 +73,8 @@ public class ProductModel extends ItemModel
     @JsonManagedReference
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductVariantModel> variants = new ArrayList<>();
+
+
 
     public String getCode()
     {
@@ -250,6 +264,16 @@ public class ProductModel extends ItemModel
     public void setMetaDescription(String metaDescription)
     {
         this.metaDescription = metaDescription;
+    }
+
+    public Set<DeliveryModeModel> getDeliveryModes()
+    {
+        return deliveryModes;
+    }
+
+    public void setDeliveryModes(Set<DeliveryModeModel> deliveryModes)
+    {
+        this.deliveryModes = deliveryModes;
     }
 
     public Set<CategoryModel> getCategories()

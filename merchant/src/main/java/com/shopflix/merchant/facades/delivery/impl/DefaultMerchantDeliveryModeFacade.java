@@ -43,7 +43,7 @@ public class DefaultMerchantDeliveryModeFacade implements MerchantDeliveryModeFa
         model.setModeType(DeliveryModeType.from(deliveryModeData.getModeType()));
         model.setModeSubType(DeliveryModeSubType.from(deliveryModeData.getModeSubType()));
         model.setTemperatureType(TemperatureType.from(deliveryModeData.getTemperatureType()));
-        model.setActive(model.getActive());
+        model.setActive(deliveryModeData.getActive());
 
         List<DeliveryModeValueModel> modeValueModels = new ArrayList<>();
 

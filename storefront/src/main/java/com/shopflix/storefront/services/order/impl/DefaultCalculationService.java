@@ -4,6 +4,7 @@ import com.shopflix.core.model.order.AbstractOrderLineItemModel;
 import com.shopflix.core.model.order.AbstractOrderModel;
 import com.shopflix.storefront.services.AbstractBusinessService;
 import com.shopflix.storefront.services.order.CalculationService;
+import com.shopflix.storefront.services.order.strategies.calculation.FindDeliveryCostStrategy;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.math.BigDecimal;
@@ -12,6 +13,8 @@ import java.util.*;
 public class DefaultCalculationService extends AbstractBusinessService
         implements CalculationService
 {
+
+    private FindDeliveryCostStrategy findDeliveryCostStrategy;
 
     @Override
     public void calculate(AbstractOrderModel order)
@@ -98,9 +101,18 @@ public class DefaultCalculationService extends AbstractBusinessService
 
     protected void resetAdditionalCosts(final AbstractOrderModel order)
     {
-//        final PriceValue deliCost = findDeliveryCostStrategy.getDeliveryCost(order);
-        double deliveryCostValue = 0.0;
+        final Double deliveryCostValue = findDeliveryCostStrategy.getDeliveryCost(order);
         order.setDeliveryCost(deliveryCostValue);
+    }
 
+
+    public FindDeliveryCostStrategy getFindDeliveryCostStrategy()
+    {
+        return findDeliveryCostStrategy;
+    }
+
+    public void setFindDeliveryCostStrategy(FindDeliveryCostStrategy findDeliveryCostStrategy)
+    {
+        this.findDeliveryCostStrategy = findDeliveryCostStrategy;
     }
 }

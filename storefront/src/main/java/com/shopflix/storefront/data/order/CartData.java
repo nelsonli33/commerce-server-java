@@ -9,6 +9,8 @@ public class CartData implements Serializable
 
     private String code;
 
+    private Double deliveryCost;
+
     private Double subtotal;
 
     private Double totalDiscounts;
@@ -29,6 +31,16 @@ public class CartData implements Serializable
     public void setCode(String code)
     {
         this.code = code;
+    }
+
+    public Double getDeliveryCost()
+    {
+        return deliveryCost;
+    }
+
+    public void setDeliveryCost(Double deliveryCost)
+    {
+        this.deliveryCost = deliveryCost;
     }
 
     public Double getSubtotal()

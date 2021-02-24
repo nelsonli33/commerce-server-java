@@ -5,10 +5,13 @@ import com.shopflix.core.enums.DeliveryModeSubType;
 import com.shopflix.core.enums.DeliveryModeType;
 import com.shopflix.core.enums.TemperatureType;
 import com.shopflix.core.model.ItemModel;
+import com.shopflix.core.model.product.ProductModel;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "deliverymodes")
@@ -16,7 +19,6 @@ public class DeliveryModeModel extends ItemModel
 {
     private String code;
     private String name;
-
     private DeliveryModeType modeType;
     private DeliveryModeSubType modeSubType;
     private TemperatureType temperatureType;
@@ -25,6 +27,11 @@ public class DeliveryModeModel extends ItemModel
     @JsonManagedReference
     @OneToMany(mappedBy = "deliveryMode", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<DeliveryModeValueModel> tierConditions = new ArrayList<>();;
+
+    @ManyToMany(mappedBy = "deliveryModes")
+    private Set<ProductModel> products = new HashSet<>();
+
+
 
     public String getCode()
     {
@@ -96,5 +103,13 @@ public class DeliveryModeModel extends ItemModel
         this.tierConditions = tierConditions;
     }
 
+    public Set<ProductModel> getProducts()
+    {
+        return products;
+    }
 
+    public void setProducts(Set<ProductModel> products)
+    {
+        this.products = products;
+    }
 }

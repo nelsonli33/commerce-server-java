@@ -2,6 +2,7 @@ package com.shopflix.core.model.order;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shopflix.core.model.ItemModel;
+import com.shopflix.core.model.order.delivery.DeliveryModeModel;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +16,9 @@ public abstract class AbstractOrderModel extends ItemModel {
     private Double subtotal;
     private Double totalPrice;
     private Double totalDiscounts;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private DeliveryModeModel deliveryMode;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
@@ -58,6 +62,16 @@ public abstract class AbstractOrderModel extends ItemModel {
 
     public void setTotalDiscounts(Double totalDiscounts) {
         this.totalDiscounts = totalDiscounts;
+    }
+
+    public DeliveryModeModel getDeliveryMode()
+    {
+        return deliveryMode;
+    }
+
+    public void setDeliveryMode(DeliveryModeModel deliveryMode)
+    {
+        this.deliveryMode = deliveryMode;
     }
 
     public List<AbstractOrderLineItemModel> getLineItems()

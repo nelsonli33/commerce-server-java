@@ -20,14 +20,17 @@ public abstract class AbstractEnumConverter<T extends Enum<T> & PersistableEnum,
     @Override
     public T convertToEntityAttribute(String dbData)
     {
-        T[] enums = clazz.getEnumConstants();
-        for (T e : enums) {
-            if (e.getCode().toLowerCase().equals(dbData)) {
-                return e;
+        if (dbData != null) {
+            T[] enums = clazz.getEnumConstants();
+            for (T e : enums) {
+                if (e.getCode().toLowerCase().equals(dbData)) {
+                    return e;
+                }
             }
-        }
 
-        throw new UnsupportedOperationException(
-                String.format("%s cannot convert to %s enum value.", dbData, clazz));
+            throw new UnsupportedOperationException(
+                    String.format("%s cannot convert to %s enum value.", dbData, clazz));
+        }
+        return null;
     }
 }
