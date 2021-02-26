@@ -1,6 +1,10 @@
 package com.shopflix.storefront.facades.user;
 
+import com.shopflix.core.data.user.AddressData;
+import com.shopflix.storefront.facades.user.data.CustomerAddressData;
 import com.shopflix.storefront.facades.user.data.RegisterData;
+
+import java.util.List;
 
 /**
  * Defines an API to perform various customer related operations
@@ -15,4 +19,13 @@ public interface CustomerFacade {
      */
     void register(RegisterData registerData);
 
+    List<CustomerAddressData> getAddressBook();
+
+    CustomerAddressData getAddress(final CustomerAddressData customerAddressData);
+
+    CustomerAddressData addAddress(final CustomerAddressData customerAddressData);
+
+    CustomerAddressData editAddress(final CustomerAddressData customerAddressData);
+
+    void removeAddress(final CustomerAddressData customerAddressData);
 }

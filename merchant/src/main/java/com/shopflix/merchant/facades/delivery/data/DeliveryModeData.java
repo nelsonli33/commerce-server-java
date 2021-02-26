@@ -17,6 +17,8 @@ public class DeliveryModeData implements Serializable
 
     private String modeSubType;
 
+    private Integer deliveryAddressType;
+
     private String temperatureType;
 
     private Boolean active;
@@ -66,6 +68,16 @@ public class DeliveryModeData implements Serializable
     public String getModeSubType()
     {
         return modeSubType;
+    }
+
+    public Integer getDeliveryAddressType()
+    {
+        return deliveryAddressType;
+    }
+
+    public void setDeliveryAddressType(Integer deliveryAddressType)
+    {
+        this.deliveryAddressType = deliveryAddressType;
     }
 
     public void setModeSubType(String modeSubType)

@@ -35,15 +35,6 @@ public class DefaultCustomerService implements CustomerService
         }
     }
 
-    public CustomerRepository getCustomerRepository()
-    {
-        return customerRepository;
-    }
-
-    public void setCustomerRepository(CustomerRepository customerRepository)
-    {
-        this.customerRepository = customerRepository;
-    }
 
     public SessionService getSessionService()
     {
@@ -53,5 +44,15 @@ public class DefaultCustomerService implements CustomerService
     public void setSessionService(SessionService sessionService)
     {
         this.sessionService = sessionService;
+    }
+
+    public CustomerRepository getCustomerRepository()
+    {
+        return customerRepository;
+    }
+
+    public void setCustomerRepository(CustomerRepository customerRepository)
+    {
+        this.customerRepository = customerRepository;
     }
 }

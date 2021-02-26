@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @MappedSuperclass
 public class ItemModel implements Serializable
@@ -48,4 +49,22 @@ public class ItemModel implements Serializable
     }
 
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (!(o instanceof ItemModel)) return false;
+        ItemModel itemModel = (ItemModel) o;
+        return getId() != null && getId().equals(itemModel.getId());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(getId());
+    }
+
+    public String toString() {
+        return this.getId() == null ? this.getClass().getSimpleName() + " (<unsaved>)" : this.getClass().getSimpleName() + " (" + this.getId().toString() + ")";
+    }
 }

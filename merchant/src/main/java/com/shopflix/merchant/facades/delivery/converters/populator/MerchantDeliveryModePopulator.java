@@ -29,7 +29,9 @@ public class MerchantDeliveryModePopulator implements Populator<DeliveryModeMode
         target.setActive(source.getActive());
         target.setModeType(source.getModeType() != null ? source.getModeType().getCode() : null);
         target.setModeSubType(source.getModeSubType() != null ? source.getModeSubType().getCode() : null);
+        target.setDeliveryAddressType(source.getDeliveryAddressType() != null ? source.getDeliveryAddressType().getValue() : null);
         target.setTemperatureType(source.getTemperatureType() != null ? source.getTemperatureType().getCode() : null);
+
 
         addDeliveryModeValues(source, target);
     }

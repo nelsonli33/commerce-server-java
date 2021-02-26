@@ -24,6 +24,9 @@ public class CustomJpaRepositoryImpl<T, ID extends Serializable> extends SimpleJ
     @Transactional
     public void refresh(T t)
     {
-        em.refresh(t);
+        if (em.contains(t)) {
+            em.refresh(em.merge(t));
+        }
+
     }
 }

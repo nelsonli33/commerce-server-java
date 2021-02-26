@@ -1,19 +1,26 @@
 package com.shopflix.core.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shopflix.core.listener.CustomerModelListener;
 import com.shopflix.core.model.ItemModel;
 import com.shopflix.core.model.order.CartModel;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@EntityListeners({CustomerModelListener.class})
 @Entity
 @Table(name = "customers")
-public class CustomerModel extends ItemModel implements Serializable
+@DynamicUpdate
+public class CustomerModel extends ItemModel
 {
-    private static final long serialVersionUID = 2180973506725092772L;
+    private static final long serialVersionUID = 1687540371837402837L;
 
     @Column(nullable = false, unique = true)
     private String uid;
@@ -24,6 +31,15 @@ public class CustomerModel extends ItemModel implements Serializable
     private String tags;
     private Date birthday;
     private boolean acceptsMarketing;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private CustomerAddressModel defaultShipmentAddress;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<CustomerAddressModel> addresses = new ArrayList<>();
+
+
 
     public String getUid() {
         return uid;
@@ -91,4 +107,23 @@ public class CustomerModel extends ItemModel implements Serializable
         this.acceptsMarketing = acceptsMarketing;
     }
 
+    public CustomerAddressModel getDefaultShipmentAddress()
+    {
+        return defaultShipmentAddress;
+    }
+
+    public void setDefaultShipmentAddress(CustomerAddressModel defaultShipmentAddress)
+    {
+        this.defaultShipmentAddress = defaultShipmentAddress;
+    }
+
+    public List<CustomerAddressModel> getAddresses()
+    {
+        return addresses;
+    }
+
+    public void setAddresses(List<CustomerAddressModel> addresses)
+    {
+        this.addresses = addresses;
+    }
 }

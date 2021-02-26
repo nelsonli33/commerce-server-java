@@ -1,6 +1,7 @@
 package com.shopflix.merchant.facades.delivery.impl;
 
 import com.shopflix.core.converters.Converter;
+import com.shopflix.core.enums.DeliveryAddressType;
 import com.shopflix.core.enums.DeliveryModeSubType;
 import com.shopflix.core.enums.DeliveryModeType;
 import com.shopflix.core.enums.TemperatureType;
@@ -43,6 +44,7 @@ public class DefaultMerchantDeliveryModeFacade implements MerchantDeliveryModeFa
         model.setModeType(DeliveryModeType.from(deliveryModeData.getModeType()));
         model.setModeSubType(DeliveryModeSubType.from(deliveryModeData.getModeSubType()));
         model.setTemperatureType(TemperatureType.from(deliveryModeData.getTemperatureType()));
+        model.setDeliveryAddressType(DeliveryAddressType.from(deliveryModeData.getDeliveryAddressType()));
         model.setActive(deliveryModeData.getActive());
 
         List<DeliveryModeValueModel> modeValueModels = new ArrayList<>();
