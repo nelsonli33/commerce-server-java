@@ -56,7 +56,11 @@ public class DefaultCustomerFacade implements CustomerFacade
         final CustomerModel currentCustomer = getCustomerService().getCurrentCustomer();
         final CustomerAddressModel addressModel = getCustomerAccountService().getAddressForId(currentCustomer, customerAddressData.getId());
 
-        return getCustomerAddressConverter().convert(addressModel);
+        if (addressModel != null) {
+            return getCustomerAddressConverter().convert(addressModel);
+        }
+
+        return null;
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.shopflix.storefront.facades.order.impl;
 
 import com.shopflix.core.converters.Converter;
 import com.shopflix.core.model.order.CartModel;
-import com.shopflix.storefront.data.order.*;
 import com.shopflix.storefront.facades.order.CartFacade;
+import com.shopflix.storefront.facades.order.data.*;
 import com.shopflix.storefront.services.order.CartService;
 import com.shopflix.storefront.services.order.CommerceCartService;
 

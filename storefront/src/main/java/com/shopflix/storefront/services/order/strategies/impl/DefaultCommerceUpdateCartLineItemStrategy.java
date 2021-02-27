@@ -1,16 +1,14 @@
 package com.shopflix.storefront.services.order.strategies.impl;
 
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
-import com.shopflix.core.model.order.CartLineItemModel;
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.service.ModelService;
-import com.shopflix.storefront.data.order.CommerceCartModification;
-import com.shopflix.storefront.data.order.CommerceCartModificationStatus;
-import com.shopflix.storefront.data.order.CommerceCartParameter;
-import com.shopflix.storefront.data.order.SKUProduct;
+import com.shopflix.storefront.facades.order.data.CommerceCartModification;
+import com.shopflix.storefront.facades.order.data.CommerceCartModificationStatus;
+import com.shopflix.storefront.facades.order.data.CommerceCartParameter;
+import com.shopflix.storefront.facades.order.data.SKUProduct;
 import com.shopflix.storefront.exceptions.CommerceCartModificationException;
 import com.shopflix.storefront.services.order.strategies.CommerceUpdateCartLineItemStrategy;
-import com.shopflix.storefront.services.product.SKUProductFactory;
 
 
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;

@@ -1,8 +1,8 @@
 package com.shopflix.core.enums;
 
-import com.shopflix.core.converters.AbstractEnumConverter;
+import com.shopflix.core.converters.AbstractStringEnumConverter;
 
-public enum TemperatureType implements PersistableEnum
+public enum TemperatureType implements PersistableStringEnum
 {
     NORMAL("0001"),
 
@@ -29,13 +29,12 @@ public enum TemperatureType implements PersistableEnum
                 return e;
             }
         }
-        // TODO: add enum converter exeption
         return null;
     }
 
     // JPA converter
     @javax.persistence.Converter(autoApply = true)
-    public static class Converter extends AbstractEnumConverter<TemperatureType, String>
+    public static class Converter extends AbstractStringEnumConverter<TemperatureType, String>
     {
         public Converter() {
             super(TemperatureType.class);

@@ -1,6 +1,6 @@
 package com.shopflix.storefront.services.order.strategies;
 
-import com.shopflix.storefront.data.order.CommerceCartParameter;
+import com.shopflix.storefront.facades.order.data.CommerceCartParameter;
 
 /**
  * Default strategy to calculate the cart when not in checkout status.

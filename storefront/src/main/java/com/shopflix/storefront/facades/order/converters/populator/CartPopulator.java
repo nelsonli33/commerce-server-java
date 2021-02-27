@@ -5,8 +5,8 @@ import com.shopflix.core.converters.Populator;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
 import com.shopflix.core.model.order.CartModel;
-import com.shopflix.storefront.data.order.CartData;
-import com.shopflix.storefront.data.order.OrderLineItemData;
+import com.shopflix.storefront.facades.order.data.CartData;
+import com.shopflix.storefront.facades.order.data.OrderLineItemData;
 import org.springframework.util.Assert;
 
 public class CartPopulator implements Populator<CartModel, CartData>

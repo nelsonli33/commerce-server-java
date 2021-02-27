@@ -3,7 +3,7 @@ package com.shopflix.storefront.facades.order.converters.populator;
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
-import com.shopflix.storefront.data.order.OrderLineItemData;
+import com.shopflix.storefront.facades.order.data.OrderLineItemData;
 import com.shopflix.storefront.services.strategies.ModifiableChecker;
 import org.springframework.util.Assert;
 

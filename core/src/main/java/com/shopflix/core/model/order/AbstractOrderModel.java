@@ -1,8 +1,12 @@
 package com.shopflix.core.model.order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.shopflix.core.model.ItemModel;
+import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
+import com.shopflix.core.model.user.AddressModel;
+import com.shopflix.core.model.user.CustomerModel;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,9 +24,14 @@ public abstract class AbstractOrderModel extends ItemModel {
     @OneToOne(fetch = FetchType.LAZY)
     private DeliveryModeModel deliveryMode;
 
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "delivery_address_id")
+    private DeliveryAddressModel deliveryAddress;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<AbstractOrderLineItemModel> lineItems;
+
 
     public String getCode() {
         return code;
@@ -74,6 +83,16 @@ public abstract class AbstractOrderModel extends ItemModel {
         this.deliveryMode = deliveryMode;
     }
 
+    public DeliveryAddressModel getDeliveryAddress()
+    {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(DeliveryAddressModel deliveryAddress)
+    {
+        this.deliveryAddress = deliveryAddress;
+    }
+
     public List<AbstractOrderLineItemModel> getLineItems()
     {
         return lineItems;
@@ -83,4 +102,6 @@ public abstract class AbstractOrderModel extends ItemModel {
     {
         this.lineItems = lineItems;
     }
+
+    abstract CustomerModel getCustomer();
 }

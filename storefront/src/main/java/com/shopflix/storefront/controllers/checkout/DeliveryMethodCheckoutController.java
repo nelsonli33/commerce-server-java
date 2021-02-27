@@ -2,19 +2,18 @@ package com.shopflix.storefront.controllers.checkout;
 
 import com.shopflix.core.controllers.AbstractController;
 import com.shopflix.core.response.ApiResult;
-import com.shopflix.storefront.data.order.DeliveryModeData;
+import com.shopflix.storefront.facades.order.data.DeliveryModeData;
 import com.shopflix.storefront.facades.order.CheckoutFacade;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping(value = "/api/v1/checkout/delivery-methods")
 public class DeliveryMethodCheckoutController extends AbstractController
 {
@@ -24,7 +23,6 @@ public class DeliveryMethodCheckoutController extends AbstractController
     @GetMapping
     public ResponseEntity<ApiResult<List<DeliveryModeData>>> deliveryMethods()
     {
-
         final List<DeliveryModeData> supportedDeliveryModes = checkoutFacade.getSupportedDeliveryModes();
 
         return ResponseEntity

@@ -1,7 +1,6 @@
-package com.shopflix.storefront.data.order;
+package com.shopflix.storefront.facades.order.data;
 
 import com.shopflix.core.model.order.CartModel;
-import com.shopflix.core.model.user.CustomerModel;
 
 import java.io.Serializable;
 

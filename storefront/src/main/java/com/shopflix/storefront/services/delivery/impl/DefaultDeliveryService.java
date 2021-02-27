@@ -1,6 +1,7 @@
 package com.shopflix.storefront.services.delivery.impl;
 
 import com.shopflix.core.model.order.AbstractOrderModel;
+import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
 import com.shopflix.core.repository.delivery.DeliveryModeRepository;
 import com.shopflix.storefront.services.delivery.DeliveryService;
@@ -13,9 +14,11 @@ import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;
 
 public class DefaultDeliveryService implements DeliveryService
 {
+
     private DeliveryModeLookupStrategy deliveryModeLookupStrategy;
     private DeliveryModeRepository deliveryModeRepository;
     private FindDeliveryCostStrategy findDeliveryCostStrategy;
+
 
     @Override
     public List<DeliveryModeModel> getSupportedDeliveryModesForOrder(AbstractOrderModel abstractOrder)
@@ -45,7 +48,16 @@ public class DefaultDeliveryService implements DeliveryService
         return getFindDeliveryCostStrategy().getDeliveryCost(deliveryMode, abstractOrder);
     }
 
-
+    @Override
+    public Integer getAddressTypeForDeliveryMode(DeliveryModeModel deliveryMode)
+    {
+        validateParameterNotNull(deliveryMode, "deliveryMode model cannot be null");
+        if (deliveryMode.getDeliveryAddressType() != null)
+        {
+            return deliveryMode.getDeliveryAddressType().getValue();
+        }
+        return null;
+    }
 
 
     public DeliveryModeLookupStrategy getDeliveryModeLookupStrategy()

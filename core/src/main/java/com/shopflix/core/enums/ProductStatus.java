@@ -1,9 +1,9 @@
 package com.shopflix.core.enums;
 
 
-import com.shopflix.core.converters.AbstractEnumConverter;
+import com.shopflix.core.converters.AbstractStringEnumConverter;
 
-public enum ProductStatus implements PersistableEnum
+public enum ProductStatus implements PersistableStringEnum
 {
     ACTIVE("ACTIVE"),
     ARCHIVED("ARCHIVED"),
@@ -27,7 +27,7 @@ public enum ProductStatus implements PersistableEnum
 
     // JPA converter
     @javax.persistence.Converter(autoApply = true)
-    public static class Converter extends AbstractEnumConverter<ProductStatus, String>
+    public static class Converter extends AbstractStringEnumConverter<ProductStatus, String>
     {
         public Converter() {
             super(ProductStatus.class);

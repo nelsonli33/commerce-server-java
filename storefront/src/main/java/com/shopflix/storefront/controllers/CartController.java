@@ -1,15 +1,12 @@
 package com.shopflix.storefront.controllers;
 
 import com.shopflix.core.controllers.AbstractController;
-import com.shopflix.core.model.user.CustomerModel;
 import com.shopflix.core.response.ApiResult;
-import com.shopflix.storefront.data.order.CartData;
-import com.shopflix.storefront.data.order.CartModificationData;
+import com.shopflix.storefront.facades.order.data.CartData;
+import com.shopflix.storefront.facades.order.data.CartModificationData;
 import com.shopflix.storefront.facades.order.CartFacade;
 import com.shopflix.storefront.forms.AddToCartForm;
 import com.shopflix.storefront.forms.UpdateCartForm;
-import com.shopflix.storefront.services.customer.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

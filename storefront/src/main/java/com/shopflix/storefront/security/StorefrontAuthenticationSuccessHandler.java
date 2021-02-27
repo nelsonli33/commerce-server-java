@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component(value = "storefrontAuthenticationSuccessHandler")
 public class StorefrontAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private CustomerService customerService;
@@ -22,8 +21,6 @@ public class StorefrontAuthenticationSuccessHandler extends SimpleUrlAuthenticat
 
         final UserDetails principal = (UserDetails) authentication.getPrincipal();
         getCustomerService().setCurrentUser(getCustomerService().getCustomerForUid(principal.getUsername()));
-
-
     }
 
     public CustomerService getCustomerService()
@@ -31,7 +28,6 @@ public class StorefrontAuthenticationSuccessHandler extends SimpleUrlAuthenticat
         return customerService;
     }
 
-    @Resource(name = "customerService")
     public void setCustomerService(CustomerService customerService)
     {
         this.customerService = customerService;

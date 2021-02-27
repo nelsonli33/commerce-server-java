@@ -1,11 +1,16 @@
 package com.shopflix.storefront.facades.order;
 
-import com.shopflix.storefront.data.order.DeliveryModeData;
+import com.shopflix.core.data.user.AddressData;
+import com.shopflix.storefront.facades.order.data.CartData;
+import com.shopflix.storefront.facades.order.data.DeliveryModeData;
+import com.shopflix.storefront.facades.user.data.CustomerAddressData;
 
 import java.util.List;
 
 public interface CheckoutFacade
 {
+    CartData getCheckoutCart();
+
     List<DeliveryModeData> getSupportedDeliveryModes();
 
     /**
@@ -15,4 +20,7 @@ public interface CheckoutFacade
      * @return true if successful
      */
     boolean setDeliveryMode(String deliveryModeCode);
+
+
+    boolean setDeliveryAddress(CustomerAddressData customerAddressData);
 }

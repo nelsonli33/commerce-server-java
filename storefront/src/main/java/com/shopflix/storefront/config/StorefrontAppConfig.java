@@ -4,6 +4,7 @@ import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.impl.PopulatingConverter;
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
 import com.shopflix.core.model.order.CartModel;
+import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
 import com.shopflix.core.model.user.CustomerAddressModel;
 import com.shopflix.core.repository.delivery.DeliveryModeRepository;
@@ -298,12 +299,15 @@ public class StorefrontAppConfig
     @Bean
     public DefaultCheckoutFacade checkoutFacade() {
         DefaultCheckoutFacade checkoutFacade = new DefaultCheckoutFacade();
+        checkoutFacade.setCartFacade(cartFacade());
         checkoutFacade.setCartService(cartService());
         checkoutFacade.setCommerceCheckoutService(commerceCheckoutService());
         checkoutFacade.setDeliveryService(deliveryService());
-        checkoutFacade.setModelService(getModelService());
         checkoutFacade.setCustomerAccountService(customerAccountService());
+        checkoutFacade.setModelService(getModelService());
+        checkoutFacade.setDeliveryAddressReversePopulator(deliveryAddressReversePopulator());
         checkoutFacade.setDeliveryModeConverter(deliveryModeConverter());
+        checkoutFacade.setDeliveryAddressConverter(deliveryAddressConverter());
         return checkoutFacade;
     }
 
@@ -426,5 +430,21 @@ public class StorefrontAppConfig
         return converter;
     }
 
+    @Bean
+    public DeliveryAddressReversePopulator deliveryAddressReversePopulator() {
+        return new DeliveryAddressReversePopulator();
+    }
 
+    @Bean
+    public DeliveryAddressPopulator deliveryAddressPopulator() {
+        return new DeliveryAddressPopulator();
+    }
+
+    @Bean
+    public Converter<DeliveryAddressModel, DeliveryAddressData> deliveryAddressConverter() {
+        PopulatingConverter<DeliveryAddressModel, DeliveryAddressData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(DeliveryAddressData.class);
+        converter.setPopulators(Arrays.asList(deliveryAddressPopulator()));
+        return converter;
+    }
 }

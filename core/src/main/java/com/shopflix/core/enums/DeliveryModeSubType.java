@@ -1,8 +1,8 @@
 package com.shopflix.core.enums;
 
-import com.shopflix.core.converters.AbstractEnumConverter;
+import com.shopflix.core.converters.AbstractStringEnumConverter;
 
-public enum DeliveryModeSubType implements PersistableEnum
+public enum DeliveryModeSubType implements PersistableStringEnum
 {
     TCAT("TCAT"),
 
@@ -34,13 +34,12 @@ public enum DeliveryModeSubType implements PersistableEnum
                 return e;
             }
         }
-        // TODO: add enum converter exeption
         return null;
     }
 
     // JPA converter
     @javax.persistence.Converter(autoApply = true)
-    public static class Converter extends AbstractEnumConverter<DeliveryModeSubType, String>
+    public static class Converter extends AbstractStringEnumConverter<DeliveryModeSubType, String>
     {
         public Converter() {
             super(DeliveryModeSubType.class);

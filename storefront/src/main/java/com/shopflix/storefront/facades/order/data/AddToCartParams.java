@@ -1,4 +1,4 @@
-package com.shopflix.storefront.data.order;
+package com.shopflix.storefront.facades.order.data;
 
 import java.io.Serializable;
 

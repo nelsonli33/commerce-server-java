@@ -1,8 +1,8 @@
 package com.shopflix.merchant.data;
 
-import com.shopflix.core.enums.PersistableEnum;
+import com.shopflix.core.enums.PersistableStringEnum;
 
-public enum ProductOption implements PersistableEnum
+public enum ProductOption implements PersistableStringEnum
 {
     BASIC("BASIC"),
     FULL("FULL");

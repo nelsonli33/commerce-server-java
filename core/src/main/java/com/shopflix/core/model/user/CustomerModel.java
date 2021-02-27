@@ -6,13 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.shopflix.core.listener.CustomerModelListener;
 import com.shopflix.core.model.ItemModel;
 import com.shopflix.core.model.order.CartModel;
+import com.shopflix.core.model.order.OrderModel;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @EntityListeners({CustomerModelListener.class})
 @Entity
@@ -39,6 +38,10 @@ public class CustomerModel extends ItemModel
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CustomerAddressModel> addresses = new ArrayList<>();
 
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<OrderModel> orders = new LinkedHashSet<>();
 
 
     public String getUid() {
@@ -125,5 +128,15 @@ public class CustomerModel extends ItemModel
     public void setAddresses(List<CustomerAddressModel> addresses)
     {
         this.addresses = addresses;
+    }
+
+    public Set<OrderModel> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderModel> orders)
+    {
+        this.orders = orders;
     }
 }

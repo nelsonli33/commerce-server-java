@@ -4,10 +4,9 @@ import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
-import com.shopflix.storefront.data.order.CartModificationData;
-import com.shopflix.storefront.data.order.CommerceCartModification;
-import com.shopflix.storefront.data.order.OrderLineItemData;
-import com.shopflix.storefront.services.strategies.ModifiableChecker;
+import com.shopflix.storefront.facades.order.data.CartModificationData;
+import com.shopflix.storefront.facades.order.data.CommerceCartModification;
+import com.shopflix.storefront.facades.order.data.OrderLineItemData;
 import org.springframework.util.Assert;
 
 public class CartModificationPopulator implements Populator<CommerceCartModification, CartModificationData>

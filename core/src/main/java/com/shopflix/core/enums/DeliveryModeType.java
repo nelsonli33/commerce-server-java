@@ -1,8 +1,8 @@
 package com.shopflix.core.enums;
 
-import com.shopflix.core.converters.AbstractEnumConverter;
+import com.shopflix.core.converters.AbstractStringEnumConverter;
 
-public enum DeliveryModeType implements PersistableEnum
+public enum DeliveryModeType implements PersistableStringEnum
 {
     HOME("HOME"),
 
@@ -27,13 +27,12 @@ public enum DeliveryModeType implements PersistableEnum
                 return e;
             }
         }
-        // TODO: add enum converter exeption
         return null;
     }
 
     // JPA converter
     @javax.persistence.Converter(autoApply = true)
-    public static class Converter extends AbstractEnumConverter<DeliveryModeType, String>
+    public static class Converter extends AbstractStringEnumConverter<DeliveryModeType, String>
     {
         public Converter() {
             super(DeliveryModeType.class);

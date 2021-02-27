@@ -1,4 +1,4 @@
-package com.shopflix.storefront.data.order;
+package com.shopflix.storefront.facades.order.data;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +21,9 @@ public class CartData implements Serializable
 
     private List<OrderLineItemData> items;
 
+    private DeliveryModeData deliveryMode;
+
+    private DeliveryAddressData deliveryAddress;
 
 
     public String getCode()
@@ -91,5 +94,25 @@ public class CartData implements Serializable
     public void setItems(List<OrderLineItemData> items)
     {
         this.items = items;
+    }
+
+    public DeliveryModeData getDeliveryMode()
+    {
+        return deliveryMode;
+    }
+
+    public void setDeliveryMode(DeliveryModeData deliveryMode)
+    {
+        this.deliveryMode = deliveryMode;
+    }
+
+    public DeliveryAddressData getDeliveryAddress()
+    {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(DeliveryAddressData deliveryAddress)
+    {
+        this.deliveryAddress = deliveryAddress;
     }
 }

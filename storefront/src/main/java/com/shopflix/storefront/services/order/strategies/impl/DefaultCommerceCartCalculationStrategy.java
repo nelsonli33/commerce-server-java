@@ -1,7 +1,7 @@
 package com.shopflix.storefront.services.order.strategies.impl;
 
 import com.shopflix.core.model.order.CartModel;
-import com.shopflix.storefront.data.order.CommerceCartParameter;
+import com.shopflix.storefront.facades.order.data.CommerceCartParameter;
 import com.shopflix.storefront.services.order.CalculationService;
 import com.shopflix.storefront.services.order.strategies.CommerceCartCalculationStrategy;
 

@@ -3,8 +3,7 @@ package com.shopflix.storefront.facades.order.converters.populator;
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
-import com.shopflix.storefront.data.order.DeliveryModeData;
-import org.apache.commons.lang3.StringUtils;
+import com.shopflix.storefront.facades.order.data.DeliveryModeData;
 import org.springframework.util.Assert;
 
 public class DeliveryModePopulator implements Populator<DeliveryModeModel, DeliveryModeData>

@@ -4,7 +4,7 @@ import com.shopflix.core.model.order.AbstractOrderLineItemModel;
 import com.shopflix.core.model.order.CartLineItemModel;
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.service.ModelService;
-import com.shopflix.storefront.data.order.SKUProduct;
+import com.shopflix.storefront.facades.order.data.SKUProduct;
 import com.shopflix.storefront.services.order.CartService;
 import com.shopflix.storefront.services.order.strategies.CommerceCartCalculationStrategy;
 import com.shopflix.storefront.services.strategies.ModifiableChecker;

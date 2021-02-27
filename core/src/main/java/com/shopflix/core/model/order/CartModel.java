@@ -9,14 +9,15 @@ import javax.persistence.*;
 public class CartModel extends AbstractOrderModel {
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
     private CustomerModel customer;
 
-    public CustomerModel getCustomer() {
+    public CustomerModel getCustomer()
+    {
         return customer;
     }
 
-    public void setCustomer(CustomerModel customer) {
+    public void setCustomer(CustomerModel customer)
+    {
         this.customer = customer;
     }
 }

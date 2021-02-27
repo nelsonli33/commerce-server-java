@@ -1,7 +1,9 @@
-package com.shopflix.storefront.data.order;
+package com.shopflix.storefront.facades.order.data;
 
 import com.shopflix.core.model.order.CartModel;
+import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
+import com.shopflix.core.model.user.AddressModel;
 
 import java.io.Serializable;
 
@@ -12,6 +14,8 @@ public class CommerceCheckoutParameter implements Serializable
     private CartModel cart;
 
     private DeliveryModeModel deliveryMode;
+
+    private DeliveryAddressModel deliveryAddress;
 
 
 
@@ -33,5 +37,15 @@ public class CommerceCheckoutParameter implements Serializable
     public void setDeliveryMode(DeliveryModeModel deliveryMode)
     {
         this.deliveryMode = deliveryMode;
+    }
+
+    public DeliveryAddressModel getDeliveryAddress()
+    {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(DeliveryAddressModel deliveryAddress)
+    {
+        this.deliveryAddress = deliveryAddress;
     }
 }

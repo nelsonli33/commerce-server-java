@@ -4,9 +4,9 @@ import com.shopflix.core.converters.Populator;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.order.CartLineItemModel;
 import com.shopflix.core.model.order.CartModel;
-import com.shopflix.storefront.data.order.CommerceCartParameter;
-import com.shopflix.storefront.data.order.SKUProduct;
-import com.shopflix.storefront.data.order.UpdateCartParams;
+import com.shopflix.storefront.facades.order.data.CommerceCartParameter;
+import com.shopflix.storefront.facades.order.data.SKUProduct;
+import com.shopflix.storefront.facades.order.data.UpdateCartParams;
 import com.shopflix.storefront.services.order.CartService;
 import com.shopflix.storefront.services.product.SKUProductFactory;
 

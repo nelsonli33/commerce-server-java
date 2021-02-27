@@ -19,8 +19,9 @@ public enum ErrorCode {
     E_1020(1020, "Parent cannot be child"),
 
     E_3000(3000, "Validation error"),
-    E_3001(3001, "Duplicate uid error");
+    E_3001(3001, "Duplicate uid error"),
 
+    E_5000(5000, "Delivery address error");
 
 
     private int errorCode;

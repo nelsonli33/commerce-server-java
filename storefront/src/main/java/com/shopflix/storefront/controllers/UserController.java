@@ -1,14 +1,12 @@
 package com.shopflix.storefront.controllers;
 
 import com.shopflix.core.controllers.AbstractController;
-import com.shopflix.core.exception.ValidationException;
 import com.shopflix.core.response.ApiResult;
 import com.shopflix.storefront.facades.user.CustomerFacade;
 import com.shopflix.storefront.facades.user.data.RegisterData;
 import com.shopflix.storefront.forms.RegisterForm;
 import com.shopflix.storefront.forms.validation.RegistrationValidator;
 import com.shopflix.storefront.security.AutoLoginStrategy;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,9 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/user")

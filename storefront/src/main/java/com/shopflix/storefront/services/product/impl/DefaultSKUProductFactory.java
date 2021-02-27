@@ -2,7 +2,7 @@ package com.shopflix.storefront.services.product.impl;
 
 import com.shopflix.core.model.product.ProductModel;
 import com.shopflix.core.model.product.ProductVariantModel;
-import com.shopflix.storefront.data.order.SKUProduct;
+import com.shopflix.storefront.facades.order.data.SKUProduct;
 import com.shopflix.storefront.services.product.SKUProductFactory;
 
 public class DefaultSKUProductFactory implements SKUProductFactory

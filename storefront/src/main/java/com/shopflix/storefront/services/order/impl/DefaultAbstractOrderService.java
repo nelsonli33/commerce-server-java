@@ -2,7 +2,7 @@ package com.shopflix.storefront.services.order.impl;
 
 import com.shopflix.core.exception.ModelNotFoundException;
 import com.shopflix.core.model.order.*;
-import com.shopflix.storefront.data.order.SKUProduct;
+import com.shopflix.storefront.facades.order.data.SKUProduct;
 import com.shopflix.storefront.services.order.AbstractOrderService;
 import org.apache.commons.collections4.CollectionUtils;
 

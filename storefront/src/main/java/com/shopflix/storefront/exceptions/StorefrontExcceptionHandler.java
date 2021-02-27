@@ -22,4 +22,11 @@ public class StorefrontExcceptionHandler {
                 .body(error);
     }
 
+    @ExceptionHandler(AbstractOrderDeliveryAddressException.class)
+    public ResponseEntity<ErrorResponse> handleAbstractOrderDeliveryAddressException(AbstractOrderDeliveryAddressException ex) {
+        ErrorResponse error = ApiResult.error(ErrorCode.E_5000, ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(error);
+    }
 }

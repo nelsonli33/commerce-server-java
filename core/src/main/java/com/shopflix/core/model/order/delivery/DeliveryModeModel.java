@@ -1,6 +1,7 @@
 package com.shopflix.core.model.order.delivery;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.shopflix.core.enums.DeliveryAddressType;
 import com.shopflix.core.enums.DeliveryModeSubType;
 import com.shopflix.core.enums.DeliveryModeType;
 import com.shopflix.core.enums.TemperatureType;
@@ -22,6 +23,7 @@ public class DeliveryModeModel extends ItemModel
     private DeliveryModeType modeType;
     private DeliveryModeSubType modeSubType;
     private TemperatureType temperatureType;
+    private DeliveryAddressType deliveryAddressType;
     private Boolean active;
 
     @JsonManagedReference
@@ -81,6 +83,16 @@ public class DeliveryModeModel extends ItemModel
     public void setTemperatureType(TemperatureType temperatureType)
     {
         this.temperatureType = temperatureType;
+    }
+
+    public DeliveryAddressType getDeliveryAddressType()
+    {
+        return deliveryAddressType;
+    }
+
+    public void setDeliveryAddressType(DeliveryAddressType deliveryAddressType)
+    {
+        this.deliveryAddressType = deliveryAddressType;
     }
 
     public Boolean getActive()

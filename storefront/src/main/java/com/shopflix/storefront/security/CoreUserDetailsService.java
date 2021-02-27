@@ -11,14 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service(value = "coreUserDetailsService")
 public class CoreUserDetailsService implements UserDetailsService {
 
     private static final Logger LOG = LoggerFactory.getLogger(CoreUserDetailsService.class);
 
     private String rolePrefix = "ROLE_";
 
-    @Autowired
     private CustomerRepository customerRepository;
 
     @Override
@@ -38,4 +36,13 @@ public class CoreUserDetailsService implements UserDetailsService {
         return userDetails;
     }
 
+    public CustomerRepository getCustomerRepository()
+    {
+        return customerRepository;
+    }
+
+    public void setCustomerRepository(CustomerRepository customerRepository)
+    {
+        this.customerRepository = customerRepository;
+    }
 }

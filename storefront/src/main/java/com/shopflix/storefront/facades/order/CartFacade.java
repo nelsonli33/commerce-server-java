@@ -1,7 +1,7 @@
 package com.shopflix.storefront.facades.order;
 
-import com.shopflix.storefront.data.order.CartData;
-import com.shopflix.storefront.data.order.CartModificationData;
+import com.shopflix.storefront.facades.order.data.CartData;
+import com.shopflix.storefront.facades.order.data.CartModificationData;
 
 public interface CartFacade
 {

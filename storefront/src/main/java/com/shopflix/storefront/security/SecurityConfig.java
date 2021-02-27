@@ -1,6 +1,10 @@
 package com.shopflix.storefront.security;
 
+import com.shopflix.core.repository.user.CustomerRepository;
+import com.shopflix.storefront.config.StorefrontAppConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,19 +21,14 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 import javax.annotation.Resource;
 
 @EnableWebSecurity
+@Import(StorefrontAppConfig.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Resource(name = "coreUserDetailsService")
-    private UserDetailsService coreUserDetailsService;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    @Resource(name = "coreAuthenticationEntryPoint")
-    private AuthenticationEntryPoint coreAuthenticationEntryPoint;
-
-    @Resource(name = "storefrontAuthenticationSuccessHandler")
-    private StorefrontAuthenticationSuccessHandler storefrontAuthenticationSuccessHandler;
-
-    @Resource(name = "storefrontAuthenticationFailureHandler")
-    private StorefrontAuthenticationFailureHandler storefrontAuthenticationFailureHandler;
+    @Autowired
+    private StorefrontAppConfig storefrontAppConfig;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,14 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .exceptionHandling().authenticationEntryPoint(coreAuthenticationEntryPoint)
+                .exceptionHandling().authenticationEntryPoint(coreAuthenticationEntryPoint())
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/api/v1/user/login")
                 .usernameParameter("uid")
                 .passwordParameter("password")
-                .successHandler(storefrontAuthenticationSuccessHandler)
-                .failureHandler(storefrontAuthenticationFailureHandler)
+                .successHandler(storefrontAuthenticationSuccessHandler())
+                .failureHandler(storefrontAuthenticationFailureHandler())
                 .and()
                 .logout()
                 .logoutUrl("/api/v1/user/logout")
@@ -67,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(coreUserDetailsService);
+        authProvider.setUserDetailsService(coreUserDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -75,5 +74,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CoreUserDetailsService coreUserDetailsService() {
+        CoreUserDetailsService coreUserDetailsService = new CoreUserDetailsService();
+        coreUserDetailsService.setCustomerRepository(customerRepository);
+        return coreUserDetailsService;
+    }
+
+    @Bean
+    public CoreAuthenticationEntryPoint coreAuthenticationEntryPoint() {
+        return new CoreAuthenticationEntryPoint();
+    }
+
+    @Bean
+    public StorefrontAuthenticationFailureHandler storefrontAuthenticationFailureHandler() {
+        return new StorefrontAuthenticationFailureHandler();
+    }
+
+    @Bean
+    public StorefrontAuthenticationSuccessHandler storefrontAuthenticationSuccessHandler() {
+        StorefrontAuthenticationSuccessHandler handler = new StorefrontAuthenticationSuccessHandler();
+        handler.setCustomerService(storefrontAppConfig.customerService());
+        return handler;
     }
 }

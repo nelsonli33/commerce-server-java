@@ -1,15 +1,13 @@
 package com.shopflix.storefront.services.order.impl;
 
-import com.shopflix.storefront.data.order.CommerceCartModification;
-import com.shopflix.storefront.data.order.CommerceCartParameter;
+import com.shopflix.storefront.facades.order.data.CommerceCartModification;
+import com.shopflix.storefront.facades.order.data.CommerceCartParameter;
 import com.shopflix.storefront.exceptions.CommerceCartModificationException;
 import com.shopflix.storefront.services.order.CommerceCartService;
 import com.shopflix.storefront.services.order.strategies.CommerceAddToCartStrategy;
 import com.shopflix.storefront.services.order.strategies.CommerceCartCalculationStrategy;
 import com.shopflix.storefront.services.order.strategies.CommerceRemoveLineItemsStrategy;
 import com.shopflix.storefront.services.order.strategies.CommerceUpdateCartLineItemStrategy;
-
-import static com.shopflix.core.util.ServicesUtil.validateParameterNotNull;
 
 public class DefaultCommerceCartService implements CommerceCartService {
 

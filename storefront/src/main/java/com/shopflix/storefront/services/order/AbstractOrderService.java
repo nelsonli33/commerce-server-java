@@ -2,7 +2,7 @@ package com.shopflix.storefront.services.order;
 
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
 import com.shopflix.core.model.order.AbstractOrderModel;
-import com.shopflix.storefront.data.order.SKUProduct;
+import com.shopflix.storefront.facades.order.data.SKUProduct;
 
 
 public interface AbstractOrderService<O extends AbstractOrderModel, E extends AbstractOrderLineItemModel>

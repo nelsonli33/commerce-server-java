@@ -2,7 +2,7 @@ package com.shopflix.storefront.services.order.strategies;
 
 import com.shopflix.storefront.facades.order.data.CommerceCheckoutParameter;
 
-public interface CommerceDeliveryModeStrategy
+public interface CommerceDeliveryAddressStrategy
 {
-    boolean setDeliveryMode(CommerceCheckoutParameter parameter);
+    boolean storeDeliveryAddress(CommerceCheckoutParameter parameter);
 }
