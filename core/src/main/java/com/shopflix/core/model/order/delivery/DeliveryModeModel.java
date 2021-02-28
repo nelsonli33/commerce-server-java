@@ -6,6 +6,7 @@ import com.shopflix.core.enums.DeliveryModeSubType;
 import com.shopflix.core.enums.DeliveryModeType;
 import com.shopflix.core.enums.TemperatureType;
 import com.shopflix.core.model.ItemModel;
+import com.shopflix.core.model.order.AbstractOrderModel;
 import com.shopflix.core.model.product.ProductModel;
 
 import javax.persistence.*;
@@ -25,6 +26,9 @@ public class DeliveryModeModel extends ItemModel
     private TemperatureType temperatureType;
     private DeliveryAddressType deliveryAddressType;
     private Boolean active;
+
+    @OneToOne(mappedBy = "deliveryMode", fetch = FetchType.LAZY)
+    private AbstractOrderModel order;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "deliveryMode", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
@@ -103,6 +107,16 @@ public class DeliveryModeModel extends ItemModel
     public void setActive(Boolean active)
     {
         this.active = active;
+    }
+
+    public AbstractOrderModel getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(AbstractOrderModel order)
+    {
+        this.order = order;
     }
 
     public List<DeliveryModeValueModel> getTierConditions()

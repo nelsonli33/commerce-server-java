@@ -25,6 +25,7 @@ public class DefaultCommerceDeliveryModeStrategy implements CommerceDeliveryMode
         validateParameterNotNull(deliveryMode, "DeliveryMode model cannot be null");
 
         cart.setDeliveryMode(deliveryMode);
+        deliveryMode.setOrder(cart);
         getModelService().save(cart);
 
         final CommerceCartParameter commerceCartParameter = new CommerceCartParameter();

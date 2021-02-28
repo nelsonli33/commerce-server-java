@@ -5,13 +5,19 @@ import com.shopflix.core.converters.Populator;
 import com.shopflix.core.exception.ConversionException;
 import com.shopflix.core.model.order.AbstractOrderLineItemModel;
 import com.shopflix.core.model.order.CartModel;
+import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
+import com.shopflix.core.model.order.delivery.DeliveryModeModel;
 import com.shopflix.storefront.facades.order.data.CartData;
+import com.shopflix.storefront.facades.order.data.DeliveryAddressData;
+import com.shopflix.storefront.facades.order.data.DeliveryModeData;
 import com.shopflix.storefront.facades.order.data.OrderLineItemData;
 import org.springframework.util.Assert;
 
 public class CartPopulator implements Populator<CartModel, CartData>
 {
     private Converter<AbstractOrderLineItemModel, OrderLineItemData> orderLineItemConverter;
+    private Converter<DeliveryModeModel, DeliveryModeData> deliveryModeConverter;
+    private Converter<DeliveryAddressModel, DeliveryAddressData> deliveryAddressConverter;
 
     @Override
     public void populate(CartModel source, CartData target) throws ConversionException
@@ -22,7 +28,7 @@ public class CartPopulator implements Populator<CartModel, CartData>
 
         addCommon(source, target);
         addTotals(source, target);
-
+        addDelivery(source, target);
     }
 
 
@@ -50,6 +56,11 @@ public class CartPopulator implements Populator<CartModel, CartData>
         target.setTotalPrice(source.getTotalPrice());
     }
 
+    protected void addDelivery(final CartModel source, final CartData target)
+    {
+        target.setDeliveryMode(getDeliveryModeConverter().convert(source.getDeliveryMode()));
+        target.setDeliveryAddress(getDeliveryAddressConverter().convert(source.getDeliveryAddress()));
+    }
 
 
 
@@ -61,5 +72,25 @@ public class CartPopulator implements Populator<CartModel, CartData>
     public void setOrderLineItemConverter(Converter<AbstractOrderLineItemModel, OrderLineItemData> orderLineItemConverter)
     {
         this.orderLineItemConverter = orderLineItemConverter;
+    }
+
+    public Converter<DeliveryModeModel, DeliveryModeData> getDeliveryModeConverter()
+    {
+        return deliveryModeConverter;
+    }
+
+    public void setDeliveryModeConverter(Converter<DeliveryModeModel, DeliveryModeData> deliveryModeConverter)
+    {
+        this.deliveryModeConverter = deliveryModeConverter;
+    }
+
+    public Converter<DeliveryAddressModel, DeliveryAddressData> getDeliveryAddressConverter()
+    {
+        return deliveryAddressConverter;
+    }
+
+    public void setDeliveryAddressConverter(Converter<DeliveryAddressModel, DeliveryAddressData> deliveryAddressConverter)
+    {
+        this.deliveryAddressConverter = deliveryAddressConverter;
     }
 }

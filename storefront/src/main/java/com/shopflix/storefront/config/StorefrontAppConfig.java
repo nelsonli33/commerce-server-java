@@ -11,12 +11,14 @@ import com.shopflix.core.repository.delivery.DeliveryModeRepository;
 import com.shopflix.core.repository.order.CartRepository;
 import com.shopflix.core.repository.product.ProductRepository;
 import com.shopflix.core.repository.user.CustomerRepository;
+import com.shopflix.core.service.I18NService;
 import com.shopflix.core.service.ModelService;
 import com.shopflix.core.service.SessionService;
 import com.shopflix.storefront.facades.order.converters.populator.*;
 import com.shopflix.storefront.facades.order.data.*;
 import com.shopflix.storefront.facades.order.impl.DefaultCartFacade;
 import com.shopflix.storefront.facades.order.impl.DefaultCheckoutFacade;
+import com.shopflix.storefront.facades.order.impl.DefaultPaymentFacade;
 import com.shopflix.storefront.facades.user.converters.populator.AbstractAddressReversePopulator;
 import com.shopflix.storefront.facades.user.converters.populator.CustomerAddressPopulator;
 import com.shopflix.storefront.facades.user.converters.populator.CustomerAddressReversePopulator;
@@ -52,7 +54,7 @@ public class StorefrontAppConfig
     private ProductRepository productRepository;
     private DeliveryModeRepository deliveryModeRepository;
     private CartRepository cartRepository;
-
+    private I18NService i18NService;
 
     public PasswordEncoder getPasswordEncoder()
     {
@@ -82,6 +84,7 @@ public class StorefrontAppConfig
     {
         return modelService;
     }
+
     @Autowired
     @Qualifier("modelService")
     public void setModelService(ModelService modelService)
@@ -105,6 +108,7 @@ public class StorefrontAppConfig
     {
         return productRepository;
     }
+
     @Autowired
     @Qualifier("productRepository")
     public void setProductRepository(ProductRepository productRepository)
@@ -116,6 +120,7 @@ public class StorefrontAppConfig
     {
         return deliveryModeRepository;
     }
+
     @Autowired
     @Qualifier("deliveryModeRepository")
     public void setDeliveryModeRepository(DeliveryModeRepository deliveryModeRepository)
@@ -127,6 +132,7 @@ public class StorefrontAppConfig
     {
         return cartRepository;
     }
+
     @Autowired
     @Qualifier("cartRepository")
     public void setCartRepository(CartRepository cartRepository)
@@ -134,9 +140,22 @@ public class StorefrontAppConfig
         this.cartRepository = cartRepository;
     }
 
+    public I18NService getI18NService()
+    {
+        return i18NService;
+    }
+
+    @Autowired
+    @Qualifier("i18NService")
+    public void setI18NService(I18NService i18NService)
+    {
+        this.i18NService = i18NService;
+    }
+
     // <!---  service layer --->
     @Bean
-    public DefaultCustomerService customerService() {
+    public DefaultCustomerService customerService()
+    {
         DefaultCustomerService customerService = new DefaultCustomerService();
         customerService.setSessionService(getSessionService());
         customerService.setCustomerRepository(getCustomerRepository());
@@ -144,7 +163,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCustomerAccountService customerAccountService() {
+    public DefaultCustomerAccountService customerAccountService()
+    {
         DefaultCustomerAccountService customerAccountService = new DefaultCustomerAccountService();
         customerAccountService.setModelService(getModelService());
         customerAccountService.setCustomerRepository(getCustomerRepository());
@@ -153,14 +173,16 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultProductService productService() {
+    public DefaultProductService productService()
+    {
         DefaultProductService productService = new DefaultProductService();
         productService.setProductRepository(getProductRepository());
         return productService;
     }
 
     @Bean
-    public DefaultCartService cartService() {
+    public DefaultCartService cartService()
+    {
         DefaultCartService cartService = new DefaultCartService();
         cartService.setCustomerService(customerService());
         cartService.setCartRepository(getCartRepository());
@@ -169,7 +191,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCartFactory cartFactory() {
+    public DefaultCartFactory cartFactory()
+    {
         DefaultCartFactory cartFactory = new DefaultCartFactory();
         cartFactory.setCustomerService(customerService());
         cartFactory.setModelService(getModelService());
@@ -177,7 +200,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCommerceCartService commerceCartService() {
+    public DefaultCommerceCartService commerceCartService()
+    {
         DefaultCommerceCartService commerceCartService = new DefaultCommerceCartService();
         commerceCartService.setCommerceCartCalculationStrategy(commerceCartCalculationStrategy());
         commerceCartService.setCommerceAddToCartStrategy(commerceAddToCartStrategy());
@@ -187,53 +211,62 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCalculationService calculationService() {
+    public DefaultCalculationService calculationService()
+    {
         DefaultCalculationService calculationService = new DefaultCalculationService();
         calculationService.setFindDeliveryCostStrategy(findDeliveryCostStrategy());
         return calculationService;
     }
 
     @Bean
-    public DefaultFindDeliveryCostStrategy findDeliveryCostStrategy() {
+    public DefaultFindDeliveryCostStrategy findDeliveryCostStrategy()
+    {
         return new DefaultFindDeliveryCostStrategy();
     }
 
     @Bean
-    public DefaultCommerceAddToCartStrategy commerceAddToCartStrategy() {
+    public DefaultCommerceAddToCartStrategy commerceAddToCartStrategy()
+    {
         return new DefaultCommerceAddToCartStrategy();
     }
 
     @Bean
-    public DefaultCommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy() {
+    public DefaultCommerceUpdateCartLineItemStrategy commerceUpdateCartLineItemStrategy()
+    {
         return new DefaultCommerceUpdateCartLineItemStrategy();
     }
 
     @Bean
-    public DefaultCommerceRemoveLineItemsStrategy commerceRemoveLineItemsStrategy() {
+    public DefaultCommerceRemoveLineItemsStrategy commerceRemoveLineItemsStrategy()
+    {
         DefaultCommerceRemoveLineItemsStrategy strategy = new DefaultCommerceRemoveLineItemsStrategy();
         strategy.setModelService(getModelService());
         return strategy;
     }
 
     @Bean
-    public DefaultCommerceCartCalculationStrategy commerceCartCalculationStrategy() {
+    public DefaultCommerceCartCalculationStrategy commerceCartCalculationStrategy()
+    {
         DefaultCommerceCartCalculationStrategy strategy = new DefaultCommerceCartCalculationStrategy();
         strategy.setCalculationService(calculationService());
         return strategy;
     }
 
     @Bean
-    public DefaultSKUProductFactory skuProductFactory() {
+    public DefaultSKUProductFactory skuProductFactory()
+    {
         return new DefaultSKUProductFactory();
     }
 
     @Bean
-    public OrderLineItemModifiableChecker orderLineItemModifiableChecker() {
+    public OrderLineItemModifiableChecker orderLineItemModifiableChecker()
+    {
         return new OrderLineItemModifiableChecker();
     }
 
     @Bean
-    public DefaultDeliveryService deliveryService() {
+    public DefaultDeliveryService deliveryService()
+    {
         DefaultDeliveryService deliveryService = new DefaultDeliveryService();
         deliveryService.setDeliveryModeLookupStrategy(deliveryModeLookupStrategy());
         deliveryService.setDeliveryModeRepository(getDeliveryModeRepository());
@@ -242,14 +275,16 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultDeliveryModeLookupStrategy deliveryModeLookupStrategy() {
+    public DefaultDeliveryModeLookupStrategy deliveryModeLookupStrategy()
+    {
         DefaultDeliveryModeLookupStrategy strategy = new DefaultDeliveryModeLookupStrategy();
         strategy.setDeliveryModeRepository(getDeliveryModeRepository());
         return strategy;
     }
 
     @Bean
-    public DefaultCommerceCheckoutService commerceCheckoutService() {
+    public DefaultCommerceCheckoutService commerceCheckoutService()
+    {
         DefaultCommerceCheckoutService commerceCheckoutService = new DefaultCommerceCheckoutService();
         commerceCheckoutService.setCommerceDeliveryModeStrategy(commerceDeliveryModeStrategy());
         commerceCheckoutService.setCommerceDeliveryAddressStrategy(commerceDeliveryAddressStrategy());
@@ -257,7 +292,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCommerceDeliveryModeStrategy commerceDeliveryModeStrategy() {
+    public DefaultCommerceDeliveryModeStrategy commerceDeliveryModeStrategy()
+    {
         DefaultCommerceDeliveryModeStrategy strategy = new DefaultCommerceDeliveryModeStrategy();
         strategy.setModelService(getModelService());
         strategy.setCommerceCartCalculationStrategy(commerceCartCalculationStrategy());
@@ -265,17 +301,18 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCommerceDeliveryAddressStrategy commerceDeliveryAddressStrategy() {
+    public DefaultCommerceDeliveryAddressStrategy commerceDeliveryAddressStrategy()
+    {
         DefaultCommerceDeliveryAddressStrategy strategy = new DefaultCommerceDeliveryAddressStrategy();
         strategy.setModelService(getModelService());
         return strategy;
     }
 
 
-
     // <!--- facade layer --->
     @Bean
-    public DefaultCustomerFacade customerFacade() {
+    public DefaultCustomerFacade customerFacade()
+    {
         DefaultCustomerFacade customerFacade = new DefaultCustomerFacade();
         customerFacade.setCustomerService(customerService());
         customerFacade.setCustomerAccountService(customerAccountService());
@@ -285,7 +322,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCartFacade cartFacade() {
+    public DefaultCartFacade cartFacade()
+    {
         DefaultCartFacade cartFacade = new DefaultCartFacade();
         cartFacade.setCartService(cartService());
         cartFacade.setCartConverter(cartConverter());
@@ -297,7 +335,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultCheckoutFacade checkoutFacade() {
+    public DefaultCheckoutFacade checkoutFacade()
+    {
         DefaultCheckoutFacade checkoutFacade = new DefaultCheckoutFacade();
         checkoutFacade.setCartFacade(cartFacade());
         checkoutFacade.setCartService(cartService());
@@ -311,24 +350,26 @@ public class StorefrontAppConfig
         return checkoutFacade;
     }
 
-
-
-
-
-
-
-
+    @Bean
+    public DefaultPaymentFacade paymentFacade() {
+        DefaultPaymentFacade paymentFacade = new DefaultPaymentFacade();
+        paymentFacade.setI18nService(i18NService);
+        paymentFacade.setCartService(cartService());
+        return paymentFacade;
+    }
 
     // <!--- converter and populator --->
     @Bean
-    public OrderLineItemPopulator orderLineItemPopulator() {
+    public OrderLineItemPopulator orderLineItemPopulator()
+    {
         OrderLineItemPopulator populator = new OrderLineItemPopulator();
         populator.setOrderLineItemModelModifiableChecker(orderLineItemModifiableChecker());
         return populator;
     }
 
     @Bean
-    public Converter<AbstractOrderLineItemModel, OrderLineItemData> orderLineItemConverter() {
+    public Converter<AbstractOrderLineItemModel, OrderLineItemData> orderLineItemConverter()
+    {
         PopulatingConverter<AbstractOrderLineItemModel, OrderLineItemData> converter = new PopulatingConverter<>();
         converter.setTargetClass(OrderLineItemData.class);
         converter.setPopulators(Arrays.asList(orderLineItemPopulator()));
@@ -336,7 +377,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public CommerceCartParameterPopulator commerceCartParameterPopulator() {
+    public CommerceCartParameterPopulator commerceCartParameterPopulator()
+    {
         CommerceCartParameterPopulator populator = new CommerceCartParameterPopulator();
         populator.setCartService(cartService());
         populator.setProductService(productService());
@@ -345,7 +387,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public Converter<AddToCartParams, CommerceCartParameter> commerceCartParameterConverter() {
+    public Converter<AddToCartParams, CommerceCartParameter> commerceCartParameterConverter()
+    {
         PopulatingConverter<AddToCartParams, CommerceCartParameter> converter = new PopulatingConverter<>();
         converter.setTargetClass(CommerceCartParameter.class);
         converter.setPopulators(Arrays.asList(commerceCartParameterPopulator()));
@@ -353,7 +396,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public CommerceUpdateCartParameterPopulator commerceUpdateCartParameterPopulator() {
+    public CommerceUpdateCartParameterPopulator commerceUpdateCartParameterPopulator()
+    {
         CommerceUpdateCartParameterPopulator populator = new CommerceUpdateCartParameterPopulator();
         populator.setCartService(cartService());
         populator.setSkuProductFactory(skuProductFactory());
@@ -361,7 +405,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public Converter<UpdateCartParams, CommerceCartParameter> commerceUpdateCartParameterConverter() {
+    public Converter<UpdateCartParams, CommerceCartParameter> commerceUpdateCartParameterConverter()
+    {
         PopulatingConverter<UpdateCartParams, CommerceCartParameter> converter = new PopulatingConverter<>();
         converter.setTargetClass(CommerceCartParameter.class);
         converter.setPopulators(Arrays.asList(commerceUpdateCartParameterPopulator()));
@@ -370,14 +415,16 @@ public class StorefrontAppConfig
 
 
     @Bean
-    public CartModificationPopulator cartModificationPopulator() {
+    public CartModificationPopulator cartModificationPopulator()
+    {
         CartModificationPopulator populator = new CartModificationPopulator();
         populator.setOrderLineItemConverter(orderLineItemConverter());
         return populator;
     }
 
     @Bean
-    public Converter<CommerceCartModification, CartModificationData> cartModificationConverter() {
+    public Converter<CommerceCartModification, CartModificationData> cartModificationConverter()
+    {
         PopulatingConverter<CommerceCartModification, CartModificationData> converter = new PopulatingConverter<>();
         converter.setTargetClass(CartModificationData.class);
         converter.setPopulators(Arrays.asList(cartModificationPopulator()));
@@ -385,14 +432,18 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public CartPopulator cartPopulator() {
+    public CartPopulator cartPopulator()
+    {
         CartPopulator populator = new CartPopulator();
         populator.setOrderLineItemConverter(orderLineItemConverter());
+        populator.setDeliveryModeConverter(deliveryModeConverter());
+        populator.setDeliveryAddressConverter(deliveryAddressConverter());
         return populator;
     }
 
     @Bean
-    public Converter<CartModel, CartData> cartConverter() {
+    public Converter<CartModel, CartData> cartConverter()
+    {
         PopulatingConverter<CartModel, CartData> converter = new PopulatingConverter<>();
         converter.setTargetClass(CartData.class);
         converter.setPopulators(Arrays.asList(cartPopulator()));
@@ -400,12 +451,14 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DeliveryModePopulator deliveryModePopulator() {
+    public DeliveryModePopulator deliveryModePopulator()
+    {
         return new DeliveryModePopulator();
     }
 
     @Bean
-    public Converter<DeliveryModeModel, DeliveryModeData> deliveryModeConverter() {
+    public Converter<DeliveryModeModel, DeliveryModeData> deliveryModeConverter()
+    {
         PopulatingConverter<DeliveryModeModel, DeliveryModeData> converter = new PopulatingConverter<>();
         converter.setTargetClass(DeliveryModeData.class);
         converter.setPopulators(Arrays.asList(deliveryModePopulator()));
@@ -413,17 +466,20 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public CustomerAddressReversePopulator customerAddressReversePopulator() {
+    public CustomerAddressReversePopulator customerAddressReversePopulator()
+    {
         return new CustomerAddressReversePopulator();
     }
 
     @Bean
-    public CustomerAddressPopulator customerAddressPopulator() {
+    public CustomerAddressPopulator customerAddressPopulator()
+    {
         return new CustomerAddressPopulator();
     }
 
     @Bean
-    public Converter<CustomerAddressModel, CustomerAddressData> customerAddressConverter() {
+    public Converter<CustomerAddressModel, CustomerAddressData> customerAddressConverter()
+    {
         PopulatingConverter<CustomerAddressModel, CustomerAddressData> converter = new PopulatingConverter<>();
         converter.setTargetClass(CustomerAddressData.class);
         converter.setPopulators(Arrays.asList(customerAddressPopulator()));
@@ -431,17 +487,20 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DeliveryAddressReversePopulator deliveryAddressReversePopulator() {
+    public DeliveryAddressReversePopulator deliveryAddressReversePopulator()
+    {
         return new DeliveryAddressReversePopulator();
     }
 
     @Bean
-    public DeliveryAddressPopulator deliveryAddressPopulator() {
+    public DeliveryAddressPopulator deliveryAddressPopulator()
+    {
         return new DeliveryAddressPopulator();
     }
 
     @Bean
-    public Converter<DeliveryAddressModel, DeliveryAddressData> deliveryAddressConverter() {
+    public Converter<DeliveryAddressModel, DeliveryAddressData> deliveryAddressConverter()
+    {
         PopulatingConverter<DeliveryAddressModel, DeliveryAddressData> converter = new PopulatingConverter<>();
         converter.setTargetClass(DeliveryAddressData.class);
         converter.setPopulators(Arrays.asList(deliveryAddressPopulator()));

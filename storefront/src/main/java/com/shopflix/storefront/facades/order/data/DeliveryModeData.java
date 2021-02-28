@@ -1,6 +1,9 @@
 package com.shopflix.storefront.facades.order.data;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
+
 
 public class DeliveryModeData implements Serializable
 {
@@ -12,6 +15,7 @@ public class DeliveryModeData implements Serializable
 
     private String description;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Double deliveryCost;
 
 

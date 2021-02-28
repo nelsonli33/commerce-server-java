@@ -25,7 +25,6 @@ public abstract class AbstractOrderModel extends ItemModel {
     private DeliveryModeModel deliveryMode;
 
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "delivery_address_id")
     private DeliveryAddressModel deliveryAddress;
 
     @JsonManagedReference
