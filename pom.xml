@@ -23,7 +23,8 @@
 		<module>core</module>
 		<module>merchant</module>
 		<module>storefront</module>
-	</modules>
+        <module>ecpaypaymentservices</module>
+    </modules>
 
 
 
