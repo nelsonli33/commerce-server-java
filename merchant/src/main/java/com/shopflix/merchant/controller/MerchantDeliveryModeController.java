@@ -47,7 +47,6 @@ public class MerchantDeliveryModeController extends AbstractController
 
         DeliveryModeData data = convertDeliveryModeFormToData(form);
 
-        System.out.println(data);
         final DeliveryModeData deliveryModeData = merchantDeliveryModeFacade.postDeliveryMode(data);
 
         return ResponseEntity

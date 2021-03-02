@@ -101,7 +101,11 @@ public class DefaultCalculationService extends AbstractBusinessService
 
     protected void resetAdditionalCosts(final AbstractOrderModel order)
     {
-        final Double deliveryCostValue = findDeliveryCostStrategy.getDeliveryCost(order);
+        double deliveryCostValue = 0.0;
+        if (order.getDeliveryMode() != null) {
+            deliveryCostValue= findDeliveryCostStrategy.getDeliveryCost(order);
+        }
+
         order.setDeliveryCost(deliveryCostValue);
     }
 

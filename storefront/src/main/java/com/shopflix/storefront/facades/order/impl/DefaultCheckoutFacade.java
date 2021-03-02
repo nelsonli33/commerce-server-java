@@ -3,6 +3,8 @@ package com.shopflix.storefront.facades.order.impl;
 import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.user.AddressData;
+import com.shopflix.core.enums.PaymentModeType;
+import com.shopflix.core.enums.PaymentStatus;
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
@@ -37,8 +39,6 @@ public class DefaultCheckoutFacade implements CheckoutFacade
     private Populator<CustomerAddressData, DeliveryAddressModel> deliveryAddressReversePopulator;
     private Converter<DeliveryAddressModel, DeliveryAddressData> deliveryAddressConverter;
     private Converter<DeliveryModeModel, DeliveryModeData> deliveryModeConverter;
-
-
 
 
     @Override
@@ -125,6 +125,24 @@ public class DefaultCheckoutFacade implements CheckoutFacade
             CommerceCheckoutParameter parameter = createCommerceCheckoutParameter(cart);
             parameter.setDeliveryAddress(deliveryAddressModel);
             return getCommerceCheckoutService().setDeliveryAddress(parameter);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean setPaymentMode(String paymentModeCode)
+    {
+        validateParameterNotNullStandardMessage("paymentModeCode", paymentModeCode);
+
+        final PaymentModeType paymentMode = PaymentModeType.from(paymentModeCode);
+
+        if (paymentMode != null) {
+            final CartModel cart = getCart();
+            cart.setPaymentMode(paymentMode);
+            cart.setPaymentStatus(PaymentStatus.UNPAID);
+            getModelService().save(cart);
+            return true;
         }
 
         return false;

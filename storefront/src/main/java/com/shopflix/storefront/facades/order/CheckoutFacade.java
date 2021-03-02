@@ -23,4 +23,7 @@ public interface CheckoutFacade
 
 
     boolean setDeliveryAddress(CustomerAddressData customerAddressData);
+
+
+    boolean setPaymentMode(String paymentModeCode);
 }

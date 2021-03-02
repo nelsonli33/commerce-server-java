@@ -1,14 +1,14 @@
 package com.shopflix.core.model.order;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.shopflix.core.enums.PaymentModeType;
+import com.shopflix.core.enums.PaymentStatus;
 import com.shopflix.core.model.ItemModel;
 import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
-import com.shopflix.core.model.user.AddressModel;
-import com.shopflix.core.model.user.CustomerModel;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,48 +27,63 @@ public abstract class AbstractOrderModel extends ItemModel {
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     private DeliveryAddressModel deliveryAddress;
 
+    private PaymentModeType paymentMode;
+    private PaymentStatus paymentStatus;
+    private Date payTime;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<AbstractOrderLineItemModel> lineItems;
 
 
-    public String getCode() {
+
+    public String getCode()
+    {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(String code)
+    {
         this.code = code;
     }
 
-    public Double getDeliveryCost() {
+    public Double getDeliveryCost()
+    {
         return deliveryCost;
     }
 
-    public void setDeliveryCost(Double deliveryCost) {
+    public void setDeliveryCost(Double deliveryCost)
+    {
         this.deliveryCost = deliveryCost;
     }
 
-    public Double getSubtotal() {
+    public Double getSubtotal()
+    {
         return subtotal;
     }
 
-    public void setSubtotal(Double subtotal) {
+    public void setSubtotal(Double subtotal)
+    {
         this.subtotal = subtotal;
     }
 
-    public Double getTotalPrice() {
+    public Double getTotalPrice()
+    {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(Double totalPrice)
+    {
         this.totalPrice = totalPrice;
     }
 
-    public Double getTotalDiscounts() {
+    public Double getTotalDiscounts()
+    {
         return totalDiscounts;
     }
 
-    public void setTotalDiscounts(Double totalDiscounts) {
+    public void setTotalDiscounts(Double totalDiscounts)
+    {
         this.totalDiscounts = totalDiscounts;
     }
 
@@ -92,6 +107,36 @@ public abstract class AbstractOrderModel extends ItemModel {
         this.deliveryAddress = deliveryAddress;
     }
 
+    public PaymentModeType getPaymentMode()
+    {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(PaymentModeType paymentMode)
+    {
+        this.paymentMode = paymentMode;
+    }
+
+    public PaymentStatus getPaymentStatus()
+    {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus)
+    {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public Date getPayTime()
+    {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime)
+    {
+        this.payTime = payTime;
+    }
+
     public List<AbstractOrderLineItemModel> getLineItems()
     {
         return lineItems;
@@ -101,6 +146,4 @@ public abstract class AbstractOrderModel extends ItemModel {
     {
         this.lineItems = lineItems;
     }
-
-    abstract CustomerModel getCustomer();
 }
