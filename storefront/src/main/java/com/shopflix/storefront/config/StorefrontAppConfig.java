@@ -14,6 +14,7 @@ import com.shopflix.core.repository.user.CustomerRepository;
 import com.shopflix.core.service.I18NService;
 import com.shopflix.core.service.ModelService;
 import com.shopflix.core.service.SessionService;
+import com.shopflix.ecpayb2cinvoiceservices.config.EcpayB2CInvoiceConfig;
 import com.shopflix.storefront.facades.order.converters.populator.*;
 import com.shopflix.storefront.facades.order.data.*;
 import com.shopflix.storefront.facades.order.impl.DefaultCartFacade;
@@ -39,11 +40,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 
 @Configuration
+@Import(value = {EcpayB2CInvoiceConfig.class})
 @ComponentScan(value = {"com.shopflix.storefront", "com.shopflix.core"})
 public class StorefrontAppConfig
 {
@@ -55,6 +58,7 @@ public class StorefrontAppConfig
     private DeliveryModeRepository deliveryModeRepository;
     private CartRepository cartRepository;
     private I18NService i18NService;
+    private EcpayB2CInvoiceConfig ecpayB2CInvoiceConfig;
 
     public PasswordEncoder getPasswordEncoder()
     {
@@ -150,6 +154,17 @@ public class StorefrontAppConfig
     public void setI18NService(I18NService i18NService)
     {
         this.i18NService = i18NService;
+    }
+
+    public EcpayB2CInvoiceConfig getEcpayB2CInvoiceConfig()
+    {
+        return ecpayB2CInvoiceConfig;
+    }
+
+    @Autowired
+    public void setEcpayB2CInvoiceConfig(EcpayB2CInvoiceConfig ecpayB2CInvoiceConfig)
+    {
+        this.ecpayB2CInvoiceConfig = ecpayB2CInvoiceConfig;
     }
 
     // <!---  service layer --->

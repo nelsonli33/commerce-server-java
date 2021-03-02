@@ -24,6 +24,7 @@
 		<module>merchant</module>
 		<module>storefront</module>
         <module>ecpaypaymentservices</module>
+        <module>ecpayb2cinvoiceservices</module>
     </modules>
 
 
