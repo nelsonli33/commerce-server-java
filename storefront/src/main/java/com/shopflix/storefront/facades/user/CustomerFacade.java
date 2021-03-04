@@ -2,9 +2,11 @@ package com.shopflix.storefront.facades.user;
 
 import com.shopflix.core.data.user.AddressData;
 import com.shopflix.storefront.facades.user.data.CustomerAddressData;
+import com.shopflix.storefront.facades.user.data.InvoiceSettingData;
 import com.shopflix.storefront.facades.user.data.RegisterData;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Defines an API to perform various customer related operations
@@ -28,4 +30,8 @@ public interface CustomerFacade {
     CustomerAddressData editAddress(final CustomerAddressData customerAddressData);
 
     void removeAddress(final CustomerAddressData customerAddressData);
+
+    Map<String, InvoiceSettingData> getInvoiceSettings();
+
+    Map<String, InvoiceSettingData> addInvoiceSetting(InvoiceSettingData invoiceSettingData);
 }

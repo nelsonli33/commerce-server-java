@@ -2,29 +2,33 @@ package com.shopflix.storefront.facades.user.impl;
 
 import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.Populator;
-import com.shopflix.core.data.user.AddressData;
 import com.shopflix.core.enums.DeliveryAddressType;
-import com.shopflix.core.model.user.AddressModel;
+import com.shopflix.core.enums.InvoiceType;
 import com.shopflix.core.model.user.CustomerAddressModel;
 import com.shopflix.core.model.user.CustomerModel;
+import com.shopflix.core.model.user.InvoiceSettingModel;
 import com.shopflix.storefront.facades.user.CustomerFacade;
 import com.shopflix.storefront.facades.user.data.CustomerAddressData;
+import com.shopflix.storefront.facades.user.data.InvoiceSettingData;
 import com.shopflix.storefront.facades.user.data.RegisterData;
 import com.shopflix.storefront.services.customer.CustomerAccountService;
 import com.shopflix.storefront.services.customer.CustomerService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
-import java.util.List;
+import java.util.*;
 
 import static com.shopflix.core.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 public class DefaultCustomerFacade implements CustomerFacade
 {
-
     private CustomerService customerService;
     private CustomerAccountService customerAccountService;
     private Populator<CustomerAddressData, CustomerAddressModel> customerAddressReversePopulator;
     private Converter<CustomerAddressModel, CustomerAddressData> customerAddressConverter;
+    private Populator<InvoiceSettingData, InvoiceSettingModel> invoiceSettingReversePopulator;
+    private Converter<InvoiceSettingModel, InvoiceSettingData> invoiceSettingConverter;
+    private Populator<InvoiceSettingModel, InvoiceSettingData> invoiceSettingPopulator;
 
     @Override
     public void register(RegisterData registerData)
@@ -36,7 +40,7 @@ public class DefaultCustomerFacade implements CustomerFacade
         CustomerModel newCustomer = new CustomerModel();
         newCustomer.setUsername(registerData.getUsername());
         newCustomer.setUid(registerData.getUid().toLowerCase());
-        newCustomer.setEmail(registerData.getEmail());
+        newCustomer.setContactEmail(registerData.getUid());
 
         getCustomerAccountService().register(newCustomer, registerData.getPassword());
     }
@@ -56,7 +60,8 @@ public class DefaultCustomerFacade implements CustomerFacade
         final CustomerModel currentCustomer = getCustomerService().getCurrentCustomer();
         final CustomerAddressModel addressModel = getCustomerAccountService().getAddressForId(currentCustomer, customerAddressData.getId());
 
-        if (addressModel != null) {
+        if (addressModel != null)
+        {
             return getCustomerAddressConverter().convert(addressModel);
         }
 
@@ -132,6 +137,72 @@ public class DefaultCustomerFacade implements CustomerFacade
         }
     }
 
+    @Override
+    public Map<String, InvoiceSettingData> getInvoiceSettings()
+    {
+        final CustomerModel currentCustomer = getCustomerService().getCurrentCustomer();
+
+        final Map<String, InvoiceSettingData> invoiceSettingMap = getInitInvoiceSettingsForCustomer(currentCustomer);
+
+        for (final InvoiceSettingModel invoiceSettingModel : currentCustomer.getInvoiceSettings())
+        {
+            final InvoiceType invoiceType = invoiceSettingModel.getInvoiceType();
+            if (invoiceType != null)
+            {
+                final InvoiceSettingData invoiceSettingData = invoiceSettingMap.get(invoiceType.getCode());
+                getInvoiceSettingPopulator().populate(invoiceSettingModel, invoiceSettingData);
+            }
+        }
+
+        return invoiceSettingMap;
+    }
+
+    private Map<String, InvoiceSettingData> getInitInvoiceSettingsForCustomer(final CustomerModel currentCustomer)
+    {
+
+        Map<String, InvoiceSettingData> map = new LinkedHashMap<>(3);
+
+        InvoiceSettingData person = new InvoiceSettingData();
+        person.setInvoiceType(InvoiceType.PERSON.getCode());
+        person.setContactEmail(currentCustomer.getUid());
+        map.put(InvoiceType.PERSON.getCode(), person);
+
+        InvoiceSettingData company = new InvoiceSettingData();
+        company.setInvoiceType(InvoiceType.COMPANY.getCode());
+        company.setContactEmail(currentCustomer.getUid());
+        map.put(InvoiceType.COMPANY.getCode(), company);
+
+        InvoiceSettingData donation = new InvoiceSettingData();
+        donation.setInvoiceType(InvoiceType.DONATION.getCode());
+        map.put(InvoiceType.DONATION.getCode(), donation);
+
+        return map;
+    }
+
+    @Override
+    public Map<String, InvoiceSettingData> addInvoiceSetting(InvoiceSettingData invoiceSettingData)
+    {
+        validateParameterNotNullStandardMessage("invoiceSettingData", invoiceSettingData);
+
+        final CustomerModel currentCustomer = getCustomerService().getCurrentCustomer();
+
+        InvoiceSettingModel invoiceSettingModel = new InvoiceSettingModel();
+        getInvoiceSettingReversePopulator().populate(invoiceSettingData, invoiceSettingModel);
+
+        final InvoiceSettingModel savedModel = getCustomerAccountService().saveInvoiceSettingEntry(currentCustomer, invoiceSettingModel);
+        return convert(savedModel);
+    }
+
+    private Map<String, InvoiceSettingData> convert(InvoiceSettingModel model)
+    {
+        Map<String, InvoiceSettingData> result = new LinkedHashMap<>();
+        final InvoiceSettingData data = getInvoiceSettingConverter().convert(model);
+        result.put(data.getInvoiceType(), data);
+        return result;
+    }
+
+
+
 
     protected boolean isHomeDeliveryAddress(final CustomerAddressModel addressModel)
     {
@@ -176,5 +247,35 @@ public class DefaultCustomerFacade implements CustomerFacade
     public void setCustomerAddressConverter(Converter<CustomerAddressModel, CustomerAddressData> customerAddressConverter)
     {
         this.customerAddressConverter = customerAddressConverter;
+    }
+
+    public Populator<InvoiceSettingData, InvoiceSettingModel> getInvoiceSettingReversePopulator()
+    {
+        return invoiceSettingReversePopulator;
+    }
+
+    public void setInvoiceSettingReversePopulator(Populator<InvoiceSettingData, InvoiceSettingModel> invoiceSettingReversePopulator)
+    {
+        this.invoiceSettingReversePopulator = invoiceSettingReversePopulator;
+    }
+
+    public Converter<InvoiceSettingModel, InvoiceSettingData> getInvoiceSettingConverter()
+    {
+        return invoiceSettingConverter;
+    }
+
+    public void setInvoiceSettingConverter(Converter<InvoiceSettingModel, InvoiceSettingData> invoiceSettingConverter)
+    {
+        this.invoiceSettingConverter = invoiceSettingConverter;
+    }
+
+    public Populator<InvoiceSettingModel, InvoiceSettingData> getInvoiceSettingPopulator()
+    {
+        return invoiceSettingPopulator;
+    }
+
+    public void setInvoiceSettingPopulator(Populator<InvoiceSettingModel, InvoiceSettingData> invoiceSettingPopulator)
+    {
+        this.invoiceSettingPopulator = invoiceSettingPopulator;
     }
 }

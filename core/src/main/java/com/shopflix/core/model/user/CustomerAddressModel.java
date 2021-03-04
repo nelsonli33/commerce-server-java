@@ -1,6 +1,7 @@
 package com.shopflix.core.model.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.shopflix.core.model.base.AddressModel;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

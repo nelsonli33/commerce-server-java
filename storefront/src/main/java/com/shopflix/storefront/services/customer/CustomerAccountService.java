@@ -1,7 +1,8 @@
 package com.shopflix.storefront.services.customer;
-import com.shopflix.core.model.user.AddressModel;
+import com.shopflix.core.model.base.AddressModel;
 import com.shopflix.core.model.user.CustomerAddressModel;
 import com.shopflix.core.model.user.CustomerModel;
+import com.shopflix.core.model.user.InvoiceSettingModel;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface CustomerAccountService {
     void clearDefaultAddressEntry(final CustomerModel customerModel);
 
     List<AddressModel> getAddressEntriesForDeliAddressType(final CustomerModel customerModel, final Integer deliAddressType);
+
+    InvoiceSettingModel saveInvoiceSettingEntry(CustomerModel customerModel, InvoiceSettingModel invoiceSettingModel);
 }

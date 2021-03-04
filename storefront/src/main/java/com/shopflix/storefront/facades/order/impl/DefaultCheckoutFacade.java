@@ -2,13 +2,11 @@ package com.shopflix.storefront.facades.order.impl;
 
 import com.shopflix.core.converters.Converter;
 import com.shopflix.core.converters.Populator;
-import com.shopflix.core.data.user.AddressData;
 import com.shopflix.core.enums.PaymentModeType;
 import com.shopflix.core.enums.PaymentStatus;
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
-import com.shopflix.core.model.user.AddressModel;
 import com.shopflix.core.service.ModelService;
 import com.shopflix.storefront.facades.order.CartFacade;
 import com.shopflix.storefront.facades.order.data.CartData;
@@ -21,7 +19,6 @@ import com.shopflix.storefront.services.customer.CustomerAccountService;
 import com.shopflix.storefront.services.delivery.DeliveryService;
 import com.shopflix.storefront.services.order.CartService;
 import com.shopflix.storefront.services.order.CommerceCheckoutService;
-import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;

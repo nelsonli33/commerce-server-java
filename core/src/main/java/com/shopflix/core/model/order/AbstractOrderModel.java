@@ -31,9 +31,13 @@ public abstract class AbstractOrderModel extends ItemModel {
     private PaymentStatus paymentStatus;
     private Date payTime;
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private OrderInvoiceModel invoice;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<AbstractOrderLineItemModel> lineItems;
+
 
 
 
@@ -135,6 +139,16 @@ public abstract class AbstractOrderModel extends ItemModel {
     public void setPayTime(Date payTime)
     {
         this.payTime = payTime;
+    }
+
+    public OrderInvoiceModel getInvoice()
+    {
+        return invoice;
+    }
+
+    public void setInvoice(OrderInvoiceModel invoice)
+    {
+        this.invoice = invoice;
     }
 
     public List<AbstractOrderLineItemModel> getLineItems()

@@ -3,7 +3,7 @@ package com.shopflix.storefront.facades.user.converters.populator;
 
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.user.AddressData;
-import com.shopflix.core.model.user.AddressModel;
+import com.shopflix.core.model.base.AddressModel;
 import com.shopflix.core.model.user.CustomerModel;
 import com.shopflix.storefront.services.customer.CustomerService;
 

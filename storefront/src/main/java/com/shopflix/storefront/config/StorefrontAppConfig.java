@@ -7,6 +7,7 @@ import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
 import com.shopflix.core.model.user.CustomerAddressModel;
+import com.shopflix.core.model.user.InvoiceSettingModel;
 import com.shopflix.core.repository.delivery.DeliveryModeRepository;
 import com.shopflix.core.repository.order.CartRepository;
 import com.shopflix.core.repository.product.ProductRepository;
@@ -20,10 +21,9 @@ import com.shopflix.storefront.facades.order.data.*;
 import com.shopflix.storefront.facades.order.impl.DefaultCartFacade;
 import com.shopflix.storefront.facades.order.impl.DefaultCheckoutFacade;
 import com.shopflix.storefront.facades.order.impl.DefaultPaymentFacade;
-import com.shopflix.storefront.facades.user.converters.populator.AbstractAddressReversePopulator;
-import com.shopflix.storefront.facades.user.converters.populator.CustomerAddressPopulator;
-import com.shopflix.storefront.facades.user.converters.populator.CustomerAddressReversePopulator;
+import com.shopflix.storefront.facades.user.converters.populator.*;
 import com.shopflix.storefront.facades.user.data.CustomerAddressData;
+import com.shopflix.storefront.facades.user.data.InvoiceSettingData;
 import com.shopflix.storefront.facades.user.impl.DefaultCustomerFacade;
 import com.shopflix.storefront.services.customer.impl.DefaultCustomerAccountService;
 import com.shopflix.storefront.services.customer.impl.DefaultCustomerService;
@@ -333,6 +333,9 @@ public class StorefrontAppConfig
         customerFacade.setCustomerAccountService(customerAccountService());
         customerFacade.setCustomerAddressReversePopulator(customerAddressReversePopulator());
         customerFacade.setCustomerAddressConverter(customerAddressConverter());
+        customerFacade.setInvoiceSettingReversePopulator(invoiceSettingReversePopulator());
+        customerFacade.setInvoiceSettingConverter(invoiceSettingConverter());
+        customerFacade.setInvoiceSettingPopulator(invoiceSettingPopulator());
         return customerFacade;
     }
 
@@ -366,7 +369,8 @@ public class StorefrontAppConfig
     }
 
     @Bean
-    public DefaultPaymentFacade paymentFacade() {
+    public DefaultPaymentFacade paymentFacade()
+    {
         DefaultPaymentFacade paymentFacade = new DefaultPaymentFacade();
         paymentFacade.setI18nService(i18NService);
         paymentFacade.setCartService(cartService());
@@ -498,6 +502,27 @@ public class StorefrontAppConfig
         PopulatingConverter<CustomerAddressModel, CustomerAddressData> converter = new PopulatingConverter<>();
         converter.setTargetClass(CustomerAddressData.class);
         converter.setPopulators(Arrays.asList(customerAddressPopulator()));
+        return converter;
+    }
+
+    @Bean
+    public InvoiceSettingReversePopulator invoiceSettingReversePopulator()
+    {
+        return new InvoiceSettingReversePopulator();
+    }
+
+    @Bean
+    public InvoiceSettingPopulator invoiceSettingPopulator()
+    {
+        return new InvoiceSettingPopulator();
+    }
+
+    @Bean
+    public Converter<InvoiceSettingModel, InvoiceSettingData> invoiceSettingConverter()
+    {
+        PopulatingConverter<InvoiceSettingModel, InvoiceSettingData> converter = new PopulatingConverter<>();
+        converter.setTargetClass(InvoiceSettingData.class);
+        converter.setPopulators(Arrays.asList(invoiceSettingPopulator()));
         return converter;
     }
 

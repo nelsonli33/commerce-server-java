@@ -3,7 +3,6 @@ package com.shopflix.storefront.facades.order.data;
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
 import com.shopflix.core.model.order.delivery.DeliveryModeModel;
-import com.shopflix.core.model.user.AddressModel;
 
 import java.io.Serializable;
 

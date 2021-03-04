@@ -2,7 +2,6 @@ package com.shopflix.storefront.services.order.strategies.impl;
 
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.model.order.delivery.DeliveryAddressModel;
-import com.shopflix.core.model.user.AddressModel;
 import com.shopflix.core.service.ModelService;
 import com.shopflix.storefront.facades.order.data.CommerceCheckoutParameter;
 import com.shopflix.storefront.services.order.strategies.CommerceDeliveryAddressStrategy;

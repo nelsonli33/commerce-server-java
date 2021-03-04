@@ -1,4 +1,4 @@
-package com.shopflix.core.model.user;
+package com.shopflix.core.model.base;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.shopflix.core.enums.DeliveryAddressType;

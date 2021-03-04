@@ -8,6 +8,8 @@ import com.shopflix.core.model.ItemModel;
 import com.shopflix.core.model.order.CartModel;
 import com.shopflix.core.model.order.OrderModel;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,7 +27,7 @@ public class CustomerModel extends ItemModel
     private String uid;
     private String username;
     private String password;
-    private String email;
+    private String contactEmail;
     private String phone;
     private String tags;
     private Date birthday;
@@ -38,6 +40,10 @@ public class CustomerModel extends ItemModel
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CustomerAddressModel> addresses = new ArrayList<>();
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<InvoiceSettingModel> invoiceSettings = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -70,43 +76,53 @@ public class CustomerModel extends ItemModel
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getContactEmail()
+    {
+        return contactEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContactEmail(String contactEmail)
+    {
+        this.contactEmail = contactEmail;
     }
 
-    public String getPhone() {
+    public String getPhone()
+    {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(String phone)
+    {
         this.phone = phone;
     }
 
-    public String getTags() {
+    public String getTags()
+    {
         return tags;
     }
 
-    public void setTags(String tags) {
+    public void setTags(String tags)
+    {
         this.tags = tags;
     }
 
-    public Date getBirthday() {
+    public Date getBirthday()
+    {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Date birthday)
+    {
         this.birthday = birthday;
     }
 
-    public boolean isAcceptsMarketing() {
+    public boolean isAcceptsMarketing()
+    {
         return acceptsMarketing;
     }
 
-    public void setAcceptsMarketing(boolean acceptsMarketing) {
+    public void setAcceptsMarketing(boolean acceptsMarketing)
+    {
         this.acceptsMarketing = acceptsMarketing;
     }
 
@@ -128,6 +144,16 @@ public class CustomerModel extends ItemModel
     public void setAddresses(List<CustomerAddressModel> addresses)
     {
         this.addresses = addresses;
+    }
+
+    public List<InvoiceSettingModel> getInvoiceSettings()
+    {
+        return invoiceSettings;
+    }
+
+    public void setInvoiceSettings(List<InvoiceSettingModel> invoiceSettings)
+    {
+        this.invoiceSettings = invoiceSettings;
     }
 
     public Set<OrderModel> getOrders()

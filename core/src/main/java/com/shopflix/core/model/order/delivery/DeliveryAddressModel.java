@@ -1,7 +1,7 @@
 package com.shopflix.core.model.order.delivery;
 
 import com.shopflix.core.model.order.AbstractOrderModel;
-import com.shopflix.core.model.user.AddressModel;
+import com.shopflix.core.model.base.AddressModel;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

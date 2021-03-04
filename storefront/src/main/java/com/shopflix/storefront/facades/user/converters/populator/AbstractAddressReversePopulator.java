@@ -3,7 +3,7 @@ package com.shopflix.storefront.facades.user.converters.populator;
 import com.shopflix.core.converters.Populator;
 import com.shopflix.core.data.user.AddressData;
 import com.shopflix.core.enums.DeliveryAddressType;
-import com.shopflix.core.model.user.AddressModel;
+import com.shopflix.core.model.base.AddressModel;
 
 public abstract class AbstractAddressReversePopulator<SOURCE extends AddressData, TARGET extends AddressModel> implements
         Populator<SOURCE, TARGET>

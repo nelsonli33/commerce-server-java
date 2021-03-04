@@ -1,8 +1,9 @@
 package com.shopflix.storefront.services.customer.impl;
 
-import com.shopflix.core.model.user.AddressModel;
+import com.shopflix.core.model.base.AddressModel;
 import com.shopflix.core.model.user.CustomerAddressModel;
 import com.shopflix.core.model.user.CustomerModel;
+import com.shopflix.core.model.user.InvoiceSettingModel;
 import com.shopflix.core.repository.user.CustomerRepository;
 import com.shopflix.core.service.ModelService;
 import com.shopflix.storefront.exceptions.DuplicateUidException;
@@ -87,6 +88,7 @@ public class DefaultCustomerAccountService implements CustomerAccountService
         getModelService().refresh(customerModel);
     }
 
+
     @Override
     public void deleteAddressEntry(CustomerModel customerModel, CustomerAddressModel customerAddressModel)
     {
@@ -161,6 +163,29 @@ public class DefaultCustomerAccountService implements CustomerAccountService
 
         return addresses;
     }
+
+    @Override
+    public InvoiceSettingModel saveInvoiceSettingEntry(CustomerModel customerModel, InvoiceSettingModel invoiceSettingModel)
+    {
+        validateParameterNotNullStandardMessage("customerModel", customerModel);
+        validateParameterNotNullStandardMessage("invoiceSettingModel", invoiceSettingModel);
+
+        if (customerModel.getInvoiceSettings().contains(invoiceSettingModel))
+        {
+            getModelService().save(invoiceSettingModel);
+        }
+        else
+        {
+            invoiceSettingModel.setCustomer(customerModel);
+            customerModel.getInvoiceSettings().add(invoiceSettingModel);
+            getModelService().save(invoiceSettingModel);
+        }
+        getModelService().save(customerModel);
+        getModelService().refresh(customerModel);
+
+        return invoiceSettingModel;
+    }
+
 
 
     public ModelService getModelService()
