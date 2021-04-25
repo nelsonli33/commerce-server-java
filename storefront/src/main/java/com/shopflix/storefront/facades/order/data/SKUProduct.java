@@ -11,7 +11,7 @@ public class SKUProduct implements Serializable {
 
     private String name;
 
-    private Long quantity;
+    private Integer quantity;
 
     private Double price;
 
@@ -37,11 +37,13 @@ public class SKUProduct implements Serializable {
         this.name = name;
     }
 
-    public Long getQuantity() {
+    public Integer getQuantity()
+    {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Integer quantity)
+    {
         this.quantity = quantity;
     }
 

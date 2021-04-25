@@ -13,44 +13,43 @@ import javax.annotation.Resource;
 
 public abstract class AbstractCommerceCartStrategy
 {
-    protected static final long DEFAULT_FORCE_IN_STOCK_MAX_QUANTITY = 9999;
+    protected static final int DEFAULT_FORCE_IN_STOCK_MAX_QUANTITY = 9999;
 
-    protected long forceInStockMaxQuantity = DEFAULT_FORCE_IN_STOCK_MAX_QUANTITY;
+    protected int forceInStockMaxQuantity = DEFAULT_FORCE_IN_STOCK_MAX_QUANTITY;
 
     private ModelService modelService;
     private CartService cartService;
     private ModifiableChecker<AbstractOrderLineItemModel> orderLineItemModifiableChecker;
     private CommerceCartCalculationStrategy commerceCartCalculationStrategy;
 
-    protected long getAllowedCartQtyAdjustmentForProduct(final CartModel cartModel, final SKUProduct skuProduct,
-                                                      final long quantityToAdd)
+    protected int getAllowedCartQtyAdjustmentForProduct(final CartModel cartModel, final SKUProduct skuProduct,
+                                                      final int quantityToAdd)
     {
-        final long cartLevel = checkCartLevel(cartModel, skuProduct);
-        final long stockLevel = getAvailableStockLevel(skuProduct);
+        final int cartLevel = checkCartLevel(cartModel, skuProduct);
+        final int stockLevel = getAvailableSellingStockLevel(skuProduct);
 
         // How many will we have in our cart if we add quantity
-        final long newTotalQuantity = cartLevel + quantityToAdd;
+        final int newTotalQuantity = cartLevel + quantityToAdd;
 
         // Now limit that to the total available in stock
-        final long newTotalQuantityAfterStockLimit = Math.min(newTotalQuantity, stockLevel);
+        final int newTotalQuantityAfterStockLimit = Math.min(newTotalQuantity, stockLevel);
 
-        // So now work out what the maximum allowed to be added is (note that
-        // this may be negative!)
+        // So now work out what the maximum allowed to be added
         final Integer maxOrderQuantity = skuProduct.getProduct().getMaxOrderQuantity();
 
         if (isMaxOrderQuantitySet(maxOrderQuantity))
         {
-            final long newTotalQuantityAfterProductMaxOrder = Math
-                    .min(newTotalQuantityAfterStockLimit, maxOrderQuantity.longValue());
+            final int newTotalQuantityAfterProductMaxOrder = Math
+                    .min(newTotalQuantityAfterStockLimit, maxOrderQuantity);
 
             return newTotalQuantityAfterProductMaxOrder - cartLevel;
         }
         return newTotalQuantityAfterStockLimit - cartLevel;
     }
 
-    protected long checkCartLevel(final CartModel cartModel, final SKUProduct skuProduct)
+    protected int checkCartLevel(final CartModel cartModel, final SKUProduct skuProduct)
     {
-        long cartLevel = 0;
+        int cartLevel = 0;
 
         CartLineItemModel lineItem = getCartService().getLineItemForSKUProduct(cartModel, skuProduct);
 
@@ -63,19 +62,19 @@ public abstract class AbstractCommerceCartStrategy
     }
 
 
-    protected long getAvailableStockLevel(final SKUProduct skuProduct)
+    protected int getAvailableSellingStockLevel(final SKUProduct skuProduct)
     {
-        final Long availableStockLevel;
+        final Integer availableSellingStockLevel;
 
-        availableStockLevel = skuProduct.getQuantity();
+        availableSellingStockLevel = skuProduct.getQuantity();
 
-        if (availableStockLevel == null)
+        if (availableSellingStockLevel == null)
         {
             return getForceInStockMaxQuantity();
         }
         else
         {
-            return availableStockLevel;
+            return availableSellingStockLevel;
         }
     }
 
@@ -84,7 +83,7 @@ public abstract class AbstractCommerceCartStrategy
     }
 
 
-    public long getForceInStockMaxQuantity()
+    public int getForceInStockMaxQuantity()
     {
         return forceInStockMaxQuantity;
     }

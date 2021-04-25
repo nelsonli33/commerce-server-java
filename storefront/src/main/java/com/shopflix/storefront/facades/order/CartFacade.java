@@ -7,9 +7,9 @@ public interface CartFacade
 {
     CartData getCart();
 
-    CartModificationData addToCart(final Long productId, Long variantId, final long quantity);
+    CartModificationData addToCart(final Long productId, Long variantId, final int quantity);
 
-    CartModificationData updateCartLineItem(final Long lineItemId, long quantity);
+    CartModificationData updateCartLineItem(final Long lineItemId, int quantity);
 
     void clearCart();
 }

@@ -10,7 +10,7 @@ public class AddToCartParams implements Serializable
 
     private Long variantId;
 
-    private long qty;
+    private int qty;
 
     public Long getProductId()
     {
@@ -32,12 +32,12 @@ public class AddToCartParams implements Serializable
         this.variantId = variantId;
     }
 
-    public long getQty()
+    public int getQty()
     {
         return qty;
     }
 
-    public void setQty(long qty)
+    public void setQty(int qty)
     {
         this.qty = qty;
     }

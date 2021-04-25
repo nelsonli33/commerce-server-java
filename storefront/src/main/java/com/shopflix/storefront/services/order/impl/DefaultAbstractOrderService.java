@@ -14,7 +14,7 @@ public abstract class DefaultAbstractOrderService<O extends AbstractOrderModel, 
         implements AbstractOrderService<O, E>
 {
     @Override
-    public E addNewLineItem(O order, SKUProduct skuProduct, long qty)
+    public E addNewLineItem(O order, SKUProduct skuProduct, int qty)
     {
         validateParameterNotNullStandardMessage("order", order);
         validateParameterNotNullStandardMessage("skuProduct", skuProduct);

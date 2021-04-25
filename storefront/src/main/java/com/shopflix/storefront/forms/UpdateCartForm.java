@@ -10,7 +10,7 @@ public class UpdateCartForm
 
     @NotNull(message = "{basket.error.quantity.notNull}")
     @Min(value = 0, message = "{basket.error.quantity.invalid}")
-    private long qty;
+    private int qty;
 
     public Long getLineItemId()
     {
@@ -22,12 +22,12 @@ public class UpdateCartForm
         this.lineItemId = lineItemId;
     }
 
-    public long getQty()
+    public int getQty()
     {
         return qty;
     }
 
-    public void setQty(long qty)
+    public void setQty(int qty)
     {
         this.qty = qty;
     }

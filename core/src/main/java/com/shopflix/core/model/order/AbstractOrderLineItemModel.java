@@ -12,7 +12,7 @@ import javax.persistence.*;
 public abstract class AbstractOrderLineItemModel extends ItemModel {
 
     private String name;
-    private Long quantity;
+    private Integer quantity;
     private String sku;
     private Double price;
 
@@ -47,11 +47,13 @@ public abstract class AbstractOrderLineItemModel extends ItemModel {
         this.name = name;
     }
 
-    public Long getQuantity() {
+    public Integer getQuantity()
+    {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Integer quantity)
+    {
         this.quantity = quantity;
     }
 

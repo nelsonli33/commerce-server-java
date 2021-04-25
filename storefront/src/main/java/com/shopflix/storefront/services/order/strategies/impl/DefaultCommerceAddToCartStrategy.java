@@ -29,16 +29,16 @@ public class DefaultCommerceAddToCartStrategy extends AbstractCommerceCartStrate
 
         final CartModel cartModel = parameter.getCart();
         final SKUProduct skuProduct = parameter.getSkuProduct();
-        final long quantityToAdd = parameter.getQuantity();
+        final int quantityToAdd = parameter.getQuantity();
 
         validateAddToCart(parameter);
 
         // So now work out what the maximum allowed to be added is (note that this may be negative!)
-        final long actualAllowedQuantityChange = getAllowedCartQtyAdjustmentForProduct(cartModel, skuProduct, quantityToAdd);
+        final int actualAllowedQuantityChange = getAllowedCartQtyAdjustmentForProduct(cartModel, skuProduct, quantityToAdd);
 
         final Integer maxOrderQuantity = skuProduct.getProduct().getMaxOrderQuantity();
-        final long cartLevel = checkCartLevel(cartModel, skuProduct);
-        final long cartLevelAfterQuantityChange = actualAllowedQuantityChange + cartLevel;
+        final int cartLevel = checkCartLevel(cartModel, skuProduct);
+        final int cartLevelAfterQuantityChange = actualAllowedQuantityChange + cartLevel;
 
         if (actualAllowedQuantityChange > 0)
         {
@@ -118,9 +118,9 @@ public class DefaultCommerceAddToCartStrategy extends AbstractCommerceCartStrate
     }
 
     protected CommerceCartModification createAddToCartResp(final CommerceCartParameter parameter, final String status,
-                                                           final CartLineItemModel lineItem, final long quantityAdded)
+                                                           final CartLineItemModel lineItem, final int quantityAdded)
     {
-        final long quantityToAdd = parameter.getQuantity();
+        final int quantityToAdd = parameter.getQuantity();
 
         final CommerceCartModification modification = new CommerceCartModification();
         modification.setStatusCode(status);

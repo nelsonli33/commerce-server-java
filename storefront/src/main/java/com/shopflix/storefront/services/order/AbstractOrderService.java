@@ -7,7 +7,7 @@ import com.shopflix.storefront.facades.order.data.SKUProduct;
 
 public interface AbstractOrderService<O extends AbstractOrderModel, E extends AbstractOrderLineItemModel>
 {
-    E addNewLineItem(final O order, final SKUProduct skuProduct, final long qty);
+    E addNewLineItem(final O order, final SKUProduct skuProduct, final int qty);
 
     E getLineItemForSKUProduct(final O order, final SKUProduct skuProduct);
 

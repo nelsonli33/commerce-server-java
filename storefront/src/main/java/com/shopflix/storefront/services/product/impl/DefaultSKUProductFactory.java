@@ -13,7 +13,7 @@ public class DefaultSKUProductFactory implements SKUProductFactory
         SKUProduct skuProduct = new SKUProduct();
         String name = product.getName();
         Double price = product.getPrice();
-        Long quantity = product.getQuantity();
+        Integer quantity = product.getQuantity();
         String sku = product.getSku();
 
         skuProduct.setVariantType(Boolean.FALSE);

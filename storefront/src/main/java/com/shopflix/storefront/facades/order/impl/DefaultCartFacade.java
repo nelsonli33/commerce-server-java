@@ -27,7 +27,7 @@ public class DefaultCartFacade implements CartFacade
     }
 
     @Override
-    public CartModificationData addToCart(final Long productId, Long variantId, final long quantity)
+    public CartModificationData addToCart(final Long productId, Long variantId, final int quantity)
     {
         final AddToCartParams params = new AddToCartParams();
         params.setProductId(productId);
@@ -46,7 +46,7 @@ public class DefaultCartFacade implements CartFacade
     }
 
     @Override
-    public CartModificationData updateCartLineItem(Long lineItemId, long quantity)
+    public CartModificationData updateCartLineItem(Long lineItemId, int quantity)
     {
         UpdateCartParams params = new UpdateCartParams();
         params.setLineItemId(lineItemId);

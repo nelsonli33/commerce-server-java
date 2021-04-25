@@ -12,7 +12,7 @@ public class CommerceCartParameter implements Serializable {
 
     private SKUProduct skuProduct;
 
-    private long quantity;
+    private int quantity;
 
     private Long lineItemId;
 
@@ -34,11 +34,13 @@ public class CommerceCartParameter implements Serializable {
         this.skuProduct = skuProduct;
     }
 
-    public long getQuantity() {
+    public int getQuantity()
+    {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(int quantity)
+    {
         this.quantity = quantity;
     }
 

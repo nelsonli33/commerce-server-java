@@ -4,7 +4,7 @@ public class UpdateCartParams
 {
     private Long lineItemId;
 
-    private long qty;
+    private int qty;
 
     public Long getLineItemId()
     {
@@ -16,12 +16,12 @@ public class UpdateCartParams
         this.lineItemId = lineItemId;
     }
 
-    public long getQty()
+    public int getQty()
     {
         return qty;
     }
 
-    public void setQty(long qty)
+    public void setQty(int qty)
     {
         this.qty = qty;
     }

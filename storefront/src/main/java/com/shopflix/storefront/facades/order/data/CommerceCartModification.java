@@ -10,9 +10,9 @@ public class CommerceCartModification implements Serializable {
 
     private String statusCode;
 
-    private long quantity;
+    private int quantity;
 
-    private long quantityAdded;
+    private int quantityAdded;
 
     private AbstractOrderLineItemModel lineItem;
 
@@ -28,22 +28,22 @@ public class CommerceCartModification implements Serializable {
         this.statusCode = statusCode;
     }
 
-    public long getQuantity()
+    public int getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(long quantity)
+    public void setQuantity(int quantity)
     {
         this.quantity = quantity;
     }
 
-    public long getQuantityAdded()
+    public int getQuantityAdded()
     {
         return quantityAdded;
     }
 
-    public void setQuantityAdded(long quantityAdded)
+    public void setQuantityAdded(int quantityAdded)
     {
         this.quantityAdded = quantityAdded;
     }

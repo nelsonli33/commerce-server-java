@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class ProductVariantModel extends ItemModel {
     private String name;
     private Double price;
-    private Long quantity;
+    private Integer quantity;
     private String sku;
     private Integer sold;
 
@@ -43,12 +43,12 @@ public class ProductVariantModel extends ItemModel {
         this.price = price;
     }
 
-    public Long getQuantity()
+    public Integer getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(Long quantity)
+    public void setQuantity(Integer quantity)
     {
         this.quantity = quantity;
     }

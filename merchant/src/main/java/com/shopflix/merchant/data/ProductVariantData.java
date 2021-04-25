@@ -7,7 +7,7 @@ public class ProductVariantData
 {
     private Long id;
     private String name;
-    private Long quantity;
+    private Integer quantity;
     private BigDecimal price;
     private String sku;
     private String value1;
@@ -34,12 +34,12 @@ public class ProductVariantData
         this.name = name;
     }
 
-    public Long getQuantity()
+    public Integer getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(Long quantity)
+    public void setQuantity(Integer quantity)
     {
         this.quantity = quantity;
     }

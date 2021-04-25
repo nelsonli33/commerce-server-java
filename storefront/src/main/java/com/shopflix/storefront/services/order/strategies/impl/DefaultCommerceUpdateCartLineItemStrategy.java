@@ -22,7 +22,7 @@ public class DefaultCommerceUpdateCartLineItemStrategy extends AbstractCommerceC
             throws CommerceCartModificationException
     {
         final CartModel cartModel = parameter.getCart();
-        final long newQuantity = parameter.getQuantity();
+        final int newQuantity = parameter.getQuantity();
         final Long lineItemId = parameter.getLineItemId();
 
 
@@ -35,13 +35,13 @@ public class DefaultCommerceUpdateCartLineItemStrategy extends AbstractCommerceC
 
         final Integer maxOrderQuantity = lineItemToUpdate.getProduct().getMaxOrderQuantity();
         // Work out how many we want to add (could be negative if we are removing items)
-        final long quantityToAdd = newQuantity - lineItemToUpdate.getQuantity();
+        final int quantityToAdd = newQuantity - lineItemToUpdate.getQuantity();
 
         if (isStockLevelSufficient(cartModel, parameter.getSkuProduct(), quantityToAdd))
         {
             // So now work out what the maximum allowed to be added is (note that
             // this may be negative!)
-            final long actualAllowedQuantityChange = getAllowedCartQtyAdjustmentForProduct(cartModel, parameter.getSkuProduct(),
+            final int actualAllowedQuantityChange = getAllowedCartQtyAdjustmentForProduct(cartModel, parameter.getSkuProduct(),
                     quantityToAdd);
             // Now do the actual cartModification
             return modifyLineItem(cartModel, lineItemToUpdate, actualAllowedQuantityChange, newQuantity, maxOrderQuantity);
@@ -77,10 +77,10 @@ public class DefaultCommerceUpdateCartLineItemStrategy extends AbstractCommerceC
     }
 
     protected CommerceCartModification modifyLineItem(final CartModel cartModel, final AbstractOrderLineItemModel lineItemToUpdate,
-                                                      final long actualAllowedQuantityChange, final long newQuantity, final Integer maxOrderQuantity)
+                                                      final int actualAllowedQuantityChange, final int newQuantity, final Integer maxOrderQuantity)
     {
         // Now work out how many that leaves us with on this entry
-        final long lineItemNewQuantity = lineItemToUpdate.getQuantity() + actualAllowedQuantityChange;
+        final int lineItemNewQuantity = lineItemToUpdate.getQuantity() + actualAllowedQuantityChange;
 
         final ModelService modelService = getModelService();
 
@@ -151,7 +151,7 @@ public class DefaultCommerceUpdateCartLineItemStrategy extends AbstractCommerceC
                                              final long quantityToAdd)
     {
         final long cartLevel = checkCartLevel(cartModel, skuProduct);
-        final long stockLevel = getAvailableStockLevel(skuProduct);
+        final long stockLevel = getAvailableSellingStockLevel(skuProduct);
 
         final long newTotalQuantity = cartLevel + quantityToAdd;
         return newTotalQuantity <= stockLevel;

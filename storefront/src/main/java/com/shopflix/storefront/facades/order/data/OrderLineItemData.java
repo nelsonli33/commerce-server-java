@@ -14,7 +14,7 @@ public class OrderLineItemData implements Serializable
 
     private String productName;
 
-    private Long quantity;
+    private Integer quantity;
 
     private Double price;
 
@@ -71,12 +71,12 @@ public class OrderLineItemData implements Serializable
         this.productName = productName;
     }
 
-    public Long getQuantity()
+    public Integer getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(Long quantity)
+    public void setQuantity(Integer quantity)
     {
         this.quantity = quantity;
     }

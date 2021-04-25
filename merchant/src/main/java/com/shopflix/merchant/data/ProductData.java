@@ -15,7 +15,7 @@ public class ProductData
     private String summary;
     private String description;
     private String status;
-    private Long quantity;
+    private Integer quantity;
     private BigDecimal price;
     private Double weight;
     private String weightUnit;
@@ -94,12 +94,12 @@ public class ProductData
         this.status = status;
     }
 
-    public Long getQuantity()
+    public Integer getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(Long quantity)
+    public void setQuantity(Integer quantity)
     {
         this.quantity = quantity;
     }
